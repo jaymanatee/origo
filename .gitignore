@@ -1,0 +1,34 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+
+# Entornos
+.venv/
+venv/
+
+# Secretos: la URL y la clave del LLM van en .env (en el repo solo .env.example)
+.env
+.env.*
+!.env.example
+
+# Herramientas
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+.ipynb_checkpoints/
+
+# Editores y sistema
+.vscode/
+.idea/
+.DS_Store
+
+# Origo: datos de terceros y ficheros que se regeneran
+origo/rag/corpus/       # documentos de la UE y guías: se regeneran con origo/rag/download.py
+origo/rag/downloads/
+origo/rag/index/        # índices y caché de embeddings: se reconstruyen solos
+outputs/                # declaraciones de origen y resultados de las pruebas

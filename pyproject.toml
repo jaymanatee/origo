@@ -1,0 +1,36 @@
+[project]
+name = "origo"
+version = "0.1.0"
+description = "Sistema multi-agente de origen preferencial para exportadores de la UE"
+readme = "README.md"
+requires-python = ">=3.11,<3.13"
+license = "MIT"
+dependencies = [
+    "pydantic>=2.11",
+    "python-dotenv>=1.1",
+    "openai>=1.60",       # cliente del Qwen3.8-27B (vLLM habla la API de OpenAI)
+    "langgraph>=0.4",     # el grafo de agentes
+    "requests>=2.32",     # herramientas: APIs del arancel, BCE, VIES
+    "httpx>=0.28",
+    "numpy>=1.26",
+    "pandas>=2.2",        # leer la lista de materiales en Excel
+    "openpyxl>=3.1",
+    "pypdf>=5.0",         # el RAG lee las guías en PDF
+]
+
+[project.optional-dependencies]
+# Los embeddings de las preguntas del RAG (Qwen3-Embedding-0.6B). Trae torch: aparte.
+rag = ["sentence-transformers>=5.0"]
+
+[dependency-groups]
+dev = ["pytest>=8.3", "ruff>=0.11"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["origo"]
+
+[tool.ruff]
+line-length = 100
