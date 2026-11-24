@@ -66,13 +66,27 @@ class Material(BaseModel):
 
 class StatementRequest(BaseModel):
     """The data of the statement on origin, when the user asks for one. Only what the user
-    gave: the verifier checks these values against the question (never made up)."""
+    gave: a value the user did not give is null (and goes to the plan's missing), never made
+    up; the verifier checks them against the question."""
 
-    invoice_number: str
-    exporter_name: str
-    place: str
-    consignment_value_eur: float = Field(gt=0)
-    exporter_reference: str = ""
+    invoice_number: str | None = Field(
+        default=None, description="Number of the invoice the statement goes on, or null."
+    )
+    exporter_name: str | None = Field(
+        default=None, description="Name of the exporting company, or null."
+    )
+    place: str | None = Field(default=None, description="Place of issue (a city), or null.")
+    consignment_value_eur: float | None = Field(
+        default=None,
+        gt=0,
+        description="Total value of the consignment (the invoice) in euros, or null. Not the "
+        "price of one product.",
+    )
+    exporter_reference: str | None = Field(
+        default=None,
+        description="REX number or authorised exporter number, exactly as the user wrote it, "
+        "or null.",
+    )
 
 
 class Plan(BaseModel):
@@ -86,7 +100,9 @@ class Plan(BaseModel):
         default=None, description="HS code of the product, only if the user wrote it."
     )
     exw_price_eur: float | None = Field(
-        default=None, gt=0, description="Ex-works price of the product, only if the user gave it."
+        default=None,
+        gt=0,
+        description="Ex-works price of the product, only if the user gave it in euros.",
     )
     agreements: list[Agreement] = Field(
         default_factory=list,
@@ -100,7 +116,10 @@ class Plan(BaseModel):
         description="Agreements or partner countries the user asks about that are not in "
         "'agreements' (e.g. Mercosur, Australia), as the user wrote them.",
     )
-    statement: StatementRequest | None = None
+    statement: StatementRequest | None = Field(
+        default=None,
+        description="Only if the user asks to issue a statement on origin; otherwise null.",
+    )
     missing: list[str] = Field(
         default_factory=list,
         description="Data the user must give and did not, in a few words each.",

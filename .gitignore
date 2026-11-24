@@ -28,7 +28,7 @@ htmlcov/
 .DS_Store
 
 # Origo: datos de terceros y ficheros que se regeneran
-origo/rag/corpus/       # documentos de la UE y guías: se regeneran con origo/rag/download.py
+origo/rag/corpus/
 origo/rag/downloads/
-origo/rag/index/        # índices y caché de embeddings: se reconstruyen solos
-outputs/                # declaraciones de origen y resultados de las pruebas
+origo/rag/index/
+outputs/

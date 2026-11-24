@@ -1,4 +1,4 @@
-"""The tools the model can call: five for preferential origin, plus the two worked examples.
+"""The tools the model can call: the five for preferential origin.
 
 | Type    | Tool                     | What it touches                                       |
 |---------|--------------------------|-------------------------------------------------------|
@@ -9,8 +9,7 @@
 | action  | ``issue_origin_statement`` | writes the statement on origin to a file (confirm) |
 
 The docstring of each tool is the description the model reads and the type hints are the
-schema, so both are written for the model. ``get_weather`` and ``calculator`` are the
-examples from the slides: they stay here as reference but are not registered.
+schema, so both are written for the model.
 
 ``evaluate_origin`` returns an ``evaluation_id`` and ``issue_origin_statement`` only accepts
 an id whose verdict was "originating": the statement can never be issued for a product the
@@ -51,8 +50,6 @@ from origo.engine.origin_engine import (
 )
 from origo.engine.registry import ToolRegistry, tool
 
-OPEN_METEO_GEOCODING = "https://geocoding-api.open-meteo.com/v1/search"
-OPEN_METEO_FORECAST = "https://api.open-meteo.com/v1/forecast"
 UK_TARIFF_ROO = (
     "https://www.trade-tariff.service.gov.uk/api/v2/rules_of_origin_schemes/{code}/{country}"
 )
@@ -241,70 +238,6 @@ class Criterion(BaseModel):
         default_factory=list,
         description="4-digit headings excluded by the rule ('CTH except from heading 8503')",
     )
-
-
-# ------------------------------------------------------------------------------ examples
-
-
-@tool
-def get_weather(location: str) -> float:
-    """Return the current air temperature in degrees Celsius for a location.
-
-    Args:
-        location: City and country, for example 'Madrid, Spain'.
-    """
-    geo = requests.get(OPEN_METEO_GEOCODING, params={"name": location, "count": 1}, timeout=15)
-    geo.raise_for_status()
-    results = geo.json().get("results") or []
-    if not results:
-        raise ValueError(f"no coordinates found for {location!r}")
-    lat, lon = results[0]["latitude"], results[0]["longitude"]
-    forecast = requests.get(
-        OPEN_METEO_FORECAST,
-        params={
-            "latitude": lat,
-            "longitude": lon,
-            "current_weather": True,
-            "temperature_unit": "celsius",
-        },
-        timeout=15,
-    )
-    forecast.raise_for_status()
-    return float(forecast.json()["current_weather"]["temperature"])
-
-
-@tool
-def calculator(expression: str) -> float:
-    """Evaluate an arithmetic expression such as '(12.5 * 3) / 2 - 1'.
-
-    Only numbers, parentheses and the operators + - * / ** % are allowed.
-
-    Args:
-        expression: The arithmetic expression to evaluate.
-    """
-    import ast
-    import operator
-
-    allowed = {
-        ast.Add: operator.add,
-        ast.Sub: operator.sub,
-        ast.Mult: operator.mul,
-        ast.Div: operator.truediv,
-        ast.Pow: operator.pow,
-        ast.Mod: operator.mod,
-        ast.USub: operator.neg,
-    }
-
-    def evaluate(node):
-        if isinstance(node, ast.Constant) and isinstance(node.value, int | float):
-            return node.value
-        if isinstance(node, ast.BinOp) and type(node.op) in allowed:
-            return allowed[type(node.op)](evaluate(node.left), evaluate(node.right))
-        if isinstance(node, ast.UnaryOp) and type(node.op) in allowed:
-            return allowed[type(node.op)](evaluate(node.operand))
-        raise ValueError("unsupported expression")
-
-    return float(evaluate(ast.parse(expression, mode="eval").body))
 
 
 # ------------------------------------------------------------------------ get_origin_rule
@@ -956,7 +889,7 @@ def issue_origin_statement(
 
 
 def default_registry() -> ToolRegistry:
-    """The registry the executor and the agent use: the five origin tools, not the examples."""
+    """The registry the executor and the agent use: the five origin tools."""
     return ToolRegistry().register(
         get_origin_rule,
         get_exchange_rate,

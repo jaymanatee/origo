@@ -16,6 +16,7 @@ dependencies = [
     "pandas>=2.2",        # leer la lista de materiales en Excel
     "openpyxl>=3.1",
     "pypdf>=5.0",         # el RAG lee las guías en PDF
+    "rank-bm25>=0.2",     # el RAG: recuperación por palabras clave (BM25)
 ]
 
 [project.optional-dependencies]

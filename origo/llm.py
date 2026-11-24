@@ -17,10 +17,10 @@ import threading
 import time
 from collections import defaultdict
 from dataclasses import dataclass
-from pydantic import BaseModel
 
 from dotenv import load_dotenv
 from openai import OpenAI
+from pydantic import BaseModel
 
 load_dotenv()
 
@@ -75,7 +75,7 @@ def client() -> OpenAI:
         _client = OpenAI(
             base_url=os.environ["ORIGO_LLM_BASE_URL"],
             api_key=os.environ["ORIGO_LLM_API_KEY"],
-            timeout=float(os.environ.get("ORIGO_LLM_TIMEOUT", 300)),
+            timeout=float(os.environ.get("ORIGO_LLM_TIMEOUT", "300")),
         )
     return _client
 
@@ -98,7 +98,7 @@ def chat(
     tools: list[dict] | None = None,
     thinking: bool = False,
     max_tokens: int | None = None,
-    schema: type[BaseModel] | None = None
+    schema: type[BaseModel] | None = None,
 ):
     """One call to the model; returns the assistant message (``.content``, ``.tool_calls``,
     and ``.reasoning`` when thinking). Sampling as Qwen recommends for each mode, with a
@@ -117,7 +117,10 @@ def chat(
     if schema is not None:  # structured output: vLLM only lets the model write valid JSON
         kwargs["response_format"] = {
             "type": "json_schema",
-            "json_schema": {"name": schema.__name__, "schema": _all_required(schema.model_json_schema())},
+            "json_schema": {
+                "name": schema.__name__,
+                "schema": _all_required(schema.model_json_schema()),
+            },
         }
         # vLLM only constrains the output with the schema; it does not show it to the model.
         # Without it, the model never reads the descriptions (it wrote DESCONOCIDO for
