@@ -20,6 +20,7 @@ from pydantic import BaseModel, Field, field_validator
 
 Agreement = Literal["TCA", "UE-JP", "UE-KR", "CETA"]
 Origin = Literal["UE", "SOCIO", "TERCERO", "DESCONOCIDO"]
+Kind = Literal["evaluate", "knowledge"]
 
 
 def _hs6(value: str) -> str:
@@ -62,22 +63,51 @@ class StatementRequest(BaseModel):
 
 
 class Plan(BaseModel):
-    """What the orchestrator understood from the question."""
-
-    product: str
-    product_hs_code: str
-    exw_price_eur: float | None = Field(default=None, gt=0)
-    agreements: list[Agreement] = Field(min_length=1)
+    kind: Kind = Field(
+        description="evaluate: the user wants to know whether a product is originating, or to "
+        "issue an origin statement for it. knowledge: a question about how the rules work, "
+        "with no product to evaluate."
+    )
+    product: str | None = Field(default=None, description="The product, as the user names it.")
+    product_hs_code: str | None = Field(
+        default=None, description="HS code of the product, only if the user wrote it."
+    )
+    exw_price_eur: float | None = Field(
+        default=None, gt=0, description="Ex-works price of the product, only if the user gave it."
+    )
+    agreements: list[Agreement] = Field(
+        default_factory=list,
+        max_length=4,
+        description="Agreements of the question that the system covers: TCA (United Kingdom), "
+        "UE-JP (Japan), UE-KR (South Korea), CETA (Canada).",
+    )
+    out_of_scope: list[str] = Field(
+        default_factory=list,
+        max_length=4,
+        description="Agreements or partner countries the user asks about that are not in "
+        "'agreements' (e.g. Mercosur, Australia), as the user wrote them.",
+    )
     statement: StatementRequest | None = None
     missing: list[str] = Field(
         default_factory=list,
-        description="Data the user has to give before the product can be evaluated",
+        description="Data the user must give and did not, in a few words each.",
     )
 
     @field_validator("product_hs_code", mode="before")
     @classmethod
     def _normalise_hs(cls, value):
-        return _hs6(value)
+        return None if value in (None, "") else _hs6(value)
+
+    def gaps(self) -> list[str]:
+        """What an evaluation needs and the plan does not have, computed by code."""
+        if self.kind != "evaluate":
+            return []
+        needed = {
+            "product_hs_code": self.product_hs_code,
+            "exw_price_eur": self.exw_price_eur,
+            "agreements": self.agreements or self.out_of_scope,
+        }
+        return [name for name, value in needed.items() if not value]
 
 
 class Issue(BaseModel):

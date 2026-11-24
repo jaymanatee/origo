@@ -16,6 +16,7 @@ import threading
 import time
 from collections import defaultdict
 from dataclasses import dataclass
+from pydantic import BaseModel
 
 from dotenv import load_dotenv
 from openai import OpenAI
@@ -78,6 +79,16 @@ def client() -> OpenAI:
     return _client
 
 
+def _all_required(schema: dict) -> dict:
+    """The JSON schema with every property required, nested models too: with structured
+    output the model may leave out any property that is not required, and it did (agreements
+    and out_of_scope of a Plan). Optional fields still accept null or []."""
+    for node in [schema, *schema.get("$defs", {}).values()]:
+        if "properties" in node:
+            node["required"] = list(node["properties"])
+    return schema
+
+
 def chat(
     messages: list[dict],
     *,
@@ -86,6 +97,7 @@ def chat(
     tools: list[dict] | None = None,
     thinking: bool = False,
     max_tokens: int | None = None,
+    schema: type[BaseModel] | None = None
 ):
     """One call to the model; returns the assistant message (``.content``, ``.tool_calls``,
     and ``.reasoning`` when thinking). Sampling as Qwen recommends for each mode, with a
@@ -101,6 +113,11 @@ def chat(
     }
     if tools:
         kwargs["tools"] = tools
+    if schema is not None:  # structured output: vLLM only lets the model write valid JSON
+        kwargs["response_format"] = {
+            "type": "json_schema",
+            "json_schema": {"name": schema.__name__, "schema": _all_required(schema.model_json_schema())},
+        }
     started = time.perf_counter()
     response = client().chat.completions.create(**kwargs)
     usage = response.usage
@@ -115,4 +132,7 @@ def chat(
             seconds=time.perf_counter() - started,
         )
     )
-    return response.choices[0].message
+    choice = response.choices[0]
+    if choice.finish_reason == "length":  # cut at max_tokens: content is partial or empty
+        raise RuntimeError(f"{agent}: the answer was cut at max_tokens={kwargs['max_tokens']}")
+    return choice.message
