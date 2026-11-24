@@ -19,7 +19,9 @@ from typing import Annotated, Literal, TypedDict
 from pydantic import BaseModel, Field, field_validator
 
 Agreement = Literal["TCA", "UE-JP", "UE-KR", "CETA"]
-Origin = Literal["UE", "SOCIO", "TERCERO", "DESCONOCIDO"]
+# The partner country of each agreement (ISO 3166 alpha-2).
+PARTNER = {"TCA": "GB", "UE-JP": "JP", "UE-KR": "KR", "CETA": "CA"}
+Country = Literal["UE", "GB", "JP", "KR", "CA", "OTRO", "DESCONOCIDO"]
 Kind = Literal["evaluate", "knowledge"]
 
 
@@ -32,23 +34,34 @@ def _hs6(value: str) -> str:
 
 
 class Material(BaseModel):
-    """One line of the bill of materials, as the extractor reads it."""
-
-    name: str
-    hs_code: str = Field(description="HS code of the material, 6 digits")
-    origin: Origin = Field(
-        description="UE: made in the EU. SOCIO: made in the partner country. "
-        "TERCERO: any other country. DESCONOCIDO: unknown"
+    name: str = Field(description="Material name, as the user wrote it.")
+    hs_code: str = Field(description="HS code of the material, as the user wrote it.")
+    country_name: str = Field(
+        description="The country where the material was made, as the user wrote it "
+        "(e.g. 'Francia'), or 'desconocido'."
     )
-    value_eur: float = Field(gt=0, description="Value of the material in euros")
+    country: Country = Field(
+        description="The code of country_name: UE for any EU member state (France, "
+        "Germany, Italy...); GB, JP, KR or CA for the United Kingdom, Japan, South Korea or "
+        "Canada; OTRO for any other country (China, United States...); DESCONOCIDO if the "
+        "user does not say."
+    )
+    value_eur: float = Field(gt=0, description="Value of the material in euros.")
     supplier_declaration: bool = Field(
-        default=False, description="True if the supplier gave a supplier's declaration"
+        default=False,
+        description="True only if the user says the supplier gave a declaration of origin.",
     )
 
     @field_validator("hs_code", mode="before")
     @classmethod
     def _normalise_hs(cls, value):
         return _hs6(value)
+
+    def origin_for(self, agreement: Agreement) -> str:
+        """The origin evaluate_origin expects, for this agreement (computed, not asked)."""
+        if self.country in ("UE", "DESCONOCIDO"):
+            return self.country
+        return "SOCIO" if self.country == PARTNER[agreement] else "TERCERO"
 
 
 class StatementRequest(BaseModel):

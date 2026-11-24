@@ -11,6 +11,7 @@ wrong. Which agents think is a design decision, and an ablation.
 
 from __future__ import annotations
 
+import json
 import os
 import threading
 import time
@@ -118,6 +119,20 @@ def chat(
             "type": "json_schema",
             "json_schema": {"name": schema.__name__, "schema": _all_required(schema.model_json_schema())},
         }
+        # vLLM only constrains the output with the schema; it does not show it to the model.
+        # Without it, the model never reads the descriptions (it wrote DESCONOCIDO for
+        # France: it did not know what UE meant).
+        hint = (
+            "\n\nAnswer only with a JSON object that follows this JSON schema (read the "
+            "descriptions of the fields):\n"
+            + json.dumps(kwargs["response_format"]["json_schema"]["schema"], ensure_ascii=False)
+        )
+        messages = [*messages]
+        if messages and messages[0]["role"] == "system":
+            messages[0] = {**messages[0], "content": messages[0]["content"] + hint}
+        else:
+            messages.insert(0, {"role": "system", "content": hint.strip()})
+        kwargs["messages"] = messages
     started = time.perf_counter()
     response = client().chat.completions.create(**kwargs)
     usage = response.usage

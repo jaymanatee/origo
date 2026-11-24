@@ -16,11 +16,14 @@ Your job: read the user's question and write the plan of the work, as JSON.
 - agreements: the covered agreements the user asks about, by their code. A country is its
   agreement (United Kingdom -> TCA). Each one once.
 - out_of_scope: agreements or countries the user asks about that are not covered, as written.
-- product_hs_code and exw_price_eur: only if the user wrote them (the price only in euros).
-  Never deduce an HS code from the product's description.
+- product_hs_code and exw_price_eur: only if the user wrote them; the price only if it is in
+  euros (another agent converts other currencies). Never deduce an HS code from the
+  product's description.
 - statement: only if the user asks to issue an origin statement; copy only what the user gives.
 - missing: what the user must still give for the work, in a few words each, in the user's
-  language. Do not list the materials: another agent reads them."""
+  language. If the user gives no materials and attaches no file, say that the materials are
+  missing; otherwise nothing about them (codes, values, currencies), and no amount in another
+  currency: another agent reads and converts them."""
 
 
 def orchestrator(state: OrigoState) -> dict:
