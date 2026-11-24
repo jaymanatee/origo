@@ -23,11 +23,12 @@ def use_tools(
     thinking: bool = False,
     max_rounds: int = 5,
 ):
-    """Run the tool loop. Returns the model's last message (no tool_calls) and every call made.
-    ``messages`` is extended in place with the assistant and tool messages."""
+    """Run the tool loop. Returns the model's last message (no tool_calls) and every distinct
+    call made. ``messages`` is extended in place with the assistant and tool messages."""
     if any(t.requires_confirmation for t in registry.tools.values()):
         raise ValueError("tools that need confirmation are run by the graph, not by an agent")
     records: list[ToolCallRecord] = []
+    done: dict[str, ToolCallRecord] = {}  # identical calls are answered from here, not run again
     for _ in range(max_rounds):
         message = chat(
             messages, agent=agent, run=run, tools=registry.definitions(), thinking=thinking
@@ -52,8 +53,12 @@ def use_tools(
                     error=f"arguments are not valid JSON: {error}",
                 )
             else:
-                record = registry.call(call.function.name, arguments)
-            records.append(record)
+                key = json.dumps([call.function.name, arguments], sort_keys=True)
+                if key in done:  # the same call again: same answer, no second request
+                    record = done[key]
+                else:
+                    record = done[key] = registry.call(call.function.name, arguments)
+                    records.append(record)
             payload = {"result": record.result} if record.ok else {"error": record.error}
             messages.append(
                 {

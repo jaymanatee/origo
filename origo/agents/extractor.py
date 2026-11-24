@@ -71,9 +71,11 @@ def extractor(state: OrigoState) -> dict:
     )
     messages = [{"role": "system", "content": SYSTEM}, {"role": "user", "content": task}]
 
+    conversions = []
     if FOREIGN.search(text):  # phase 1, only when there is something to convert
         registry = ToolRegistry().register(get_exchange_rate)
-        use_tools(messages, registry, agent="extractor", run=run)  # adds calls and results
+        _, records = use_tools(messages, registry, agent="extractor", run=run)
+        conversions = [r.result for r in records if r.ok]
         messages.append({"role": "user", "content": "Now write the extraction as JSON."})
 
     message = chat(messages, agent="extractor", run=run, schema=Extraction)
@@ -82,4 +84,8 @@ def extractor(state: OrigoState) -> dict:
     update = {"missing": plan.missing + extraction.missing}
     if plan.exw_price_eur is None and extraction.exw_price_eur is not None:
         update["exw_price_eur"] = extraction.exw_price_eur
-    return {"materials": extraction.materials, "plan": plan.model_copy(update=update)}
+    return {
+        "materials": extraction.materials,
+        "plan": plan.model_copy(update=update),
+        "conversions": conversions,
+    }
