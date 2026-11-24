@@ -26,8 +26,14 @@ Kind = Literal["evaluate", "knowledge"]
 
 
 def _hs6(value: str) -> str:
-    """'8414.59', '8414 59' or '841459' -> '841459'; anything else is refused."""
-    digits = re.sub(r"\D", "", str(value))
+    """'8414.59', '8414 59' or '841459' -> '841459'; anything else is refused.
+
+    '8501.1' is '8501.10': a code typed in Excel is stored as a number and loses its trailing
+    zero (the subheading always has two digits after the point)."""
+    text = str(value).strip()
+    if re.fullmatch(r"\d{4}\.\d", text):
+        text += "0"
+    digits = re.sub(r"\D", "", text)
     if len(digits) < 6:
         raise ValueError(f"{value!r} is not an HS code of at least 6 digits")
     return digits[:6]

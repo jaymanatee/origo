@@ -46,7 +46,9 @@ def use_tools(
                 arguments = json.loads(call.function.arguments or "{}")
             except json.JSONDecodeError as error:
                 record = ToolCallRecord(
-                    name=call.function.name, arguments={}, ok=False,
+                    name=call.function.name,
+                    arguments={},
+                    ok=False,
                     error=f"arguments are not valid JSON: {error}",
                 )
             else:

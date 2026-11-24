@@ -43,4 +43,3 @@ def orchestrator(state: OrigoState) -> dict:
         schema=Plan,
     )
     return {"plan": Plan.model_validate_json(message.content)}
-  

@@ -31,7 +31,9 @@ class Extraction(BaseModel):
     )
 
 
-SYSTEM = DOMAIN_CONTEXT + """
+SYSTEM = (
+    DOMAIN_CONTEXT
+    + """
 
 Your job: extract the bill of materials of the product (name, HS code, country where it was
 made, value in euros, supplier declaration).
@@ -41,6 +43,7 @@ made, value in euros, supplier declaration).
 - A value in another currency: convert it with get_exchange_rate (currency, the month the user
   names, amount) and use its amount_eur. The same for the product's ex-works price. A value
   converted this way is given, not missing."""
+)
 
 # An amount in a currency other than the euro: the ECB codes, symbols and their names.
 FOREIGN = re.compile(
@@ -52,7 +55,7 @@ FOREIGN = re.compile(
 
 def read_bom(path: str, max_rows: int = 200) -> str:
     """The Excel as CSV text: the model maps the columns, whatever their names."""
-    table = pd.read_excel(path).dropna(how="all").head(max_rows)
+    table = pd.read_excel(path, dtype=str).dropna(how="all").head(max_rows)
     return table.to_csv(index=False)
 
 
