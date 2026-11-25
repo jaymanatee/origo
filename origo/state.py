@@ -174,6 +174,7 @@ class OrigoState(TypedDict, total=False):
     plan: Plan  # orchestrator
     materials: list[Material]  # extractor
     conversions: list[dict]  # extractor: get_exchange_rate results (amount -> amount_eur)
+    materials_missing: list[str]  # extractor: materials left out (no HS code or no value)
     rules: Annotated[dict[str, dict], merge]  # rules agent: agreement -> get_origin_rule result
     evaluations: Annotated[dict[str, dict], merge]  # origin agent: agreement -> evaluate_origin
     operations: list[str] | None  # origin agent: what the producer does (None: manufacturing)

@@ -82,11 +82,12 @@ def extractor(state: OrigoState) -> dict:
     message = chat(messages, agent="extractor", run=run, schema=Extraction)
     extraction = Extraction.model_validate_json(message.content)
 
-    update = {"missing": list(dict.fromkeys(plan.missing + extraction.missing))}
+    update = {}
     if plan.exw_price_eur is None and extraction.exw_price_eur is not None:
         update["exw_price_eur"] = extraction.exw_price_eur
     return {
         "materials": extraction.materials,
+        "materials_missing": extraction.missing,
         "plan": plan.model_copy(update=update),
         "conversions": conversions,
     }

@@ -68,17 +68,18 @@ and nothing else.
 - Name each criterion and agreement as in the definitions above. Do not explain how a
   criterion is met beyond the trace of the result: the tool already checked it.
 - If facts.results is empty and facts.missing is not: there is no verdict; ask the user for
-  exactly what is missing. If there are results and something is missing (e.g. data of the
-  statement), give the results and ask for what is missing.
+  exactly what is missing. If there are results and facts.missing is not empty, give the
+  results and ask for what is missing.
 - For each agreement in facts.results: the verdict (originating or not), the criterion met (or
   why none is), the rule applied, and the materials that are non-originating and why.
 - Explain each warning with its explanation in the facts.
 - Say what could not be checked (not_checked) and any error, plainly, without a verdict.
 - Agreements in facts.not_covered: the system does not cover them.
 - facts.unresolved: problems the system could not fix; say the answer may be affected.
-- If facts.statement_requested: if facts.statement_missing is empty, say the statement is
-  ready and the user will be asked to confirm its data; otherwise say it cannot be issued yet
-  and why (facts.statement_missing).
+- If facts.statement_requested: only facts.statement_missing says what the statement lacks.
+  If it is empty, nothing is missing (no REX number is needed below 6,000 EUR): say the
+  statement is ready and the user will be asked to confirm its data. Otherwise say it cannot
+  be issued yet and why (facts.statement_missing).
 - Clear and short: a summary first, then the detail per agreement. Markdown is fine."""
 )
 
@@ -116,6 +117,18 @@ def _result(evaluation: dict) -> dict:
     return result
 
 
+def _missing(state: OrigoState) -> list[str]:
+    """What the user must still give, computed by code (never the orchestrator's free text:
+    it kept listing a REX number the statement did not need)."""
+    plan = state["plan"]
+    missing = list(plan.gaps())
+    if plan.kind == "evaluate" and "plan" in state and not plan.gaps():
+        if not state.get("materials"):
+            missing.append("the bill of materials (each material's HS code, country and value)")
+        missing += state.get("materials_missing", [])
+    return missing
+
+
 def _facts(state: OrigoState) -> dict:
     """What the writer may use: the results of the other nodes, without internal fields."""
     plan = state["plan"]
@@ -125,7 +138,7 @@ def _facts(state: OrigoState) -> dict:
         "product_hs_code": plan.product_hs_code,
         "exw_price_eur": plan.exw_price_eur,
         "not_covered": plan.out_of_scope,
-        "missing": plan.missing + plan.gaps(),
+        "missing": _missing(state),
         "statement_requested": plan.statement is not None,
         "statement_missing": statement_gaps(state),
     }

@@ -268,14 +268,170 @@ y solo devuelve las llamadas distintas (ya no hay conversiones duplicadas).
 métrica de eficiencia en la evaluación: repeticiones por ejecución, junto a los tokens y los
 segundos del `METER`.
 
+## 2026-11-25 · Redactor
+
+`agents/writer.py`: el último agente con LLM. El código reúne los **hechos** del estado
+(`_facts`: veredictos, reglas aplicadas, materiales, avisos, lo que falta) y el modelo solo los
+redacta en el idioma del usuario. Las cifras ya vienen calculadas; el modelo no suma ni
+convierte nada.
+
+**Primera versión, qué pasó.** No inventó ninguna cifra, pero:
+- ligó la tolerancia general (10 %) a MAXNOM: la tolerancia solo se aplica a los criterios de
+  cambio de clasificación y nunca amplía un umbral de valor;
+- tradujo CTH como "cambio de tarifa arancelaria";
+- añadió un consejo propio ("necesario para la trazabilidad").
+
+**Causa.** **[informe]** Igual que con el esquema: recibía códigos sin explicar
+(`tolerance_pct`, `CTH`, `proveedor_sin_declaracion`) y los rellenaba con lo que creía.
+
+**Cambio.** Las explicaciones las pone el código, en la entrada; la salida no se toca:
+- `GLOSSARY` con los criterios en el prompt;
+- cada aviso del motor sustituido en los hechos por su explicación (`WARNINGS`, sacadas del
+  código del motor);
+- `tolerance_pct` renombrado a `general_tolerance_pct`;
+- regla de "ningún consejo propio".
+
+## 2026-11-25 · Comprobación de cifras del redactor
+
+**Qué.** `unsupported_numbers`: toda cifra del informe tiene que estar en los hechos, en la
+pregunta o en el glosario. Para no ser demasiado estricta:
+- cada número se lee con punto y con coma decimal, y como código sin puntos
+  (4407.92 = 440792);
+- se aceptan redondeos a 0, 1 o 2 decimales;
+- los enteros de 0 a 10 pasan siempre (numeración, "4 dígitos").
+
+Si hay cifras sin respaldo, el redactor **reescribe una vez** con un mensaje que dice cuáles. Si
+siguen, se entrega igualmente y quedan anotadas en `unsupported_numbers`. El texto nunca se
+edita.
+
+**Prueba.** El informe de las sillas: ninguna cifra sin respaldo y una sola llamada. Tres cifras
+inventadas a mano (45,30 EUR, 8414.51, 33 %): detectadas las tres.
+
+## 2026-11-25 · Grafo con LangGraph
+
+`origo/graph.py`:
+- **Rutas:** consulta de conocimiento o datos que faltan → redactor; sin materiales →
+  redactor; el resto → extractor → reglas → origen → verificador.
+- **Arista del verificador:** sin `issues` → redactor; con `issues` → el primer agente que
+  debe rehacer, y los posteriores se rehacen solos por las aristas normales; sin intentos
+  (`MAX_ATTEMPTS=2`) → redactor.
+- **Reintentos:** cada agente con LLM añade a su prompt sus `issues` del intento anterior
+  (`issues_note`).
+- **`build(verify=False)`** quita el verificador, para la comparación.
+- **`ask(pregunta)`** ejecuta una pregunta de principio a fin.
+
+**Tests.** `tests/test_graph.py` comprueba el orden de los nodos con nodos falsos
+(`monkeypatch`), sin modelo ni red.
+
+**Primera ejecución completa** (sillas, Corea + Reino Unido + Mercosur): el mismo informe
+correcto, sin `issues`, sin cifras sin respaldo. **[informe]** Coste por agente según el `METER`:
+
+| Agente | Llamadas | Tokens de entrada | Segundos |
+|---|---|---|---|
+| Orquestador | 1 | 1.540 | 2,1 |
+| Extractor | 4 | 4.704 (54 %) | 9,3 |
+| Origen | 1 | 768 | 1,0 |
+| Redactor | 1 | 1.676 | 10,4 |
+| **Total** | **7** | **8.688** | **22,8** |
+
+- **El agente de origen es el más barato**, porque solo recibe lo que necesita para decidir.
+- **El redactor tarda por la salida**, no por la entrada.
+- **El extractor gasta 4 llamadas en convertir 6 USD:** pide la conversión, la repite, escribe
+  un texto que se descarta y hace la salida estructurada. Mejora posible: que el modelo solo lea
+  importe, moneda y mes, y que convierta el código.
+
+## 2026-11-25 · Confirmación humana y emisión de la declaración
+
+`agents/statement.py`:
+- **`statement_gaps`, en código**, decide si la declaración se puede ofrecer: el usuario la
+  pidió, se sabe para qué acuerdo, están todos los datos, el REX está si el envío supera
+  6.000 €, el producto es originario y no quedan `issues`.
+- **`confirm`** para el grafo con `interrupt`: enseña los datos y espera un sí o un no.
+- **`issue`** emite con `issue_origin_statement`, usando los datos del estado.
+
+`ask` monta un checkpointer (`InMemorySaver`, con los modelos Pydantic del estado permitidos) y
+un `thread_id`, y reanuda con `Command(resume=respuesta)`.
+
+**Detalle.** Al reanudar, el nodo `confirm` se ejecuta otra vez desde el principio (se vio en la
+prueba). Por eso, antes del `interrupt` solo lee, y la emisión va en un nodo aparte.
+
+**[informe]** Lo que en ARCA no se pudo garantizar con el modelo (emitir solo si es originario,
+el REX por encima de 6.000 €, nunca con datos inventados) aquí lo garantiza el código, y la
+persona confirma lo que el código no puede comprobar.
+
+**Prueba real.** Factura F-2026-118, 2.400 €, TCA: el grafo se paró, se contestó "s" y se
+escribió `outputs/origin_statements/F-2026-118.txt` con el texto oficial. Con "n" no se emite
+nada (`{'confirmed': False}`).
+
+**Limitación.** Una declaración por pregunta (una factura es un envío a un destino). Si se
+pregunta por varios acuerdos sin decir para cuál es, se pide en vez de elegir.
+
+## 2026-11-25 · El redactor varía entre ejecuciones
+
+**Qué pasó.** Con la misma pregunta:
+- en una ejecución explicó bien el CTH (cambio de partida, 4 dígitos);
+- en otra lo explicó como "cambio de subpartida, 6 dígitos", y llamó al TCA "Acuerdo UE-UE".
+
+Ninguno es una cifra, así que la comprobación de números no los detecta.
+
+**Causas.**
+- **Temperatura 0,7**, la recomendada por Qwen sin razonamiento: demasiado alta para un
+  redactor que debe ser fiel.
+- **Siglas en inglés y redacción en español:** el modelo las traducía de memoria.
+- **Explicaba por su cuenta** cómo se cumple un criterio.
+
+**Cambio.**
+- `chat(temperature=...)` y 0,2 para el redactor;
+- glosario con los nombres en español de los criterios y los acuerdos;
+- regla de no explicar más allá de la traza del motor.
+
+**Resultado.** Dos ejecuciones casi iguales, con CTH como "cambio de partida" y el TCA con su
+nombre.
+
+**[informe]** La comprobación de cifras no basta: el redactor puede equivocarse en conceptos
+sin inventar números, y el mismo sistema varía de una ejecución a otra. En la evaluación hay
+que medir la fidelidad del informe y repetir cada pregunta varias veces.
+
+## 2026-11-25 · Dos fuentes de "lo que falta" se contradecían
+
+**Qué pasó.** Envío de 2.400 € a Reino Unido: el grafo ofreció la declaración sin REX
+(correcto: por debajo de 6.000 € no hace falta), pero el informe decía que faltaba el REX. Hubo
+tres intentos de arreglarlo:
+1. Regla en el orquestador para que no anotara datos de la declaración en `missing`: lo seguía
+   haciendo.
+2. Quitar del redactor el ejemplo "(e.g. data of the statement)", que le invitaba a pedir datos
+   de la declaración: el informe se contradecía dentro del mismo párrafo ("no se requiere REX…
+   sin embargo, el sistema indica que falta").
+3. **Que lo que falta lo calcule solo el código.**
+
+**Cambio.** El redactor ya no recibe el `missing` del orquestador, que es texto libre. Lo que
+falta sale de:
+- `plan.gaps()` (código SA, precio, acuerdo);
+- la lista de materiales vacía;
+- los materiales que el extractor dejó fuera (`materials_missing`);
+- `statement_gaps()` para la declaración.
+
+**Resultado.** "La declaración de origen está lista. No falta ningún dato."
+
+**[informe]** Cada vez que un dato tenía dos fuentes, una en código y otra en texto libre de un
+LLM, acababan contradiciéndose, y los parches de prompt solo reducían el problema. La solución
+fue dejar una sola fuente, en código.
+
+## 2026-11-25 · Notebooks
+
+`ipykernel` en el grupo `dev`, para probar cosas en notebooks con el entorno del repo.
+
 ---
 
 ## Pendiente
 
-1. **Redactor:** estado → respuesta al usuario, solo con los resultados y sin cifras propias.
-2. **Reintentos:** que cada agente lea sus `issues` cuando el verificador le devuelve el trabajo.
-3. **Grafo de LangGraph:** aristas condicionales, límite de intentos, confirmación humana y
-   emisión de la declaración.
-4. **Ruta de conocimiento:** RAG con el filtro por acuerdo de ARCA.
-5. **Evaluación y comparaciones:** un agente frente a multi-agente; con y sin verificador;
-   27B frente al 1,7B de ARCA; razonamiento por agente.
+1. **Evaluación y comparaciones:** un agente frente a multi-agente; con y sin verificador;
+   27B frente al 1,7B de ARCA; razonamiento por agente; fidelidad y variación del redactor
+   (varias ejecuciones por pregunta).
+2. **Ruta de conocimiento:** RAG con el filtro por acuerdo de ARCA.
+3. **Extractor:** que el modelo solo lea importe, moneda y mes, y que convierta el código
+   (de 4 llamadas a 1), medido con el `METER`.
+4. **Para pulir:**
+   - el aviso `proveedor_sin_declaracion` debería decir qué materiales lo provocan;
+   - el hueco vacío "(Exporter Reference No )" en las declaraciones sin REX;
+   - varias declaraciones en una pregunta.
