@@ -99,6 +99,7 @@ def chat(
     thinking: bool = False,
     max_tokens: int | None = None,
     schema: type[BaseModel] | None = None,
+    temperature: float | None = None,
 ):
     """One call to the model; returns the assistant message (``.content``, ``.tool_calls``,
     and ``.reasoning`` when thinking). Sampling as Qwen recommends for each mode, with a
@@ -107,7 +108,7 @@ def chat(
         "model": MODEL,
         "messages": messages,
         "max_tokens": max_tokens or (8192 if thinking else 2048),
-        "temperature": 0.6 if thinking else 0.7,
+        "temperature": temperature if temperature is not None else (0.6 if thinking else 0.7),
         "top_p": 0.95 if thinking else 0.8,
         "seed": 0,
         "extra_body": {"chat_template_kwargs": {"enable_thinking": thinking}},

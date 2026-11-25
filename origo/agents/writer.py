@@ -20,16 +20,21 @@ from origo.llm import chat
 from origo.state import OrigoState
 
 GLOSSARY = """\
-Criteria of a rule of origin (a rule lists alternatives: meeting one is enough):
-- WO: wholly obtained in the EU.
-- CC: every non-originating material changes chapter (2 digits) with respect to the product.
-- CTH: every non-originating material changes heading (4 digits).
-- CTSH: every non-originating material changes subheading (6 digits).
-- MAXNOM X %: the non-originating materials are at most X % of the ex-works price.
-- RVC X %: the regional value content is at least X % (of the FOB price if it says FOB).
-General tolerance: only for CC, CTH and CTSH. Non-originating materials that do not change
-classification may still be used if together they are at most that % of the ex-works price.
-It never widens a MAXNOM or RVC threshold."""
+Criteria of a rule of origin (a rule lists alternatives: meeting one is enough). Use these
+names in Spanish:
+- WO (enteramente obtenido): wholly obtained in the EU.
+- CC (cambio de capítulo): every non-originating material changes chapter (2 digits).
+- CTH (cambio de partida): every non-originating material changes heading (4 digits).
+- CTSH (cambio de subpartida): every non-originating material changes subheading (6 digits).
+- MAXNOM X % (valor máximo de materiales no originarios): the non-originating materials are
+  at most X % of the ex-works price.
+- RVC X % (contenido de valor regional): at least X % (of the FOB price if it says FOB).
+General tolerance (tolerancia general): only for CC, CTH and CTSH. Non-originating materials
+that do not change classification may still be used if together they are at most that % of
+the ex-works price. It never widens a MAXNOM or RVC threshold.
+Agreements, in Spanish: TCA = Acuerdo de Comercio y Cooperación UE-Reino Unido; UE-JP =
+Acuerdo de Asociación Económica UE-Japón; UE-KR = Acuerdo de Libre Comercio UE-Corea; CETA =
+Acuerdo Económico y Comercial Global UE-Canadá."""
 
 # What each warning of the engine means (origo/engine/origin_engine.py, `flags`).
 WARNINGS = {
@@ -60,6 +65,8 @@ Your job: write the answer to the user, in the user's language, from the facts y
 and nothing else.
 - Every figure, code, rule, verdict and explanation comes from the facts and the definitions
   above. Never add one of your own, never compute a new one, no advice of your own.
+- Name each criterion and agreement as in the definitions above. Do not explain how a
+  criterion is met beyond the trace of the result: the tool already checked it.
 - If facts.results is empty and facts.missing is not: there is no verdict; ask the user for
   exactly what is missing. If there are results and something is missing (e.g. data of the
   statement), give the results and ask for what is missing.
@@ -150,7 +157,7 @@ def writer(state: OrigoState) -> dict:
     messages = [{"role": "system", "content": SYSTEM}, {"role": "user", "content": task}]
     sources = [facts, state["question"], GLOSSARY]
     for attempt in range(2):  # one rewrite at most: never edited, never blocked
-        report = chat(messages, agent="writer", run=run).content or ""
+        report = chat(messages, agent="writer", run=run, temperature=0.2).content or ""
         unsupported = unsupported_numbers(report, sources)
         if not unsupported or attempt == 1:
             break
