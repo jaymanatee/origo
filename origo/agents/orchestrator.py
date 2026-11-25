@@ -22,8 +22,8 @@ Your job: read the user's question and write the plan of the work, as JSON.
   euros (another agent converts other currencies). Never deduce an HS code from the
   product's description.
 - statement: only if the user asks to issue an origin statement; copy only what the user
-  gives, null for the rest, and list in missing what is null (the exporter reference only
-  if the consignment is above 6,000 EUR).
+  gives and null for the rest. Do not list its missing data in missing: the system checks
+  the statement by itself.
 - missing: what the user must still give for the work, in a few words each, in the user's
   language. If the user gives no materials and attaches no file, say that the materials are
   missing; otherwise nothing about them (codes, values, currencies), and no amount in another

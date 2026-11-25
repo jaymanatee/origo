@@ -1,7 +1,7 @@
 """The routes of the graph, with fake nodes: no model, no API, no network."""
 
-import origo.graph as graph
-from origo.state import Issue, Material, Plan
+from origo import graph
+from origo.state import Issue, Material, Plan, StatementRequest
 
 PLAN = Plan(
     kind="evaluate",
@@ -13,17 +13,26 @@ PLAN = Plan(
 MATERIALS = [
     Material(name="madera", hs_code="440792", country_name="Francia", country="UE", value_eur=30)
 ]
+STATEMENT_PLAN = PLAN.model_copy(
+    update={
+        "statement": StatementRequest(
+            invoice_number="F-1", exporter_name="ACME", place="Valencia", consignment_value_eur=1200
+        )
+    }
+)
 
 
-def fake_nodes(monkeypatch, calls, plan=PLAN, materials=MATERIALS, issues_first=None):
-    """Replace every node by a fake that records its name and returns fixed values."""
+def fake_nodes(
+    monkeypatch, calls, plan=PLAN, materials=MATERIALS, issues_first=None, evaluations=None
+):
+    """Replace every node but confirm by a fake that records its name and returns fixed
+    values."""
 
     def node(name, update):
         def run(state):
             calls.append(name)
             return update(state) if callable(update) else update
 
-        run.__name__ = name
         monkeypatch.setattr(graph, name, run)
 
     def verifier(state):
@@ -36,9 +45,10 @@ def fake_nodes(monkeypatch, calls, plan=PLAN, materials=MATERIALS, issues_first=
     node("orchestrator", {"plan": plan})
     node("extractor", {"materials": materials})
     node("rules", {"rules": {"TCA": {}}})
-    node("origin", {"evaluations": {"TCA": {}}, "operations": None})
+    node("origin", {"evaluations": evaluations or {"TCA": {}}, "operations": None})
     node("verifier", verifier)
     node("writer", {"report": "ok"})
+    node("issue", {"statement": {"confirmed": True, "path": "F-1.txt"}})
 
 
 def test_full_route(monkeypatch):
@@ -105,3 +115,41 @@ def test_without_verifier(monkeypatch):
     fake_nodes(monkeypatch, calls)
     graph.build(verify=False).invoke({"question": "q"})
     assert calls == ["orchestrator", "extractor", "rules", "origin", "writer"]
+
+
+ORIGINATING = {"TCA": {"originating": True, "evaluation_id": "EV-X"}}
+
+
+def test_statement_issued_after_yes(monkeypatch):
+    calls, shown = [], []
+    fake_nodes(monkeypatch, calls, plan=STATEMENT_PLAN, evaluations=ORIGINATING)
+    state = graph.ask("q", confirm=lambda data: shown.append(data) or True)
+    assert calls[-2:] == ["writer", "issue"]
+    assert shown[0]["invoice_number"] == "F-1"
+    assert shown[0]["evaluation_id"] == "EV-X"
+    assert state["statement"]["path"] == "F-1.txt"
+
+
+def test_statement_not_issued_after_no(monkeypatch):
+    calls = []
+    fake_nodes(monkeypatch, calls, plan=STATEMENT_PLAN, evaluations=ORIGINATING)
+    state = graph.ask("q", confirm=lambda data: False)
+    assert "issue" not in calls
+    assert state["statement"] == {"confirmed": False}
+
+
+def test_statement_not_offered_when_not_originating(monkeypatch):
+    calls, shown = [], []
+    not_originating = {"TCA": {"originating": False, "evaluation_id": "EV-Y"}}
+    fake_nodes(monkeypatch, calls, plan=STATEMENT_PLAN, evaluations=not_originating)
+    graph.ask("q", confirm=lambda data: shown.append(data) or True)
+    assert shown == []
+    assert calls[-1] == "writer"
+
+
+def test_statement_not_offered_without_its_data(monkeypatch):
+    calls, shown = [], []
+    plan = PLAN.model_copy(update={"statement": StatementRequest(place="Valencia")})
+    fake_nodes(monkeypatch, calls, plan=plan, evaluations=ORIGINATING)
+    graph.ask("q", confirm=lambda data: shown.append(data) or True)
+    assert shown == []

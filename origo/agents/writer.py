@@ -14,6 +14,7 @@ import json
 import re
 
 from origo.agents.prompts import DOMAIN_CONTEXT
+from origo.agents.statement import statement_gaps
 from origo.agents.verifier import _amounts
 from origo.llm import chat
 from origo.state import OrigoState
@@ -68,8 +69,9 @@ and nothing else.
 - Say what could not be checked (not_checked) and any error, plainly, without a verdict.
 - Agreements in facts.not_covered: the system does not cover them.
 - facts.unresolved: problems the system could not fix; say the answer may be affected.
-- If facts.statement_requested: the statement on origin can only be issued for an originating
-  product, after the user confirms its data.
+- If facts.statement_requested: if facts.statement_missing is empty, say the statement is
+  ready and the user will be asked to confirm its data; otherwise say it cannot be issued yet
+  and why (facts.statement_missing).
 - Clear and short: a summary first, then the detail per agreement. Markdown is fine."""
 )
 
@@ -118,6 +120,7 @@ def _facts(state: OrigoState) -> dict:
         "not_covered": plan.out_of_scope,
         "missing": plan.missing + plan.gaps(),
         "statement_requested": plan.statement is not None,
+        "statement_missing": statement_gaps(state),
     }
     if plan.kind == "knowledge":
         facts["knowledge"] = "The knowledge base is not available yet: say so, without answering."

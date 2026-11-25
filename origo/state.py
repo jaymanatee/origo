@@ -93,6 +93,11 @@ class StatementRequest(BaseModel):
         description="REX number or authorised exporter number, exactly as the user wrote it, "
         "or null.",
     )
+    agreement: Agreement | None = Field(
+        default=None,
+        description="The agreement the statement is for (where this invoice goes), or null if "
+        "the user does not say.",
+    )
 
 
 class Plan(BaseModel):
@@ -128,7 +133,9 @@ class Plan(BaseModel):
     )
     missing: list[str] = Field(
         default_factory=list,
-        description="Data the user must give and did not, in a few words each.",
+        description="Data the user must give and did not, in a few words each. Nothing about "
+        "the materials, no amount given in another currency, and nothing about the statement "
+        "on origin: other agents and checks handle them.",
     )
 
     @field_validator("product_hs_code", mode="before")

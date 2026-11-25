@@ -7,28 +7,37 @@
                                                               └─ issues: back to  │
                                                                  the first agent  │
                                                                  that must redo   ▼
-                                                                               writer → END
+                                                                                writer
+    writer ─┬─ a statement was asked and code finds it ready → confirm ─┬─ yes → issue → END
+            └─ otherwise → END                                          └─ no ─────────→ END
 
-The model never chooses the next step: it cannot issue before evaluating, nor skip the checks.
-``build(verify=False)`` leaves the verifier out (origin → writer), for the comparison
-"with and without verifier"."""
+The model never chooses the next step: it cannot issue before evaluating, nor skip the checks,
+nor issue without the user's yes. ``build(verify=False)`` leaves the verifier out
+(origin → writer), for the comparison "with and without verifier"."""
 
 from __future__ import annotations
 
+import json
 import uuid
 
+from langgraph.checkpoint.memory import InMemorySaver
+from langgraph.checkpoint.serde.jsonplus import JsonPlusSerializer
 from langgraph.graph import END, START, StateGraph
+from langgraph.types import Command
 
 from origo.agents.extractor import extractor
 from origo.agents.orchestrator import orchestrator
 from origo.agents.origin import origin
 from origo.agents.rules import rules
+from origo.agents.statement import confirm, issue, statement_gaps
 from origo.agents.verifier import verifier
 from origo.agents.writer import writer
 from origo.state import OrigoState
 
 MAX_ATTEMPTS = 2  # verifier runs: the first check and one retry
 ORDER = ("orchestrator", "extractor", "rules", "origin")  # redoing one redoes the ones after it
+# The Pydantic models of the state, allowed in the checkpoints that the interrupt needs.
+STATE_MODELS = [("origo.state", name) for name in ("Plan", "Material", "StatementRequest", "Issue")]
 
 
 def after_plan(state: OrigoState) -> str:
@@ -47,10 +56,30 @@ def after_verification(state: OrigoState) -> str:
     return min((issue.agent for issue in issues), key=ORDER.index)
 
 
-def build(verify: bool = True):
+def after_writer(state: OrigoState) -> str:
+    asked = state["plan"].statement is not None
+    return "confirm" if asked and not statement_gaps(state) else END
+
+
+def after_confirm(state: OrigoState) -> str:
+    return "issue" if state["statement"]["confirmed"] else END
+
+
+def build(verify: bool = True, checkpointer=None):
+    """The compiled graph. A statement needs a checkpointer (the interrupt saves the state
+    while it waits for the user); ``ask`` gives one."""
     graph = StateGraph(OrigoState)
-    for node in (orchestrator, extractor, rules, origin, writer):
-        graph.add_node(node.__name__, node)
+    nodes = {
+        "orchestrator": orchestrator,
+        "extractor": extractor,
+        "rules": rules,
+        "origin": origin,
+        "writer": writer,
+        "confirm": confirm,
+        "issue": issue,
+    }
+    for name, node in nodes.items():
+        graph.add_node(name, node)
     graph.add_edge(START, "orchestrator")
     graph.add_conditional_edges("orchestrator", after_plan, ["extractor", "writer"])
     graph.add_conditional_edges("extractor", after_extraction, ["rules", "writer"])
@@ -61,11 +90,27 @@ def build(verify: bool = True):
         graph.add_conditional_edges("verifier", after_verification, [*ORDER, "writer"])
     else:
         graph.add_edge("origin", "writer")
-    graph.add_edge("writer", END)
-    return graph.compile()
+    graph.add_conditional_edges("writer", after_writer, ["confirm", END])
+    graph.add_conditional_edges("confirm", after_confirm, ["issue", END])
+    graph.add_edge("issue", END)
+    return graph.compile(checkpointer=checkpointer)
 
 
-def ask(question: str, bom_file: str | None = None, verify: bool = True) -> OrigoState:
-    """One run of the system: the final state (the answer is state['report'])."""
-    state = {"run": uuid.uuid4().hex[:8], "question": question, "bom_file": bom_file}
-    return build(verify).invoke(state)
+def ask_in_terminal(data: dict) -> bool:
+    """The default confirmation: show the statement's data and wait for a yes."""
+    print("\nStatement on origin, ready to issue:")
+    print(json.dumps(data, ensure_ascii=False, indent=1))
+    return input("Issue it? [s/N] ").strip().lower() in ("s", "si", "sí", "y", "yes")
+
+
+def ask(question: str, bom_file: str | None = None, verify: bool = True, confirm=ask_in_terminal):
+    """One run of the system: the final state (the answer is state['report'], the issued
+    statement state['statement']). ``confirm(data) -> bool`` answers the interrupt."""
+    run = uuid.uuid4().hex[:8]
+    saver = InMemorySaver(serde=JsonPlusSerializer(allowed_msgpack_modules=STATE_MODELS))
+    graph = build(verify, checkpointer=saver)
+    config = {"configurable": {"thread_id": run}}
+    state = graph.invoke({"run": run, "question": question, "bom_file": bom_file}, config)
+    while "__interrupt__" in state:  # stopped at confirm: the user decides
+        state = graph.invoke(Command(resume=confirm(state["__interrupt__"][0].value)), config)
+    return state
