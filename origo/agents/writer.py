@@ -3,13 +3,18 @@
 The code gathers the facts (verdicts, rules, materials, warnings, what is missing) and explains
 every code in them (criteria, warnings, tolerance); the model only writes them up in the
 user's language. Every figure is already computed: the model never adds, converts or guesses
-one. Without the explanations it filled the gaps itself (it tied the tolerance to MAXNOM)."""
+one. Without the explanations it filled the gaps itself (it tied the tolerance to MAXNOM).
+
+The code checks that every figure of the answer is in the facts, the question or the
+glossary. If one is not, the answer is rejected once and written again; it is never edited."""
 
 from __future__ import annotations
 
 import json
+import re
 
 from origo.agents.prompts import DOMAIN_CONTEXT
+from origo.agents.verifier import _amounts
 from origo.llm import chat
 from origo.state import OrigoState
 
@@ -66,6 +71,29 @@ and nothing else.
 - Clear and short: a summary first, then the detail per agreement. Markdown is fine."""
 )
 
+_NUMBER = re.compile(r"\d[\d.,]*\d|\d")
+
+
+def unsupported_numbers(report: str, sources: list[str]) -> list[str]:
+    """Figures of the report that no source contains. A figure passes if any reading of it
+    (decimal point or comma, rounded to 0, 1 or 2 decimals) is a number of a source, or if
+    its digits are a code of a source ('4407.92' and '440792'). Counters 0-10 always pass
+    (section numbers, '4 digits')."""
+    allowed, codes = set(), set()
+    for source in sources:
+        for value in _amounts(source):
+            allowed |= {round(value, 2), round(value, 1), float(round(value))}
+        codes |= set(re.findall(r"\d+", source))
+    unsupported = set()
+    for token in _NUMBER.findall(report):
+        readings = {round(value, 2) for value in _amounts(token)}
+        if any(value <= 10 and value == int(value) for value in readings):
+            continue
+        if readings & allowed or re.sub(r"\D", "", token) in codes:
+            continue
+        unsupported.add(token)
+    return sorted(unsupported)
+
 
 def _result(evaluation: dict) -> dict:
     """An evaluation for the writer: no internal id, warnings explained, tolerance named."""
@@ -110,12 +138,23 @@ def _facts(state: OrigoState) -> dict:
 
 
 def writer(state: OrigoState) -> dict:
-    """LangGraph node: writes state['report']."""
+    """LangGraph node: writes state['report'] and the figures it could not back up."""
+    run = state.get("run", "default")
     facts = json.dumps(_facts(state), ensure_ascii=False, indent=1)
     task = f"The user's message:\n\n{state['question']}\n\nThe facts:\n{facts}"
-    message = chat(
-        [{"role": "system", "content": SYSTEM}, {"role": "user", "content": task}],
-        agent="writer",
-        run=state.get("run", "default"),
-    )
-    return {"report": message.content or ""}
+    messages = [{"role": "system", "content": SYSTEM}, {"role": "user", "content": task}]
+    sources = [facts, state["question"], GLOSSARY]
+    for attempt in range(2):  # one rewrite at most: never edited, never blocked
+        report = chat(messages, agent="writer", run=run).content or ""
+        unsupported = unsupported_numbers(report, sources)
+        if not unsupported or attempt == 1:
+            break
+        messages += [
+            {"role": "assistant", "content": report},
+            {
+                "role": "user",
+                "content": f"These figures are not in the facts: {', '.join(unsupported)}. Write "
+                "the whole answer again with only figures from the facts.",
+            },
+        ]
+    return {"report": report, "unsupported_numbers": unsupported}

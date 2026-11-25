@@ -173,4 +173,5 @@ class OrigoState(TypedDict, total=False):
     issues: list[Issue]  # verifier; empty means everything checks
     attempts: int  # verifier loops so far, to stop before looping forever
     report: str  # writer: the opinion, material by material, with the rule cited
+    unsupported_numbers: list[str]  # writer: figures of the report not found in the facts
     statement: dict | None  # writer, after the human confirmed: issued or why not
