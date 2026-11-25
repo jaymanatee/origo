@@ -15,3 +15,14 @@ covered.
 Facts about products, materials, rules and agreements come only from the tools and the
 knowledge base, never from memory. Values the user gives (codes, prices, references) are
 copied exactly as the user wrote them, never made up."""
+
+
+def issues_note(state: dict, agent: str) -> str:
+    """The problems the verifier found in this agent's previous attempt, for its prompt."""
+    mine = [issue.message for issue in state.get("issues", []) if issue.agent == agent]
+    if not mine:
+        return ""
+    return (
+        "\n\nIn your previous attempt the checks found these problems. Fix them:\n- "
+        + "\n- ".join(mine)
+    )

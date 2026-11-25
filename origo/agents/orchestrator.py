@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from origo.agents.prompts import DOMAIN_CONTEXT
+from origo.agents.prompts import DOMAIN_CONTEXT, issues_note
 from origo.llm import chat
 from origo.state import OrigoState, Plan
 
@@ -36,6 +36,7 @@ def orchestrator(state: OrigoState) -> dict:
     question = state["question"]
     if state.get("bom_file"):
         question += f"\n\n[Attached bill of materials: {Path(state['bom_file']).name}]"
+    question += issues_note(state, "orchestrator")
     message = chat(
         [{"role": "system", "content": SYSTEM}, {"role": "user", "content": question}],
         agent="orchestrator",

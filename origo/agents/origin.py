@@ -11,7 +11,7 @@ import json
 
 from pydantic import BaseModel, Field
 
-from origo.agents.prompts import DOMAIN_CONTEXT
+from origo.agents.prompts import DOMAIN_CONTEXT, issues_note
 from origo.engine.registry import ToolRegistry
 from origo.engine.tools import Operation, evaluate_origin
 from origo.llm import chat
@@ -74,6 +74,7 @@ def origin(state: OrigoState) -> dict:
         f"The user's message:\n\n{state['question']}\n\nProduct: {plan.product} "
         f"(HS {plan.product_hs_code}).\n\nRules with several subdivisions:\n{listing or 'none'}"
     )
+    task += issues_note(state, "origin")
     message = chat(
         [{"role": "system", "content": SYSTEM}, {"role": "user", "content": task}],
         agent="origin",

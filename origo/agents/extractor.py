@@ -7,7 +7,7 @@ import re
 import pandas as pd
 from pydantic import BaseModel, Field
 
-from origo.agents.prompts import DOMAIN_CONTEXT
+from origo.agents.prompts import DOMAIN_CONTEXT, issues_note
 from origo.agents.tooling import use_tools
 from origo.engine.registry import ToolRegistry
 from origo.engine.tools import ECB_CURRENCIES, get_exchange_rate
@@ -69,6 +69,7 @@ def extractor(state: OrigoState) -> dict:
         f"The user's message:\n\n{text}\n\nYour task is only the bill of materials: do not "
         "answer the user's question, other agents do that."
     )
+    task += issues_note(state, "extractor")
     messages = [{"role": "system", "content": SYSTEM}, {"role": "user", "content": task}]
 
     conversions = []
@@ -81,7 +82,7 @@ def extractor(state: OrigoState) -> dict:
     message = chat(messages, agent="extractor", run=run, schema=Extraction)
     extraction = Extraction.model_validate_json(message.content)
 
-    update = {"missing": plan.missing + extraction.missing}
+    update = {"missing": list(dict.fromkeys(plan.missing + extraction.missing))}
     if plan.exw_price_eur is None and extraction.exw_price_eur is not None:
         update["exw_price_eur"] = extraction.exw_price_eur
     return {
