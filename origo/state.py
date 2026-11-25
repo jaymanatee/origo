@@ -169,6 +169,7 @@ class OrigoState(TypedDict, total=False):
     conversions: list[dict]  # extractor: get_exchange_rate results (amount -> amount_eur)
     rules: Annotated[dict[str, dict], merge]  # rules agent: agreement -> get_origin_rule result
     evaluations: Annotated[dict[str, dict], merge]  # origin agent: agreement -> evaluate_origin
+    operations: list[str] | None  # origin agent: what the producer does (None: manufacturing)
     issues: list[Issue]  # verifier; empty means everything checks
     attempts: int  # verifier loops so far, to stop before looping forever
     report: str  # writer: the opinion, material by material, with the rule cited
