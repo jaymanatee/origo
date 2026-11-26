@@ -1,7 +1,7 @@
 """The graph: which node runs after which, decided by code (LangGraph).
 
     orchestrator ─┬─ knowledge question, or data missing ─────────────────────────┐
-                  └─ extractor ─┬─ no materials ──────────────────────────────────┤
+                  └─ extractor ─┬─ no materials or the price not converted ───────┤
                                 └─ rules → origin → verifier ─┬─ all checks pass ─┤
                                                               ├─ out of attempts ─┤
                                                               └─ issues: back to  │
@@ -42,11 +42,13 @@ STATE_MODELS = [("origo.state", name) for name in ("Plan", "Material", "Statemen
 
 def after_plan(state: OrigoState) -> str:
     plan = state["plan"]
-    return "writer" if plan.kind == "knowledge" or plan.gaps() else "extractor"
+    # A price in another currency is not missing yet: the extractor converts it.
+    return "writer" if plan.kind == "knowledge" or plan.gaps(converting=True) else "extractor"
 
 
 def after_extraction(state: OrigoState) -> str:
-    return "rules" if state.get("materials") else "writer"
+    # The price is still missing here if it was in another currency and was not converted.
+    return "rules" if state.get("materials") and not state["plan"].gaps() else "writer"
 
 
 def after_verification(state: OrigoState) -> str:

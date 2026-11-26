@@ -11,8 +11,36 @@ import unicodedata
 
 from origo.agents.extractor import read_bom
 from origo.state import Issue, OrigoState, _hs6
+from origo.engine.tools import ECB_CURRENCIES
 
-_CODE = re.compile(r"\b\d{4}(?:[.\s]?\d{2}|\.\d)\b")
+# An amount written in a currency other than the euro: '6 USD', 'USD 6', '$6', '60 libras'.
+# It is not a value in euros (in ARCA the model used 150 USD as 150 EUR, and the verdict
+# flipped): it has to come from get_exchange_rate.
+_CURRENCY = (
+    r"(?:\b(?:" + "|".join(sorted(ECB_CURRENCIES)) + r")\b|[$£¥₩]"
+    r"|(?i:d[oó]lar(?:es)?|libras?|yen(?:es)?|wons?|yuan(?:es)?|francos? suizos?)\b)"
+)
+# HS 6 ('8414.51', '8414 51', '841451'), CN 8 and TARIC 10 ('84145100', '8414.51.00.00'), and
+# '8501.1' from Excel. Only the first six digits count. No space before the CN and TARIC
+# digits: '8414.51 8501.10' would be read as one code.
+_CODE = re.compile(r"\b\d{4}(?:[.\s]?\d{2}(?:\.?\d{2}){0,2}|\.\d)\b")
+
+_NUMBER = r"\d(?:[\d.,]*\d)?"
+_FOREIGN_AMOUNT = re.compile(rf"{_CURRENCY}\s*{_NUMBER}|{_NUMBER}\s*{_CURRENCY}")
+_STOP_WORDS = {"de", "del", "la", "las", "el", "los", "y", "e", "of", "the", "and"}
+
+
+def _names_country(country_name: str, plain: str) -> bool:
+    """Whether the user's text (``plain``) names this country. A long word may be part of a
+    longer one ('Corea' in 'coreana'); a short one ('UK', 'USA', 'EE.UU.') has to be a whole
+    word, or 'usa' would be found in 'causa'. Short words used to be skipped, so 'UK' was
+    never found."""
+    words = set(plain.split())
+    return any(
+        word in plain if len(word) > 3 else word in words
+        for word in _plain(country_name).split()
+        if word not in _STOP_WORDS
+    )
 
 
 def _plain(text: str) -> str:
@@ -22,7 +50,8 @@ def _plain(text: str) -> str:
 
 
 def _codes(text: str) -> set[str]:
-    """The 6-digit HS codes written in the text ('8501.10', '8501 10', '8501.1' from Excel)."""
+    """The 6-digit HS codes written in the text ('8501.10', '8501 10', '8501.1' from Excel,
+    and the first six digits of a CN or TARIC code: '84145100' -> '841451')."""
     codes = set()
     for match in _CODE.finditer(text):
         try:
@@ -43,6 +72,11 @@ def _amounts(text: str) -> set[float]:
             except ValueError:
                 pass
     return values
+
+def _euro_amounts(text: str) -> set[float]:
+    """The numbers of the text that may be in euros: all but the amounts written in another
+    currency ('6 USD')."""
+    return _amounts(_FOREIGN_AMOUNT.sub(" ", text))
 
 
 def _given(value: float, amounts: set[float]) -> bool:
@@ -73,7 +107,7 @@ def verifier(state: OrigoState) -> dict:
     if state.get("bom_file"):
         source += "\n" + read_bom(state["bom_file"])
     plain, codes = _plain(source), _codes(source)
-    amounts = _amounts(source) | {c["amount_eur"] for c in state.get("conversions", [])}
+    amounts = _euro_amounts(source) | {c["amount_eur"] for c in state.get("conversions", [])}
     issues: list[Issue] = []
 
     def check(ok: bool, agent: str, message: str) -> None:
@@ -92,7 +126,9 @@ def verifier(state: OrigoState) -> dict:
         check(
             _given(plan.exw_price_eur, amounts),
             "orchestrator",
-            f"exw_price_eur {plan.exw_price_eur} is not a value the user gave: copy it, or null.",
+            f"exw_price_eur {plan.exw_price_eur} is not a value the user gave in euros: copy it "
+            "if it is in euros; if it is in another currency, exw_price_eur null and "
+            "exw_price_currency its code.",
         )
     if plan.statement:
         for field in ("invoice_number", "exporter_name", "exporter_reference"):
@@ -116,8 +152,9 @@ def verifier(state: OrigoState) -> dict:
         check(
             m.hs_code in codes,
             "extractor",
-            f"material '{m.name}': HS {m.hs_code} is not in the user's text or file: copy it, "
-            "or leave the material out and say so in missing.",
+            f"material '{m.name}': value_eur {m.value_eur} is not a value the user gave in euros "
+            "nor an amount_eur of get_exchange_rate: copy it, or convert it if it is in another "
+            "currency.",
         )
         check(
             _given(m.value_eur, amounts),
@@ -127,7 +164,7 @@ def verifier(state: OrigoState) -> dict:
         )
         words = [w for w in _plain(m.country_name).split() if len(w) > 3]
         check(
-            m.country == "DESCONOCIDO" or any(w in plain for w in words),
+            m.country == "DESCONOCIDO" or _names_country(m.country_name, plain),
             "extractor",
             f"material '{m.name}': country '{m.country_name}' is not in the user's text: copy "
             "the country the user wrote, or DESCONOCIDO.",

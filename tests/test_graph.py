@@ -20,6 +20,7 @@ STATEMENT_PLAN = PLAN.model_copy(
         )
     }
 )
+USD_PLAN = PLAN.model_copy(update={"exw_price_eur": None, "exw_price_currency": "USD"})
 
 
 def fake_nodes(
@@ -65,6 +66,33 @@ def test_knowledge_and_missing_data_go_to_the_writer(monkeypatch):
         fake_nodes(monkeypatch, calls, plan=plan)
         graph.build().invoke({"question": "q"})
         assert calls == ["orchestrator", "writer"]
+
+
+def test_a_price_in_another_currency_is_not_missing_until_the_extractor_tried():
+    assert graph.after_plan({"plan": PLAN.model_copy(update={"exw_price_eur": None})}) == "writer"
+    assert graph.after_plan({"plan": USD_PLAN}) == "extractor"
+    converted = USD_PLAN.model_copy(update={"exw_price_eur": 110.5})
+    assert graph.after_extraction({"plan": converted, "materials": MATERIALS}) == "rules"
+    assert graph.after_extraction({"plan": USD_PLAN, "materials": MATERIALS}) == "writer"
+
+
+def test_a_price_in_another_currency_is_converted_and_evaluated(monkeypatch):
+    calls = []
+    fake_nodes(monkeypatch, calls, plan=USD_PLAN)
+    converted = {
+        "plan": USD_PLAN.model_copy(update={"exw_price_eur": 110.5}),
+        "materials": MATERIALS,
+    }
+    monkeypatch.setattr(graph, "extractor", lambda state: calls.append("extractor") or converted)
+    graph.build().invoke({"question": "q"})
+    assert calls == ["orchestrator", "extractor", "rules", "origin", "verifier", "writer"]
+
+
+def test_a_price_not_converted_goes_to_the_writer(monkeypatch):
+    calls = []
+    fake_nodes(monkeypatch, calls, plan=USD_PLAN)  # the fake extractor leaves the price as it is
+    graph.build().invoke({"question": "q"})
+    assert calls == ["orchestrator", "extractor", "writer"]
 
 
 def test_no_materials_go_to_the_writer(monkeypatch):

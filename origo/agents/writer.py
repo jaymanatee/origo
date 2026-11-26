@@ -121,9 +121,15 @@ def _missing(state: OrigoState) -> list[str]:
     """What the user must still give, computed by code (never the orchestrator's free text:
     it kept listing a REX number the statement did not need)."""
     plan = state["plan"]
-    missing = list(plan.gaps())
-    if plan.kind == "evaluate" and "plan" in state and not plan.gaps():
-        if not state.get("materials"):
+    extracted = "materials" in state  # the extractor ran, and had its chance to convert the price
+    missing = plan.gaps(converting=not extracted)
+    if "exw_price_eur" in missing and plan.exw_price_currency:  # given, but not converted
+        missing[missing.index("exw_price_eur")] = (
+            f"exw_price_eur (the user gave it in {plan.exw_price_currency} and it could not be "
+            "converted to euros)"
+        )
+    if extracted:
+        if not state["materials"]:
             missing.append("the bill of materials (each material's HS code, country and value)")
         missing += state.get("materials_missing", [])
     return missing

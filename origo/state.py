@@ -115,6 +115,11 @@ class Plan(BaseModel):
         gt=0,
         description="Ex-works price of the product, only if the user gave it in euros.",
     )
+    exw_price_currency: str | None = Field(
+        default=None,
+        description="Only if the user gave the ex-works price in a currency other than the "
+        "euro: its ISO code (USD, GBP, JPY...), and exw_price_eur null. Otherwise null.",
+    )
     agreements: list[Agreement] = Field(
         default_factory=list,
         max_length=4,
@@ -143,13 +148,17 @@ class Plan(BaseModel):
     def _normalise_hs(cls, value):
         return None if value in (None, "") else _hs6(value)
 
-    def gaps(self) -> list[str]:
-        """What an evaluation needs and the plan does not have, computed by code."""
+    def gaps(self, converting: bool = False) -> list[str]:
+        """What an evaluation needs and the plan does not have, computed by code.
+
+        ``converting``: before the extractor runs, a price in another currency is not missing,
+        because the extractor converts it. Without this the graph went straight to the writer
+        and asked the user for a price they had given in USD."""
         if self.kind != "evaluate":
             return []
         needed = {
             "product_hs_code": self.product_hs_code,
-            "exw_price_eur": self.exw_price_eur,
+            "exw_price_eur": self.exw_price_eur or (converting and self.exw_price_currency),
             "agreements": self.agreements or self.out_of_scope,
         }
         return [name for name, value in needed.items() if not value]
