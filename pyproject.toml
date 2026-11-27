@@ -15,14 +15,16 @@ dependencies = [
     "numpy>=1.26",
     "pandas>=2.2",        # leer la lista de materiales en Excel
     "openpyxl>=3.1",
-    "pypdf>=5.0",         # el RAG lee las guías en PDF
+    "pypdf==6.18.1",         # el RAG lee las guías en PDF
     "rank-bm25>=0.2",     # el RAG: recuperación por palabras clave (BM25)
 ]
 
 [project.optional-dependencies]
 # Los embeddings de las preguntas del RAG (Qwen3-Embedding-0.6B). Trae torch: aparte.
-rag = ["sentence-transformers>=5.0"]
-
+rag = [
+    "sentence-transformers>=5.0",
+    "langchain-text-splitters>=0.3",  # the recursive chunking, one of the strategies compared
+]
 [dependency-groups]
 dev = [
     "ipykernel>=7.4.0",

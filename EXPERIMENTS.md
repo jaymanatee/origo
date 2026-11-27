@@ -421,17 +421,132 @@ fue dejar una sola fuente, en código.
 
 `ipykernel` en el grupo `dev`, para probar cosas en notebooks con el entorno del repo.
 
+## 2026-11-26 · Tres fallos de las comprobaciones en código
+
+Encontrados leyendo el código, antes de medir. Los tres falseaban resultados sin dar error.
+
+**1. Un precio en otra moneda no se evaluaba nunca.** El orquestador deja `exw_price_eur` en
+`null` si el precio no está en euros, porque lo convierte el extractor. Pero `gaps()` lo daba
+como dato que falta y el grafo iba del orquestador al redactor, que pedía al usuario un precio
+que ya había dado. Además, si el modelo copiaba "150 USD" como 150 €, el verificador lo daba
+por bueno: solo miraba que el número estuviera en el texto (en ARCA, ese error cambió un
+veredicto en `cambio-01`).
+→ `Plan.exw_price_currency` guarda la moneda. `gaps(converting=True)` no cuenta el precio como
+que falta antes del extractor, y después del extractor `gaps()` sí: si no se pudo convertir, el
+grafo va al redactor, que dice que no se pudo convertir en vez de pedir el precio.
+→ El verificador ya no acepta como euros los importes escritos en otra moneda ("6 USD",
+"USD 6", "$6", "60 libras"): un valor en euros sale del texto en euros o de `get_exchange_rate`.
+Vale para el precio, los materiales y el valor del envío.
+
+**2. Los países cortos daban un `Issue` falso.** La comprobación del país solo miraba palabras
+de más de 3 letras, así que "UK", "USA" o "EE.UU." no se encontraban nunca: el extractor se
+repetía para nada, el informe salía con un problema sin resolver y la declaración quedaba
+bloqueada.
+→ Las palabras cortas cuentan, pero como palabra entera ("usa" no vale dentro de "causa"), y
+sin palabras vacías ("de", "del"…), para que "Estados Unidos de América" no pase por un "de".
+
+**3. Los códigos de 8 y 10 dígitos sin separador** ("84145100", habitual en Excel) no se
+reconocían, con el mismo efecto que el 2.
+→ `_codes` reconoce los códigos NC y TARIC y se queda con las 6 primeras cifras. Sin espacio
+antes de las cifras de más: con espacio, "8414.51 8501.10" se leía como un solo código y el
+material desaparecía.
+
+**Tests.** `tests/test_checks.py` (verificador y lo que falta, con estados fijos) y tres rutas
+nuevas en `tests/test_graph.py`. Los nuevos fallan con el código anterior, salvo los que vigilan
+que el arreglo no deje pasar nada de más (entre ellos, la pregunta de las sillas sin ningún
+problema).
+
 ---
+
+## 2026-11-26 · Banco de ARCA en Origo
+
+`origo/eval/bench.py` pasa por Origo las 20 tareas del banco de la fase 4 de ARCA
+(`data/bench/tasks.jsonl`, copiadas sin cambios) con las mismas comprobaciones automáticas
+(`matches`, copiada). Así el agente único y el sistema multiagente se miden igual. Todavía no
+se ha lanzado.
+
+Origo es un grafo y no un agente con una lista de pasos, así que su respuesta se lee de otra
+forma:
+
+- **La respuesta comprobada es el informe más la declaración emitida.** El agente de ARCA
+  escribía el nombre del fichero en su respuesta; Origo emite después del redactor, así que se
+  añade la línea que ve el usuario con el fichero.
+- **Las herramientas prohibidas se leen del estado:** `issue_origin_statement` se usó si hay
+  declaración emitida; `evaluate_origin`, si algún acuerdo tiene veredicto.
+- **Se quita el Markdown antes de comprobar:** "**no son** originarias" tiene que valer como
+  "no son originarias".
+- **La confirmación es automática**, porque las tareas que piden declaración dicen "si es
+  originario, emítela". Cada ejecución tiene su carpeta de declaraciones vacía:
+  `issue_origin_statement` no sobrescribe, y la segunda repetición encontraría la primera.
+
+Cada fila se guarda al terminar su tarea, con la respuesta, el coste por agente (`ask()` acepta
+ahora el nombre de la ejecución, para leer el `METER` aunque falle) y una traza del estado.
+`--resume` continúa una ejecución cortada y `--rescore` vuelve a comprobar sin el modelo.
+
+**Lo que se sabe antes de lanzarlo**, leyendo el código:
+- `conocimiento-01` a `-03` necesitan el RAG, y `vies-01`, VIES (la herramienta está en
+  `engine/tools.py`, pero ningún agente la usa).
+- `faltan-datos-02` seguramente falle por dos motivos: el dong vietnamita no se reconoce como
+  moneda extranjera (el extractor y el verificador solo conocen las del BCE), y el grafo evalúa
+  con la lista de materiales incompleta, que es justo lo que la tarea prohíbe.
+
+## 2026-11-27 · RAG, bloque 1: recuperación con filtro por acuerdo
+
+La copia del RAG era anterior al filtro por acuerdo. Se ha puesto al día, sin tocar todavía el
+grafo:
+
+- `origo/rag/agreements.py` (el filtro) y `retriever.py` (los buscadores con `keep`);
+- `origo/rag/serving.py`: la configuración elegida (chunking estructural, híbrido con λ = 0,3,
+  pool de 20, filtro activado);
+- `origo/rag/evaluate.py`, `evaluate_filter.py` y el conjunto dorado (`origo/rag/gold/`);
+- los tests de filtro, recuperación y chunking.
+
+El índice se guarda en `origo/rag/index/` (en el `.gitignore`), no en `rag/index`: esa ruta
+relativa habría creado en Origo una carpeta fuera del `.gitignore`.
+
+**pypdf fijado en 6.18.1.** Con la 7.1.1, una cita del conjunto dorado (q51, la guía de la AEAT
+sobre el exportador autorizado) no aparecía en el texto extraído del PDF. Cambiar la cita habría
+tapado el síntoma: si pypdf extrae distinto ese PDF, también puede trocear distinto los demás
+sin que nada avise. Con la versión fijada, el corpus es el mismo con el que se eligió la
+configuración.
+
+**Resultado** (58 preguntas con respuesta en el corpus; 51 nombran un acuerdo):
+
+| Buscador | Filtro | R@1 | R@3 | R@5 | R@10 | MRR |
+|---|---|---|---|---|---|---|
+| BM25 | no | 0,371 | 0,491 | 0,560 | 0,681 | 0,472 |
+| BM25 | sí | 0,414 | 0,534 | 0,621 | 0,690 | 0,522 |
+| Denso | no | 0,483 | 0,741 | 0,879 | 0,914 | 0,659 |
+| Denso | sí | 0,483 | 0,750 | 0,897 | 0,914 | 0,664 |
+| Híbrido | no | 0,603 | 0,741 | 0,853 | 0,914 | 0,715 |
+| Híbrido | sí | 0,603 | 0,819 | **0,905** | 0,914 | **0,729** |
+
+- **[informe]** Sin filtro, el top 5 del híbrido trae 38 pasajes de otro acuerdo en total; con
+  filtro, ninguno. Los artículos de los distintos protocolos se parecen mucho (todos hablan de
+  conservar copias "durante X años"), así que sin filtro el modelo puede recibir el plazo de
+  otro acuerdo. En q02 (conservación en el TCA), el pasaje bueno salía séptimo, por detrás de
+  tres de otros acuerdos, y fuera de los 5 que recibe el modelo.
+- El filtro mejora seis preguntas (q02, q03, q04, q05, q07 y q45) y no empeora ninguna.
+- λ = 0,3 sigue siendo el mejor peso con el filtro y sin él.
+- Control de la copia: BM25 da las mismas cifras que en ARCA; el denso cambia en el segundo
+  decimal porque los embeddings se han recalculado.
+
+Esto mide solo la búsqueda, sin modelo de lenguaje. La respuesta de Origo se medirá al meter el
+agente de normativa en el grafo (bloque 2), con las tareas de conocimiento del banco.
 
 ## Pendiente
 
 1. **Evaluación y comparaciones:** un agente frente a multi-agente; con y sin verificador;
    27B frente al 1,7B de ARCA; razonamiento por agente; fidelidad y variación del redactor
-   (varias ejecuciones por pregunta).
-2. **Ruta de conocimiento:** RAG con el filtro por acuerdo de ARCA.
-3. **Extractor:** que el modelo solo lea importe, moneda y mes, y que convierta el código
+   (varias ejecuciones por pregunta). El script del banco está hecho; falta lanzarlo y el
+   baseline de ARCA con el 27B.
+2. **Ruta de conocimiento, bloque 2:** el agente de normativa en el grafo, con el filtro por los
+   acuerdos del plan y preguntas mixtas (evaluación y normativa a la vez).
+3. **Monedas fuera del BCE y lista de materiales incompleta** (`faltan-datos-02`), y decidir si
+   VIES entra en el alcance.
+4. **Extractor:** que el modelo solo lea importe, moneda y mes, y que convierta el código
    (de 4 llamadas a 1), medido con el `METER`.
-4. **Para pulir:**
+5. **Para pulir:**
    - el aviso `proveedor_sin_declaracion` debería decir qué materiales lo provocan;
    - el hueco vacío "(Exporter Reference No )" en las declaraciones sin REX;
    - varias declaraciones en una pregunta.

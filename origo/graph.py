@@ -1,7 +1,7 @@
 """The graph: which node runs after which, decided by code (LangGraph).
 
     orchestrator ─┬─ knowledge question, or data missing ─────────────────────────┐
-                  └─ extractor ─┬─ no materials or the price not converted ───────┤
+                  └─ extractor ─┬─ no materials, or the price not converted ──────┤
                                 └─ rules → origin → verifier ─┬─ all checks pass ─┤
                                                               ├─ out of attempts ─┤
                                                               └─ issues: back to  │
@@ -105,10 +105,18 @@ def ask_in_terminal(data: dict) -> bool:
     return input("Issue it? [s/N] ").strip().lower() in ("s", "si", "sí", "y", "yes")
 
 
-def ask(question: str, bom_file: str | None = None, verify: bool = True, confirm=ask_in_terminal):
+def ask(
+    question: str,
+    bom_file: str | None = None,
+    verify: bool = True,
+    confirm=ask_in_terminal,
+    run: str | None = None,
+):
     """One run of the system: the final state (the answer is state['report'], the issued
-    statement state['statement']). ``confirm(data) -> bool`` answers the interrupt."""
-    run = uuid.uuid4().hex[:8]
+    statement state['statement']). ``confirm(data) -> bool`` answers the interrupt. ``run``
+    names the run in the cost meter (llm.METER); the benchmark gives one so that it can read
+    the cost even of a run that crashed."""
+    run = run or uuid.uuid4().hex[:8]
     saver = InMemorySaver(serde=JsonPlusSerializer(allowed_msgpack_modules=STATE_MODELS))
     graph = build(verify, checkpointer=saver)
     config = {"configurable": {"thread_id": run}}

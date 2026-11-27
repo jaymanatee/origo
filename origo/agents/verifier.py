@@ -10,9 +10,13 @@ import re
 import unicodedata
 
 from origo.agents.extractor import read_bom
-from origo.state import Issue, OrigoState, _hs6
 from origo.engine.tools import ECB_CURRENCIES
+from origo.state import Issue, OrigoState, _hs6
 
+# HS 6 ('8414.51', '8414 51', '841451'), CN 8 and TARIC 10 ('84145100', '8414.51.00.00'), and
+# '8501.1' from Excel. Only the first six digits count. No space before the CN and TARIC
+# digits: '8414.51 8501.10' would be read as one code.
+_CODE = re.compile(r"\b\d{4}(?:[.\s]?\d{2}(?:\.?\d{2}){0,2}|\.\d)\b")
 # An amount written in a currency other than the euro: '6 USD', 'USD 6', '$6', '60 libras'.
 # It is not a value in euros (in ARCA the model used 150 USD as 150 EUR, and the verdict
 # flipped): it has to come from get_exchange_rate.
@@ -20,14 +24,17 @@ _CURRENCY = (
     r"(?:\b(?:" + "|".join(sorted(ECB_CURRENCIES)) + r")\b|[$£¥₩]"
     r"|(?i:d[oó]lar(?:es)?|libras?|yen(?:es)?|wons?|yuan(?:es)?|francos? suizos?)\b)"
 )
-# HS 6 ('8414.51', '8414 51', '841451'), CN 8 and TARIC 10 ('84145100', '8414.51.00.00'), and
-# '8501.1' from Excel. Only the first six digits count. No space before the CN and TARIC
-# digits: '8414.51 8501.10' would be read as one code.
-_CODE = re.compile(r"\b\d{4}(?:[.\s]?\d{2}(?:\.?\d{2}){0,2}|\.\d)\b")
-
 _NUMBER = r"\d(?:[\d.,]*\d)?"
 _FOREIGN_AMOUNT = re.compile(rf"{_CURRENCY}\s*{_NUMBER}|{_NUMBER}\s*{_CURRENCY}")
+# Words of a country name that say nothing by themselves ('Corea del Sur', 'Estados Unidos de
+# América').
 _STOP_WORDS = {"de", "del", "la", "las", "el", "los", "y", "e", "of", "the", "and"}
+
+
+def _plain(text: str) -> str:
+    """Lower case, no accents, only letters and digits: 'Haya (Francia)' -> 'haya francia'."""
+    text = unicodedata.normalize("NFKD", str(text)).encode("ascii", "ignore").decode()
+    return " ".join(re.findall(r"[a-z0-9]+", text.lower()))
 
 
 def _names_country(country_name: str, plain: str) -> bool:
@@ -41,12 +48,6 @@ def _names_country(country_name: str, plain: str) -> bool:
         for word in _plain(country_name).split()
         if word not in _STOP_WORDS
     )
-
-
-def _plain(text: str) -> str:
-    """Lower case, no accents, only letters and digits: 'Haya (Francia)' -> 'haya francia'."""
-    text = unicodedata.normalize("NFKD", str(text)).encode("ascii", "ignore").decode()
-    return " ".join(re.findall(r"[a-z0-9]+", text.lower()))
 
 
 def _codes(text: str) -> set[str]:
@@ -72,6 +73,7 @@ def _amounts(text: str) -> set[float]:
             except ValueError:
                 pass
     return values
+
 
 def _euro_amounts(text: str) -> set[float]:
     """The numbers of the text that may be in euros: all but the amounts written in another
@@ -152,17 +154,16 @@ def verifier(state: OrigoState) -> dict:
         check(
             m.hs_code in codes,
             "extractor",
-            f"material '{m.name}': value_eur {m.value_eur} is not a value the user gave in euros "
-            "nor an amount_eur of get_exchange_rate: copy it, or convert it if it is in another "
-            "currency.",
+            f"material '{m.name}': HS {m.hs_code} is not in the user's text or file: copy it, "
+            "or leave the material out and say so in missing.",
         )
         check(
             _given(m.value_eur, amounts),
             "extractor",
-            f"material '{m.name}': value_eur {m.value_eur} is not a value the user gave nor an "
-            "amount_eur of get_exchange_rate: copy it or convert it.",
+            f"material '{m.name}': value_eur {m.value_eur} is not a value the user gave in euros "
+            "nor an amount_eur of get_exchange_rate: copy it, or convert it if it is in another "
+            "currency.",
         )
-        words = [w for w in _plain(m.country_name).split() if len(w) > 3]
         check(
             m.country == "DESCONOCIDO" or _names_country(m.country_name, plain),
             "extractor",
