@@ -534,14 +534,91 @@ configuración.
 Esto mide solo la búsqueda, sin modelo de lenguaje. La respuesta de Origo se medirá al meter el
 agente de normativa en el grafo (bloque 2), con las tareas de conocimiento del banco.
 
+## 2026-11-27 · RAG, bloque 2: agente de normativa en el grafo
+
+El RAG entra en el grafo con un agente nuevo, `knowledge` (`origo/agents/knowledge.py`), y la
+búsqueda que usa (`origo/rag/search.py`). Todavía no se ha medido con el modelo.
+
+**El plan admite preguntas mixtas.** `Plan.knowledge_questions` lleva las preguntas sobre las
+normas, cada una reescrita para entenderse sola. `kind` se queda: `evaluate` hay un producto
+(con preguntas de normativa o sin ellas) y `knowledge` solo hay preguntas de normativa. Así una
+pregunta como "¿son originarias las cocinas para el CETA y cuánto tiempo guardo los papeles?"
+se evalúa y se responde, y el resto del código, que mira `kind`, no cambia.
+
+**El filtro sale de los acuerdos del plan, no del texto.** En ARCA el filtro miraba qué acuerdo
+nombraba la pregunta. Aquí la subpregunta ("¿cuánto tiempo guardo los papeles?") puede no
+nombrarlo, y saldría el plazo de Corea o del Reino Unido. El orquestador ya sabe el acuerdo de
+todo el mensaje: `search(pregunta, plan.agreements)` pasa los documentos de esos acuerdos y los
+generales (guías de REX y de exportador autorizado, notas NC). Sin acuerdo, no se filtra. Si el
+mensaje solo habla de acuerdos no cubiertos (Australia), no se busca nada: el corpus
+contestaría con la norma de otro acuerdo.
+
+**El agente.** Para cada subpregunta, el código busca los 5 mejores pasajes (lo medido con
+R@5) y el modelo responde solo con ellos, con salida estructurada: si los pasajes la responden
+(`found`), la respuesta y los números de los pasajes que cita. Si no la responden, no hay
+respuesta: no contesta de memoria.
+
+**El grafo.** El agente va después de la evaluación, y no antes ni en paralelo: el verificador
+devuelve el trabajo a un agente y se rehacen los que van detrás, así que una cita mala solo
+rehace el agente de normativa. Todas las preguntas pasan por el verificador (es código, no
+cuesta nada), también las que no tienen nada que evaluar, y ya no hay salto directo al
+redactor. Una pregunta solo de acuerdos no cubiertos (solo Mercosur) ya no pasa por el
+extractor ni por el agente de origen: eran dos llamadas para nada.
+
+**Verificador.** Comprueba que cada respuesta cita algún pasaje, que las citas existen y que
+los pasajes son de los acuerdos del plan o de documentos generales. También que un plan
+`knowledge` traiga sus preguntas: sin ellas el agente no se ejecuta y el redactor no tendría
+nada que contar.
+
+**Redactor.** Recibe cada respuesta con solo los pasajes que cita, como fuentes, y las nombra.
+La comprobación de cifras cuenta esos pasajes como fuente.
+
+**Tests.** `tests/test_knowledge.py` (filtro, agente, comprobaciones y hechos del redactor, con
+búsqueda y modelo falsos) y las rutas nuevas en `tests/test_graph.py` (solo normativa, mixta,
+mixta con datos que faltan, una cita mala rehace solo la normativa, sin verificador).
+
+**Falta:** medirlo con las 6 tareas de `data/bench/tasks_knowledge.jsonl` y las 3 de
+`conocimiento` del banco.
+
+## 2026-11-27 · Primera medida de la normativa
+
+**Resultado** (3 repeticiones; banco de `origo/eval/bench.py`):
+
+| Tareas | Aciertos | Llamadas | Segundos por tarea |
+|---|---|---|---|
+| `kn-01` a `kn-06` (`tasks_knowledge.jsonl`) | **18 de 18** | 3,7 | 17 |
+| `conocimiento-01` a `-03` (`tasks.jsonl`) | 6 de 9 | 4,6 | 27 |
+
+- Las mixtas (`kn-05`, `kn-06`, `conocimiento-02` y `-03`: evaluar un producto y responder sobre
+  las normas) aciertan siempre.
+- **`conocimiento-01` falla las tres veces**, así que no es ruido. Pide el límite de los pequeños
+  paquetes a Corea (1.000 USD, art. 21(3)(b)) **y ese límite en euros** con el tipo del BCE de
+  octubre de 2026 (892,73 €). Ningún agente encadena una respuesta del corpus con un cálculo: el
+  extractor solo convierte los importes del usuario, y el redactor no calcula.
+- **[informe]** El sistema no se inventa la cifra: da el límite en USD con su fuente y dice que
+  no puede dar la conversión. La comprobación de cifras del redactor habría rechazado un importe
+  en euros que no estuviera en los hechos.
+
+**Probado y quitado: convertir en el agente de normativa.** Se añadió un paso que convertía con
+`get_exchange_rate` cuando la subpregunta pedía euros y la respuesta daba otra moneda. En las
+tres repeticiones no se llegó a ejecutar, por dos motivos:
+- el orquestador **separa la conversión en otra subpregunta** ("¿cuál es el equivalente en
+  euros…?"), o la quita: la subpregunta del límite ya no pide euros, y la de la conversión se
+  busca en el corpus, que no la responde (`not_found`);
+- el modelo escribe el importe como "1000 US dollars", que no se reconocía como moneda.
+
+Hacerlo funcionar pedía cambiar también el prompt del orquestador y el reconocimiento de
+monedas, para una sola tarea del banco. Se deja como **límite conocido**: Origo no encadena una
+respuesta de normativa con un cálculo.
+
 ## Pendiente
 
 1. **Evaluación y comparaciones:** un agente frente a multi-agente; con y sin verificador;
    27B frente al 1,7B de ARCA; razonamiento por agente; fidelidad y variación del redactor
    (varias ejecuciones por pregunta). El script del banco está hecho; falta lanzarlo y el
    baseline de ARCA con el 27B.
-2. **Ruta de conocimiento, bloque 2:** el agente de normativa en el grafo, con el filtro por los
-   acuerdos del plan y preguntas mixtas (evaluación y normativa a la vez).
+2. **Ruta de conocimiento:** medida (18 de 18 y 6 de 9). Límite conocido: no encadena una
+   respuesta del corpus con una conversión (`conocimiento-01`).
 3. **Monedas fuera del BCE y lista de materiales incompleta** (`faltan-datos-02`), y decidir si
    VIES entra en el alcance.
 4. **Extractor:** que el modelo solo lea importe, moneda y mes, y que convierta el código

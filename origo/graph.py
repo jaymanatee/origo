@@ -1,19 +1,30 @@
 """The graph: which node runs after which, decided by code (LangGraph).
 
-    orchestrator ─┬─ knowledge question, or data missing ─────────────────────────┐
-                  └─ extractor ─┬─ no materials, or the price not converted ──────┤
-                                └─ rules → origin → verifier ─┬─ all checks pass ─┤
-                                                              ├─ out of attempts ─┤
-                                                              └─ issues: back to  │
-                                                                 the first agent  │
-                                                                 that must redo   ▼
-                                                                                writer
+    orchestrator ─┬─ a product to evaluate, with its data ─→ extractor ─┬─ rules → origin ─┐
+                  │                                                     └─ no materials, ─┤
+                  │                                                        or no price    │
+                  └─ nothing to evaluate (only rules, data missing, not covered) ─────────┤
+                                                                                          ▼
+                       ┌─ questions about the rules → knowledge ─┐
+                       └─ none ──────────────────────────────────┤
+                                                                 ▼
+                                                             verifier ─┬─ all checks pass ─┐
+                                                                       ├─ out of attempts ─┤
+                                                                       └─ issues: back to  │
+                                                                          the first agent  │
+                                                                          that must redo   ▼
+                                                                                         writer
     writer ─┬─ a statement was asked and code finds it ready → confirm ─┬─ yes → issue → END
             └─ otherwise → END                                          └─ no ─────────→ END
 
+The knowledge agent goes after the evaluation, not before nor in parallel: the verifier sends
+work back to an agent and the agents after it are redone, so a bad citation only redoes the
+knowledge agent. Every question goes through the verifier (it is code, it costs nothing), so
+there is one way to the writer.
+
 The model never chooses the next step: it cannot issue before evaluating, nor skip the checks,
-nor issue without the user's yes. ``build(verify=False)`` leaves the verifier out
-(origin → writer), for the comparison "with and without verifier"."""
+nor issue without the user's yes. ``build(verify=False)`` leaves the verifier out (straight
+to the writer), for the comparison "with and without verifier"."""
 
 from __future__ import annotations
 
@@ -26,6 +37,7 @@ from langgraph.graph import END, START, StateGraph
 from langgraph.types import Command
 
 from origo.agents.extractor import extractor
+from origo.agents.knowledge import knowledge
 from origo.agents.orchestrator import orchestrator
 from origo.agents.origin import origin
 from origo.agents.rules import rules
@@ -35,20 +47,34 @@ from origo.agents.writer import writer
 from origo.state import OrigoState
 
 MAX_ATTEMPTS = 2  # verifier runs: the first check and one retry
-ORDER = ("orchestrator", "extractor", "rules", "origin")  # redoing one redoes the ones after it
+ORDER = ("orchestrator", "extractor", "rules", "origin", "knowledge")  # redoing one redoes the rest
 # The Pydantic models of the state, allowed in the checkpoints that the interrupt needs.
-STATE_MODELS = [("origo.state", name) for name in ("Plan", "Material", "StatementRequest", "Issue")]
+STATE_MODELS = [
+    ("origo.state", name)
+    for name in ("Plan", "Material", "StatementRequest", "Issue", "Passage", "KnowledgeAnswer")
+]
 
 
-def after_plan(state: OrigoState) -> str:
+def after_evaluation(state: OrigoState, checks: str = "verifier") -> str:
+    """After the evaluation, or instead of it: the knowledge agent if the message asks about
+    the rules, then the checks (the verifier, or the writer without it)."""
+    return "knowledge" if state["plan"].knowledge_questions else checks
+
+
+def after_plan(state: OrigoState, checks: str = "verifier") -> str:
     plan = state["plan"]
-    # A price in another currency is not missing yet: the extractor converts it.
-    return "writer" if plan.kind == "knowledge" or plan.gaps(converting=True) else "extractor"
+    # A price in another currency is not missing yet: the extractor converts it. Without a
+    # covered agreement (only Mercosur) there is nothing to evaluate either.
+    if plan.kind == "evaluate" and plan.agreements and not plan.gaps(converting=True):
+        return "extractor"
+    return after_evaluation(state, checks)
 
 
-def after_extraction(state: OrigoState) -> str:
+def after_extraction(state: OrigoState, checks: str = "verifier") -> str:
     # The price is still missing here if it was in another currency and was not converted.
-    return "rules" if state.get("materials") and not state["plan"].gaps() else "writer"
+    if state.get("materials") and not state["plan"].gaps():
+        return "rules"
+    return after_evaluation(state, checks)
 
 
 def after_verification(state: OrigoState) -> str:
@@ -76,22 +102,33 @@ def build(verify: bool = True, checkpointer=None):
         "extractor": extractor,
         "rules": rules,
         "origin": origin,
+        "knowledge": knowledge,
         "writer": writer,
         "confirm": confirm,
         "issue": issue,
     }
     for name, node in nodes.items():
         graph.add_node(name, node)
+    checks = "verifier" if verify else "writer"  # where the work goes when it is done
+
+    def route_plan(state: OrigoState) -> str:
+        return after_plan(state, checks)
+
+    def route_extraction(state: OrigoState) -> str:
+        return after_extraction(state, checks)
+
+    def route_evaluation(state: OrigoState) -> str:
+        return after_evaluation(state, checks)
+
     graph.add_edge(START, "orchestrator")
-    graph.add_conditional_edges("orchestrator", after_plan, ["extractor", "writer"])
-    graph.add_conditional_edges("extractor", after_extraction, ["rules", "writer"])
+    graph.add_conditional_edges("orchestrator", route_plan, ["extractor", "knowledge", checks])
+    graph.add_conditional_edges("extractor", route_extraction, ["rules", "knowledge", checks])
     graph.add_edge("rules", "origin")
+    graph.add_conditional_edges("origin", route_evaluation, ["knowledge", checks])
+    graph.add_edge("knowledge", checks)
     if verify:
         graph.add_node("verifier", verifier)
-        graph.add_edge("origin", "verifier")
         graph.add_conditional_edges("verifier", after_verification, [*ORDER, "writer"])
-    else:
-        graph.add_edge("origin", "writer")
     graph.add_conditional_edges("writer", after_writer, ["confirm", END])
     graph.add_conditional_edges("confirm", after_confirm, ["issue", END])
     graph.add_edge("issue", END)

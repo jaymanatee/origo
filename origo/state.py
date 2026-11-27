@@ -103,8 +103,9 @@ class StatementRequest(BaseModel):
 class Plan(BaseModel):
     kind: Kind = Field(
         description="evaluate: the user wants to know whether a product is originating, or to "
-        "issue an origin statement for it. knowledge: a question about how the rules work, "
-        "with no product to evaluate."
+        "issue an origin statement for it (the message may also ask about the rules: those "
+        "questions go to knowledge_questions). knowledge: only questions about how the rules "
+        "work, with no product to evaluate."
     )
     product: str | None = Field(default=None, description="The product, as the user names it.")
     product_hs_code: str | None = Field(
@@ -136,6 +137,14 @@ class Plan(BaseModel):
         default=None,
         description="Only if the user asks to issue a statement on origin; otherwise null.",
     )
+    knowledge_questions: list[str] = Field(
+        default_factory=list,
+        max_length=4,
+        description="The questions about how the rules work (validity, records, REX, "
+        "procedures...), each one rewritten to be understood alone, without the rest of the "
+        "message, in the user's language. Not whether the product is originating: that is the "
+        "evaluation. Empty if there are none.",
+    )
     missing: list[str] = Field(
         default_factory=list,
         description="Data the user must give and did not, in a few words each. Nothing about "
@@ -164,10 +173,50 @@ class Plan(BaseModel):
         return [name for name, value in needed.items() if not value]
 
 
+class Passage(BaseModel):
+    """A passage of the knowledge base, as the search returns it."""
+
+    source: str  # document of the corpus, e.g. 'korea/protocol_rules_of_origin.md'
+    section: str  # heading the passage is under
+    text: str
+
+
+class Answer(BaseModel):
+    """What the model writes for one question about the rules (structured output)."""
+
+    found: bool = Field(
+        description="true if the passages answer the question; false if they do not."
+    )
+    answer: str = Field(
+        description="The answer, only from the passages, with the figures as they say them. "
+        "Empty if found is false."
+    )
+    cited: list[int] = Field(
+        description="Numbers of the passages the answer comes from ([1] is 1). Empty if found "
+        "is false."
+    )
+
+
+class KnowledgeAnswer(BaseModel):
+    """One question about the rules and its answer, with the passages it was given."""
+
+    question: str
+    status: Literal["answered", "not_found", "not_covered"]
+    # answered: the passages answer it; not_found: they do not; not_covered: the question is
+    # only about agreements the system does not cover, so nothing was searched.
+    answer: str = ""
+    cited: list[int] = Field(default_factory=list)  # numbers of the passages, from 1
+    passages: list[Passage] = Field(default_factory=list)  # what the search returned
+
+    def sources(self) -> list[Passage]:
+        """The passages the answer cites (the numbers that exist)."""
+        return [self.passages[n - 1] for n in self.cited if 1 <= n <= len(self.passages)]
+
+
 class Issue(BaseModel):
     """A problem the verifier found, and which agent has to redo its part."""
 
-    agent: Literal["orchestrator", "extractor", "rules", "origin"]
+    agent: Literal["orchestrator", "extractor", "rules", "origin", "knowledge"]
     message: str
 
 
@@ -187,6 +236,7 @@ class OrigoState(TypedDict, total=False):
     rules: Annotated[dict[str, dict], merge]  # rules agent: agreement -> get_origin_rule result
     evaluations: Annotated[dict[str, dict], merge]  # origin agent: agreement -> evaluate_origin
     operations: list[str] | None  # origin agent: what the producer does (None: manufacturing)
+    knowledge: list[KnowledgeAnswer]  # knowledge agent: one per question about the rules
     issues: list[Issue]  # verifier; empty means everything checks
     attempts: int  # verifier loops so far, to stop before looping forever
     report: str  # writer: the opinion, material by material, with the rule cited

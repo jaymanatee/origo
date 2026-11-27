@@ -17,7 +17,7 @@ from origo.agents.prompts import DOMAIN_CONTEXT
 from origo.agents.statement import statement_gaps
 from origo.agents.verifier import _amounts
 from origo.llm import chat
-from origo.state import OrigoState
+from origo.state import KnowledgeAnswer, OrigoState
 
 GLOSSARY = """\
 Criteria of a rule of origin (a rule lists alternatives: meeting one is enough). Use these
@@ -75,6 +75,10 @@ and nothing else.
 - Explain each warning with its explanation in the facts.
 - Say what could not be checked (not_checked) and any error, plainly, without a verdict.
 - Agreements in facts.not_covered: the system does not cover them.
+- facts.knowledge: the answers to the questions about the rules. Give each answer that has
+  sources and name them after it (document and section). Status not_found: the knowledge base
+  does not answer it; not_covered: it is about an agreement the system does not cover. In
+  both cases say so and do not answer it.
 - facts.unresolved: problems the system could not fix; say the answer may be affected.
 - If facts.statement_requested: only facts.statement_missing says what the statement lacks.
   If it is empty, nothing is missing (no REX number is needed below 6,000 EUR): say the
@@ -135,6 +139,25 @@ def _missing(state: OrigoState) -> list[str]:
     return missing
 
 
+KNOWLEDGE_STATUS = {
+    "answered": "answered from the knowledge base",
+    "not_found": "the knowledge base does not answer it",
+    "not_covered": "it is about an agreement the system does not cover",
+}
+
+
+def _knowledge(answer: KnowledgeAnswer) -> dict:
+    """An answer about the rules for the writer: only the passages it cites, as its sources."""
+    return {
+        "question": answer.question,
+        "status": KNOWLEDGE_STATUS[answer.status],
+        "answer": answer.answer,
+        "sources": [
+            {"document": p.source, "section": p.section, "text": p.text} for p in answer.sources()
+        ],
+    }
+
+
 def _facts(state: OrigoState) -> dict:
     """What the writer may use: the results of the other nodes, without internal fields."""
     plan = state["plan"]
@@ -148,8 +171,9 @@ def _facts(state: OrigoState) -> dict:
         "statement_requested": plan.statement is not None,
         "statement_missing": statement_gaps(state),
     }
+    if state.get("knowledge"):
+        facts["knowledge"] = [_knowledge(answer) for answer in state["knowledge"]]
     if plan.kind == "knowledge":
-        facts["knowledge"] = "The knowledge base is not available yet: say so, without answering."
         return facts
     facts["materials"] = [
         m.model_dump(include={"name", "hs_code", "country_name", "value_eur"})

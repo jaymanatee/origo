@@ -2,7 +2,10 @@
 
 It never corrects anything: each problem becomes an Issue for the agent that has to redo its
 part, with a message that says what to fix. What code cannot check (whether 'UE' is right
-for 'Francia') is not checked. Missing data is not an issue: the user is asked for it."""
+for 'Francia') is not checked. Missing data is not an issue: the user is asked for it.
+
+The answers about the rules are checked too: an answer cites the passages it was given, and
+only passages of the plan's agreements or of general documents."""
 
 from __future__ import annotations
 
@@ -11,6 +14,8 @@ import unicodedata
 
 from origo.agents.extractor import read_bom
 from origo.engine.tools import ECB_CURRENCIES
+from origo.rag.agreements import agreement_of
+from origo.rag.search import CORPUS_AGREEMENT
 from origo.state import Issue, OrigoState, _hs6
 
 # HS 6 ('8414.51', '8414 51', '841451'), CN 8 and TARIC 10 ('84145100', '8414.51.00.00'), and
@@ -102,9 +107,58 @@ def verifier(state: OrigoState) -> dict:
     """LangGraph node: writes state['issues'] (empty: all checks pass) and counts the attempt."""
     attempts = state.get("attempts", 0) + 1
     plan = state["plan"]
-    if plan.kind != "evaluate":
-        return {"issues": [], "attempts": attempts}
+    issues = _evaluation_issues(state) if plan.kind == "evaluate" else []
+    if plan.kind == "knowledge" and not plan.knowledge_questions:
+        # Without its questions the knowledge agent does not run, and the writer has nothing.
+        issues.append(
+            Issue(
+                agent="orchestrator",
+                message="kind is knowledge but knowledge_questions is empty: write there each "
+                "question of the message about the rules.",
+            )
+        )
+    issues += _knowledge_issues(state)
+    return {"issues": issues, "attempts": attempts}
 
+
+def _knowledge_issues(state: OrigoState) -> list[Issue]:
+    """An answer cites at least one passage, only passages it was given, and only of the
+    plan's agreements or of general documents. The search already filters the passages: the
+    last check catches a change in the search, not a slip of the model."""
+    allowed = {CORPUS_AGREEMENT[a] for a in state["plan"].agreements}
+    issues: list[Issue] = []
+
+    def check(ok: bool, message: str) -> None:
+        if not ok:
+            issues.append(Issue(agent="knowledge", message=message))
+
+    for answer in state.get("knowledge", []):
+        if answer.status != "answered":
+            continue
+        where = f"question '{answer.question}'"
+        n = len(answer.passages)
+        check(
+            bool(answer.cited),
+            f"{where}: the answer cites no passage: cite the ones it comes from, or found false.",
+        )
+        wrong = [c for c in answer.cited if not 1 <= c <= n]
+        check(not wrong, f"{where}: cites {wrong}, but the passages are 1 to {n}: cite only those.")
+        foreign = sorted(
+            p.source
+            for p in answer.sources()
+            if allowed and (agreement := agreement_of(p.source)) and agreement not in allowed
+        )
+        check(
+            not foreign,
+            f"{where}: cites {foreign}, of another agreement: answer only from the agreements "
+            "of the message, or found false.",
+        )
+    return issues
+
+
+def _evaluation_issues(state: OrigoState) -> list[Issue]:
+    """The plan, the materials and the evaluations, against the user's text and the tools."""
+    plan = state["plan"]
     source = state["question"]
     if state.get("bom_file"):
         source += "\n" + read_bom(state["bom_file"])
@@ -185,5 +239,4 @@ def verifier(state: OrigoState) -> dict:
     for agreement, evaluation in state.get("evaluations", {}).items():
         if "error" in evaluation and (issue := _evaluation_issue(agreement, evaluation["error"])):
             issues.append(issue)
-
-    return {"issues": issues, "attempts": attempts}
+    return issues

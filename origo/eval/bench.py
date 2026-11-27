@@ -125,6 +125,7 @@ def _trace(state: dict) -> dict:
         "evaluations": state.get("evaluations", {}),
         "issues": [i.model_dump() for i in state.get("issues", [])],
         "attempts": state.get("attempts", 0),
+        "knowledge": [a.model_dump() for a in state.get("knowledge", [])],
         "unsupported_numbers": state.get("unsupported_numbers", []),
         "statement": {k: v for k, v in (state.get("statement") or {}).items() if k != "text"},
     }

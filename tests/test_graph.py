@@ -21,6 +21,9 @@ STATEMENT_PLAN = PLAN.model_copy(
     }
 )
 USD_PLAN = PLAN.model_copy(update={"exw_price_eur": None, "exw_price_currency": "USD"})
+RECORDS = "¿Cuánto tiempo hay que conservar los documentos?"
+MIXED_PLAN = PLAN.model_copy(update={"knowledge_questions": [RECORDS]})
+KNOWLEDGE_PLAN = Plan(kind="knowledge", agreements=["TCA"], knowledge_questions=[RECORDS])
 
 
 def fake_nodes(
@@ -47,6 +50,7 @@ def fake_nodes(
     node("extractor", {"materials": materials})
     node("rules", {"rules": {"TCA": {}}})
     node("origin", {"evaluations": evaluations or {"TCA": {}}, "operations": None})
+    node("knowledge", {"knowledge": []})
     node("verifier", verifier)
     node("writer", {"report": "ok"})
     node("issue", {"statement": {"confirmed": True, "path": "F-1.txt"}})
@@ -60,20 +64,23 @@ def test_full_route(monkeypatch):
     assert state["report"] == "ok"
 
 
-def test_knowledge_and_missing_data_go_to_the_writer(monkeypatch):
-    for plan in (Plan(kind="knowledge"), Plan(kind="evaluate", agreements=["TCA"])):
+def test_nothing_to_evaluate_goes_through_the_checks_to_the_writer(monkeypatch):
+    only_mercosur = PLAN.model_copy(update={"agreements": [], "out_of_scope": ["Mercosur"]})
+    missing_data = Plan(kind="evaluate", agreements=["TCA"])
+    for plan in (Plan(kind="knowledge"), missing_data, only_mercosur):
         calls = []
         fake_nodes(monkeypatch, calls, plan=plan)
         graph.build().invoke({"question": "q"})
-        assert calls == ["orchestrator", "writer"]
+        assert calls == ["orchestrator", "verifier", "writer"]
 
 
 def test_a_price_in_another_currency_is_not_missing_until_the_extractor_tried():
-    assert graph.after_plan({"plan": PLAN.model_copy(update={"exw_price_eur": None})}) == "writer"
+    no_price = PLAN.model_copy(update={"exw_price_eur": None})
+    assert graph.after_plan({"plan": no_price}) == "verifier"
     assert graph.after_plan({"plan": USD_PLAN}) == "extractor"
     converted = USD_PLAN.model_copy(update={"exw_price_eur": 110.5})
     assert graph.after_extraction({"plan": converted, "materials": MATERIALS}) == "rules"
-    assert graph.after_extraction({"plan": USD_PLAN, "materials": MATERIALS}) == "writer"
+    assert graph.after_extraction({"plan": USD_PLAN, "materials": MATERIALS}) == "verifier"
 
 
 def test_a_price_in_another_currency_is_converted_and_evaluated(monkeypatch):
@@ -92,14 +99,14 @@ def test_a_price_not_converted_goes_to_the_writer(monkeypatch):
     calls = []
     fake_nodes(monkeypatch, calls, plan=USD_PLAN)  # the fake extractor leaves the price as it is
     graph.build().invoke({"question": "q"})
-    assert calls == ["orchestrator", "extractor", "writer"]
+    assert calls == ["orchestrator", "extractor", "verifier", "writer"]
 
 
 def test_no_materials_go_to_the_writer(monkeypatch):
     calls = []
     fake_nodes(monkeypatch, calls, materials=[])
     graph.build().invoke({"question": "q"})
-    assert calls == ["orchestrator", "extractor", "writer"]
+    assert calls == ["orchestrator", "extractor", "verifier", "writer"]
 
 
 def test_an_issue_sends_back_to_the_first_agent_that_must_redo(monkeypatch):
@@ -143,6 +150,73 @@ def test_without_verifier(monkeypatch):
     fake_nodes(monkeypatch, calls)
     graph.build(verify=False).invoke({"question": "q"})
     assert calls == ["orchestrator", "extractor", "rules", "origin", "writer"]
+
+
+# --- questions about the rules (knowledge agent)
+
+
+def test_a_question_about_the_rules_goes_to_the_knowledge_agent(monkeypatch):
+    calls = []
+    fake_nodes(monkeypatch, calls, plan=KNOWLEDGE_PLAN)
+    graph.build().invoke({"question": "q"})
+    assert calls == ["orchestrator", "knowledge", "verifier", "writer"]
+
+
+def test_a_mixed_question_evaluates_and_then_asks_the_knowledge_agent(monkeypatch):
+    calls = []
+    fake_nodes(monkeypatch, calls, plan=MIXED_PLAN)
+    graph.build().invoke({"question": "q"})
+    assert calls == [
+        "orchestrator",
+        "extractor",
+        "rules",
+        "origin",
+        "knowledge",
+        "verifier",
+        "writer",
+    ]
+
+
+def test_a_mixed_question_with_missing_data_still_gets_its_answer_about_the_rules(monkeypatch):
+    calls = []
+    plan = MIXED_PLAN.model_copy(update={"exw_price_eur": None})
+    fake_nodes(monkeypatch, calls, plan=plan)
+    graph.build().invoke({"question": "q"})
+    assert calls == ["orchestrator", "knowledge", "verifier", "writer"]
+
+
+def test_a_bad_citation_only_redoes_the_knowledge_agent(monkeypatch):
+    calls = []
+    issues = [Issue(agent="knowledge", message="x")]
+    fake_nodes(monkeypatch, calls, plan=MIXED_PLAN, issues_first=issues)
+    graph.build().invoke({"question": "q"})
+    assert calls == [
+        "orchestrator",
+        "extractor",
+        "rules",
+        "origin",
+        "knowledge",
+        "verifier",
+        "knowledge",  # only the knowledge agent is redone
+        "verifier",
+        "writer",
+    ]
+
+
+def test_an_extractor_issue_redoes_the_knowledge_agent_too(monkeypatch):
+    calls = []
+    issues = [Issue(agent="extractor", message="x")]
+    fake_nodes(monkeypatch, calls, plan=MIXED_PLAN, issues_first=issues)
+    graph.build().invoke({"question": "q"})
+    after_first_check = calls[calls.index("verifier") + 1 :]
+    assert after_first_check == ["extractor", "rules", "origin", "knowledge", "verifier", "writer"]
+
+
+def test_without_verifier_the_knowledge_agent_goes_to_the_writer(monkeypatch):
+    calls = []
+    fake_nodes(monkeypatch, calls, plan=MIXED_PLAN)
+    graph.build(verify=False).invoke({"question": "q"})
+    assert calls == ["orchestrator", "extractor", "rules", "origin", "knowledge", "writer"]
 
 
 ORIGINATING = {"TCA": {"originating": True, "evaluation_id": "EV-X"}}

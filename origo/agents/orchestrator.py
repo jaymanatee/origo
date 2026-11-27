@@ -14,7 +14,13 @@ SYSTEM = (
 
 Your job: read the user's question and write the plan of the work, as JSON.
 - kind: "evaluate" if the user has a product and wants to know whether it is originating, or
-  wants an origin statement for it; "knowledge" if the user asks how the rules work.
+  wants an origin statement for it (even if the message also asks about the rules);
+  "knowledge" if the user only asks how the rules work.
+- knowledge_questions: each question about how the rules work (how long a statement is
+  valid, how long to keep records, REX, who may make out a statement...), rewritten so that
+  it is understood alone, in the user's language. Not whether the product is originating:
+  that is the evaluation. The agreement does not need to be in the question: it goes in
+  agreements, like the rest of the message. Empty if there are none.
 - agreements: the covered agreements the user asks about, by their code. A country is its
   agreement (United Kingdom -> TCA). Each one once.
 - out_of_scope: agreements or countries the user asks about that are not covered, as written.
