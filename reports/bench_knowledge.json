@@ -1,0 +1,2340 @@
+{
+ "origo": {
+  "n_rows": 18,
+  "success_rate": 1.0,
+  "success_by_repeat": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "by_category": {
+   "conocimiento": 1.0
+  },
+  "crashes": 0,
+  "mean_calls": 3.6666666666666665,
+  "mean_tokens": 7030.0,
+  "mean_seconds": 16.827777777777776,
+  "rows": [
+   {
+    "id": "kn-01",
+    "category": "conocimiento",
+    "repeat": 0,
+    "final_answer": "## Resumen\n\nBajo el **Acuerdo de Comercio y Cooperación UE-Reino Unido (TCA)**, una declaración de origen es válida durante **12 meses** desde la fecha en que se emite. No obstante, la Parte importadora puede establecer un período más largo, con un máximo de **24 meses**.\n\n## Detalle\n\n- **Vigencia estándar:** 12 meses desde la fecha de emisión.\n- **Vigencia extendida:** La Parte importadora puede permitir un período más largo, hasta un máximo de 24 meses.\n- **Aplicación a múltiples envíos:** La declaración puede aplicarse a varios envíos de productos idénticos dentro del período especificado en la propia declaración, siempre que este no supere los 12 meses.\n\n**Fuentes:**\n1. *tca/rules_of_origin.md*, SECTION 2 ORIGIN PROCEDURES › Article 56 Statement on origin.\n2. *guides/tca_origin_questions_answers.pdf*, Question 34.\n3. *guides/tca_origin_questions_answers.pdf*, Question 33.",
+    "tools_worked": [],
+    "crash": null,
+    "seconds": 26.3,
+    "cost": {
+     "calls": 3.0,
+     "prompt_tokens": 5478.0,
+     "completion_tokens": 436.0,
+     "reasoning_tokens": 0.0,
+     "seconds": 10.794452446993091
+    },
+    "cost_per_agent": {
+     "orchestrator": {
+      "calls": 1.0,
+      "prompt_tokens": 1903.0,
+      "completion_tokens": 117.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 2.423080636988743
+     },
+     "knowledge": {
+      "calls": 1.0,
+      "prompt_tokens": 1726.0,
+      "completion_tokens": 88.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 2.0500425080099376
+     },
+     "writer": {
+      "calls": 1.0,
+      "prompt_tokens": 1849.0,
+      "completion_tokens": 231.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 6.32132930199441
+     }
+    },
+    "trace": {
+     "plan": {
+      "kind": "knowledge",
+      "product": null,
+      "product_hs_code": null,
+      "exw_price_eur": null,
+      "exw_price_currency": null,
+      "agreements": [
+       "TCA"
+      ],
+      "out_of_scope": [],
+      "statement": null,
+      "knowledge_questions": [
+       "How long is a statement on origin valid under the EU-UK Trade and Cooperation Agreement?"
+      ],
+      "missing": []
+     },
+     "materials": [],
+     "materials_missing": [],
+     "conversions": [],
+     "evaluations": {},
+     "issues": [],
+     "attempts": 1,
+     "knowledge": [
+      {
+       "question": "How long is a statement on origin valid under the EU-UK Trade and Cooperation Agreement?",
+       "status": "answered",
+       "answer": "A statement on origin is valid for 12 months from the date it was made out, or for a longer period up to a maximum of 24 months as provided by the Party of import (Article 56).",
+       "cited": [
+        2,
+        3,
+        4
+       ],
+       "passages": [
+        {
+         "source": "tca/annex6_7_supplier_declaration_statement.md",
+         "section": "ANNEX 7 TEXT OF THE STATEMENT ON ORIGIN",
+         "text": "[EU-UK Trade and Cooperation Agreement: Annexes 6 and 7: Supplier's declaration and text of the statement on origin › ANNEX 7 TEXT OF THE STATEMENT ON ORIGIN]\n…(4)\n\n(Place and date)\n\n…\n\n(Name of the exporter)\n\n(1) If the statement on origin is completed for multiple shipments of identical originating products within the meaning of point (b) of Article 56(4) of this Agreement, indicate the period for which the statement on origin is to apply. That period shall not exceed 12 months. All importations of the product must occur within the period indicated. If a period is not applicable, the field may be left blank.\n\n(2) Indicate the reference number by which the exporter is identified. For the Union exporter, this will be the number assigned in accordance with the laws and regulations of the Union. For the United Kingdom exporter, this will be the number assigned in accordance with the laws and regulations applicable within the United Kingdom. Where the exporter has not been assigned a number, this field may be left blank.\n\n(3) Indicate the origin of the product: the United Kingdom or the Union.\n\n(4) Place and date may be omitted if the information is contained on the document itself."
+        },
+        {
+         "source": "tca/rules_of_origin.md",
+         "section": "SECTION 2 ORIGIN PROCEDURES › Article 56 Statement on origin",
+         "text": "[EU-UK Trade and Cooperation Agreement: Part Two, Heading One, Title I, Chapter 2: Rules of origin › SECTION 2 ORIGIN PROCEDURES › Article 56 Statement on origin]\nArticle 56\n\nStatement on origin\n\n1. A statement on origin shall be made out by an exporter of a product on the basis of information demonstrating that the product is originating, including, information on the originating status of materials used in the production of the product. The exporter shall be responsible for the correctness of the statement on origin and the information provided.\n\n2. A statement on origin shall be made out using one of the language versions set out in Annex 7 in an invoice or on any other document that describes the originating product in sufficient detail to enable the identification of that product. The exporter shall be responsible for providing sufficient detail to allow the identification of the originating product. The importing Party shall not require the importer to submit a translation of the statement on origin.\n\n3. A statement on origin shall be valid for 12 months from the date it was made out or for such longer period as provided by the Party of import up to a maximum of 24 months.\n\n4. A statement on origin may apply to:\n\n(a) a single shipment of one or more products imported into a Party; or\n\n(b) multiple shipments of identical products imported into a Party within the period specified in the statement on origin, which shall not exceed 12 months."
+        },
+        {
+         "source": "guides/tca_origin_questions_answers.pdf",
+         "section": "Question 34",
+         "text": "[European Commission, EU-UK Trade and Cooperation Agreement: compendium of questions and answers on rules of origin › Question 34]\n34. Question: May the Parties choose the validity of the statement? Why are there 2 validity periods?\n\nAnswer: The validity will be of 12 months, unless a Party decides to provide for a longer peri od (up to 24 months). The Commission is not liable to provide information on third countries policies.\n\nHowever, it appears that t he UK has decided to provide for such a longer period for imports in the UK of EU originating goods."
+        },
+        {
+         "source": "guides/tca_origin_questions_answers.pdf",
+         "section": "Question 33",
+         "text": "[European Commission, EU-UK Trade and Cooperation Agreement: compendium of questions and answers on rules of origin › Question 33]\n33. Question: In article ORIG-19 stands following: “3. A statement on origin shall be valid for 12 months from the date it was made out or for such longer period as provided by the Party of import up to a maximum of 24 months.” What is the validity period for imports into the EU?\n\nAnswer: When the EU is the importing Party , the validity period is 12 months . The Commission is not liable to provide information on third countries policies. However, it appears that for the UK as importing Party the validity is 24 months."
+        },
+        {
+         "source": "guides/tca_guide_for_traders.pdf",
+         "section": "A. Statement on origin",
+         "text": "[European Commission, EU-UK Trade and Cooperation Agreement: Guide for traders on rules of origin › A. Statement on origin]\nA. Statement on origin\n\nThe statement on origin is made out by the exporter of the goods. The TCA states that a statement on origin can be made out “in an invoice or on any other document that describes the originating product in sufficient detail to enable the identification of that product.”\n\nTherefore, any document meeting that condition is acceptable to make out a statement on origin. It is up to the exporter to make sure they themselves are in possession of the necessary information to make out the statement on origin and to ensure that the information provided is correct. To fulfil this obligation, the exporter can make use of any relevant source of information allowing the origin of the products to be determined, such as the so-called ‘supplier’s declarations’ which provide in particular a description and the value of the non-originating materials used. For the first year of the application of the EU-UK TCA (1.1.2021 – 31.12.2021), an exceptional trade facilitation measure is in place for the provision of supplier’s declarations to EU exporters (see point 6)."
+        }
+       ]
+      }
+     ],
+     "unsupported_numbers": [],
+     "statement": {}
+    },
+    "correct": true
+   },
+   {
+    "id": "kn-02",
+    "category": "conocimiento",
+    "repeat": 0,
+    "final_answer": "## Resumen\n\nUna declaración de origen en el marco del Acuerdo de Asociación Económica UE-Japón es válida durante **12 meses** desde la fecha en que se extiende.\n\n## Detalle\n\n- **Pregunta:** ¿Durante cuánto tiempo es válida una declaración de origen en el marco del Acuerdo de Asociación Económica UE-Japón desde que se extiende?\n- **Respuesta:** La declaración de origen es válida durante 12 meses desde la fecha en que se extiende.\n- **Fuente:** *japan/chapter3_rules_of_origin.md*, sección *SECTION B Origin procedures › ARTICLE 3.17 Statement on origin* (Artículo 3.17, apartado 4).",
+    "tools_worked": [],
+    "crash": null,
+    "seconds": 12.3,
+    "cost": {
+     "calls": 3.0,
+     "prompt_tokens": 5458.0,
+     "completion_tokens": 339.0,
+     "reasoning_tokens": 0.0,
+     "seconds": 12.180561669985764
+    },
+    "cost_per_agent": {
+     "orchestrator": {
+      "calls": 1.0,
+      "prompt_tokens": 1905.0,
+      "completion_tokens": 130.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 7.409392941990518
+     },
+     "knowledge": {
+      "calls": 1.0,
+      "prompt_tokens": 2056.0,
+      "completion_tokens": 58.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 1.6440053840051405
+     },
+     "writer": {
+      "calls": 1.0,
+      "prompt_tokens": 1497.0,
+      "completion_tokens": 151.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 3.127163343990105
+     }
+    },
+    "trace": {
+     "plan": {
+      "kind": "knowledge",
+      "product": null,
+      "product_hs_code": null,
+      "exw_price_eur": null,
+      "exw_price_currency": null,
+      "agreements": [
+       "UE-JP"
+      ],
+      "out_of_scope": [],
+      "statement": null,
+      "knowledge_questions": [
+       "¿Durante cuánto tiempo es válida una declaración de origen en el marco del Acuerdo de Asociación Económica UE-Japón desde que se extiende?"
+      ],
+      "missing": []
+     },
+     "materials": [],
+     "materials_missing": [],
+     "conversions": [],
+     "evaluations": {},
+     "issues": [],
+     "attempts": 1,
+     "knowledge": [
+      {
+       "question": "¿Durante cuánto tiempo es válida una declaración de origen en el marco del Acuerdo de Asociación Económica UE-Japón desde que se extiende?",
+       "status": "answered",
+       "answer": "A statement on origin is valid for 12 months from the date it was made out, as stated in Article 3.17(4).",
+       "cited": [
+        5
+       ],
+       "passages": [
+        {
+         "source": "japan/annex3c_3d_information_statement.md",
+         "section": "ANNEX 3-D TEXT OF THE STATEMENT ON ORIGIN",
+         "text": "[EU-Japan Economic Partnership Agreement: Annexes 3-C and 3-D: Information for verification and text of the statement on origin › ANNEX 3-D TEXT OF THE STATEMENT ON ORIGIN]\n…\n\n(Plats och datum (5))\n\n…\n\n(Exportörens namn, med tryckbokstäver)\n\n…\n\n(1) If the statement on origin is completed for multiple shipments of identical originating products within the meaning of subparagraph 5(b) of Article 3.17, indicate the period for which the statement on origin will apply. That period shall not exceed 12 months. All importations of the product must occur within the period indicated. Where a period is not applicable, the field can be left blank.\n\n(2) Indicate the reference number through which the exporter is identified. For the European Union exporter, this will be the number assigned in accordance with the laws and regulations of the European Union. For the Japanese exporter, this will be the Japan Corporate Number. Where the exporter has not been assigned a number, this field may be left blank.\n\n(3) Indicate the origin of the product; the European Union or Japan.\n\n(4) Indicate, depending on the case, one or more of the following codes;\n\n‘A’\n\nfor a product referred to in subparagraph 1(a) of Article 3.2;\n\n‘B’\n\nfor a product referred to in subparagraph 1(b) of Article 3.2;\n\n‘C’\n\nfor a product referred to in subparagraph 1(c) of Article 3.2, with the following additional information on the type of product specific requirement actually applied to the product;\n\n‘1’\n\nfor a change in tariff classification rule;\n\n‘2’\n\nfor a maximum value of non-originating materials or a minimum regional value content rule;\n\n‘3’\n\nfor a specific production process rule; or"
+        },
+        {
+         "source": "guides/japan_statements_on_origin.pdf",
+         "section": "1. Legal basis",
+         "text": "[European Commission, EU-Japan EPA: Guidance on statements on origin › 1. Legal basis]\n5. A statement on origin may apply to:\n\n(a) a single shipment of one or more products into a Party; or\n\n(b) multiple shipments of identical products within any period specified in the statement on origin not exceeding 12 months."
+        },
+        {
+         "source": "guides/japan_statements_on_origin.pdf",
+         "section": "2. Guidance1",
+         "text": "[European Commission, EU-Japan EPA: Guidance on statements on origin › 2. Guidance1]\nthe statement\n\nA statement on origin shall be valid for 12 months from the date it was made out.\n\nThe date at which the statement on origin is made out is indicated in the statement but may be omitted if the date is included on the document itself (e.g. the invoice date).\n\nThe statement on origin must be valid at the time when the claim for preferential tariff treatme nt is made. This can be the time at which the import declaration in respect of the originating products is accepted by the Validity\n\nperiod of the\n\nstatement on\n\norigin\n\ncustoms, or in the EU at which an application for repayment or re mission of customs duties is submitted.\n\nA statement on origin may be made out at any time, so before, when or after the products to which it relates are exported. It can of course, only be used as the basis of a claim for preferential tariff treatment during its validity period.\n\nRetrospective\n\nmaking out of\n\na statement on\n\norigin\n\nThe issue of a replacement of the statement on origin issued in the context of the EU -Japan EPA for sending products elsewhere in the EU is an internal matter for the EU and therefore provided for (only) in Article 69 UCC-IA.\n\nReplacement\n\nstatement on\n\norigin"
+        },
+        {
+         "source": "guides/japan_statements_on_origin.pdf",
+         "section": "ANNEX 3-D TEXT OF THE STATEMENT ON ORIGIN",
+         "text": "[European Commission, EU-Japan EPA: Guidance on statements on origin › ANNEX 3-D TEXT OF THE STATEMENT ON ORIGIN]\n...……………………………………………………………………........................……… (Printed name of the exporter)\n\n...……………………………………………………………………............................…… 1 If the statement on origin is completed for multiple shipments of identical originating products within the meaning of subparagraph 5 (b) of Article 3.17, indicate the period for which the statement on origin will apply. That period shall not exceed 12 months. All importations of the product must occur within the period indicated. Where a period is not applicable, the field can be left blank. 2 Indicate the reference number through which the exporter is identified. For the European Union exporter, this will be the number assigned in a ccordance with the laws and regulations of the European Union. For the Japanese exporter, this will be the Japan Corporate Number. Where the exporter has not been assigned a number, this field may be left blank.\n\n3 Indicate the origin of the product; the European Union. or Japan 4 Indicate, depending on the case, one or more of the following codes: “A” product referred to in subparagraph 1(a) of Article 3.2 “B” product referred to in subparagraph 1(b) of Article 3.2 “C” product referred to in subparagraph 1(c) of Article 3.2 , with the following additional information on the type of PSR actually applied to the product: “1” for a change of tariff classification rule\n\n“2” for a for a maximum value of non -originating materials or a minimum regional value content rule;"
+        },
+        {
+         "source": "japan/chapter3_rules_of_origin.md",
+         "section": "SECTION B Origin procedures › ARTICLE 3.17 Statement on origin",
+         "text": "[EU-Japan Economic Partnership Agreement: Chapter 3: Rules of origin and origin procedures › SECTION B Origin procedures › ARTICLE 3.17 Statement on origin]\nARTICLE 3.17\n\nStatement on origin\n\n1. A statement on origin may be made out by an exporter of a product on the basis of information demonstrating that the product is originating, including information on the originating status of materials used in the production of the product. The exporter is responsible for the correctness of the statement on origin and of the information provided.\n\n2. A statement on origin shall be made out using one of the linguistic versions of the text set out in Annex 3-D on an invoice or on any other commercial document that describes the originating product in sufficient detail to enable its identification. The importing Party shall not require the importer to submit a translation of the statement on origin.\n\n3. The customs authority of the importing Party shall not reject a claim for preferential tariff treatment due to minor errors or discrepancies in the statement on origin or for the sole reason that an invoice was issued in a third country.\n\n4. A statement on origin shall be valid for 12 months from the date it was made out.\n\n5. A statement on origin may apply to:\n\n(a) a single shipment of one or more products imported into a Party; or\n\n(b) multiple shipments of identical products imported into a Party within any period specified in the statement on origin not exceeding 12 months."
+        }
+       ]
+      }
+     ],
+     "unsupported_numbers": [],
+     "statement": {}
+    },
+    "correct": true
+   },
+   {
+    "id": "kn-03",
+    "category": "conocimiento",
+    "repeat": 0,
+    "final_answer": "## Resumen\n\nBajo el Acuerdo de Libre Comercio UE-Corea (UE-KR), las copias de las declaraciones de origen deben conservarse durante **cinco años**.\n\n## Detalle\n\n- **Pregunta:** ¿Cuánto tiempo deben conservarse las copias de las declaraciones de origen para las exportaciones a Corea del Sur?\n- **Respuesta:** Cinco años.\n- **Base:** Artículo 23.1 del Protocolo de origen del Acuerdo UE-KR, que establece que el exportador que emita una declaración de origen deberá conservar durante cinco años una copia de dicha declaración, así como los documentos a que se refiere el artículo 16.3.\n\n**Fuente:** *korea/protocol_rules_of_origin.md*, sección *TITLE V Proof of origin › Article 23 Preservation of proof of origin and supporting documents*.",
+    "tools_worked": [],
+    "crash": null,
+    "seconds": 9.7,
+    "cost": {
+     "calls": 3.0,
+     "prompt_tokens": 5227.0,
+     "completion_tokens": 357.0,
+     "reasoning_tokens": 0.0,
+     "seconds": 9.604579969018232
+    },
+    "cost_per_agent": {
+     "orchestrator": {
+      "calls": 1.0,
+      "prompt_tokens": 1905.0,
+      "completion_tokens": 122.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 2.5381093000032706
+     },
+     "knowledge": {
+      "calls": 1.0,
+      "prompt_tokens": 1955.0,
+      "completion_tokens": 57.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 3.097429244007799
+     },
+     "writer": {
+      "calls": 1.0,
+      "prompt_tokens": 1367.0,
+      "completion_tokens": 178.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 3.9690414250071626
+     }
+    },
+    "trace": {
+     "plan": {
+      "kind": "knowledge",
+      "product": null,
+      "product_hs_code": null,
+      "exw_price_eur": null,
+      "exw_price_currency": null,
+      "agreements": [
+       "UE-KR"
+      ],
+      "out_of_scope": [],
+      "statement": null,
+      "knowledge_questions": [
+       "How long must copies of origin declarations for exports to South Korea be kept under the EU-Korea FTA?"
+      ],
+      "missing": []
+     },
+     "materials": [],
+     "materials_missing": [],
+     "conversions": [],
+     "evaluations": {},
+     "issues": [],
+     "attempts": 1,
+     "knowledge": [
+      {
+       "question": "How long must copies of origin declarations for exports to South Korea be kept under the EU-Korea FTA?",
+       "status": "answered",
+       "answer": "Copies of origin declarations must be kept for five years, as stated in Article 23.1 of the EU-Korea FTA origin protocol.",
+       "cited": [
+        1
+       ],
+       "passages": [
+        {
+         "source": "korea/protocol_rules_of_origin.md",
+         "section": "TITLE V Proof of origin › Article 23 Preservation of proof of origin and supporting documents",
+         "text": "[EU-Korea Free Trade Agreement, Protocol concerning the definition of 'originating products' and methods of administrative cooperation: Protocol on origin, Titles I to VIII and Annex I (introductory notes) › TITLE V Proof of origin › Article 23 Preservation of proof of origin and supporting documents]\nArticle 23\n\nPreservation of proof of origin and supporting documents\n\n1. The exporter making out an origin declaration shall keep for five years a copy of this origin declaration as well as the documents referred to in Article 16.3.\n\n2. The importer shall keep all records related to the importation in accordance with laws and regulations of the importing Party.\n\n3. The customs authorities of the importing Party shall keep for five years the origin declarations submitted to them.\n\n4. The records to be kept in accordance with paragraphs 1 through 3 may include electronic records."
+        },
+        {
+         "source": "guides/guidance_preferential_origin_2025.pdf",
+         "section": "i. Government certificates",
+         "text": "[European Commission, Guidance on preferential rules of origin (March 2025) › i. Government certificates]\n• If a Contracting Party to the PEM Convention does not yet apply the PEM Convention, , the concerned Article of the Free Trade Agreement applies, e.g. Article 22 of Protocol No. 4 between the EU and Morocco\n\n• Article 15 of the origin protocol of the EU -Korea FTA (text of the origin declaration: Annex III of the Origin protocol)\n\nUnlike other FTAs, under the EU - Korea FTA it is not possible to use government certificates, the only applicable document on origin is the origin declaration. If the total value of the consignment of originating products (based on the ex -works price) exceeds EUR 6 000, the origin declaration has to be made out by Approved Exporters. For detailed information on Approved Exporters see:\n\nhttps://ec.europa.eu/taxation_customs/system/files/2019-02/guidance-on-approvedexporters.pdf\n\nIn trade with the Contracting Parties to the PEM Convention, under the same circumstances in which the movement certificate EUR-MED or EUR.1 is used, the invoice or origin declaration EUR-MED may be required instead of the invoice or origin declaration until the end of 2025. For further details, see the PanEuroMed Handbook (https://taxation customs.ec.europa.eu/document/download/4d27b1c7-511d-480f-be4eba3a67265d39_en?filename=handbook_en.pdf):\n\nRegistered Exporter\n\nLegal reference - examples\n\n• Articles 18 and 19 of the EU-Canada CETA origin protocol - (text of the origin declaration: Annex 2 of the EU-Canada CETA origin protocol)"
+        },
+        {
+         "source": "korea/protocol_rules_of_origin.md",
+         "section": "TITLE V Proof of origin › Article 16 Conditions for making out an origin declaration",
+         "text": "[EU-Korea Free Trade Agreement, Protocol concerning the definition of 'originating products' and methods of administrative cooperation: Protocol on origin, Titles I to VIII and Annex I (introductory notes) › TITLE V Proof of origin › Article 16 Conditions for making out an origin declaration]\nArticle 16\n\nConditions for making out an origin declaration\n\n1. An origin declaration as referred to in Article 15.1 of this Protocol may be made out:\n\n(a) by an approved exporter within the meaning of Article 17; or\n\n(b) by any exporter for any consignment consisting of one or more packages containing originating products whose total value does not exceed 6000 euros.\n\n2. Without prejudice to paragraph 3, an origin declaration may be made out if the products concerned can be considered as products originating in the EU Party or in Korea and fulfil the other requirements of this Protocol.\n\n3. The exporter making out an origin declaration shall be prepared to submit at any time, at the request of the customs authorities of the exporting Party, all appropriate documents proving the originating status of the products concerned including statements from the suppliers or producers in accordance with domestic legislation as well as the fulfilment of the other requirements of this Protocol.\n\n4. An origin declaration shall be made out by the exporter by typing, stamping or printing on the invoice, the delivery note or another commercial document, the text which appears in Annex III, using one of the linguistic versions set out in that Annex and in accordance with the legislation of the exporting Party. If the declaration is handwritten, it shall be written in ink in capital characters."
+        },
+        {
+         "source": "korea/protocol_rules_of_origin.md",
+         "section": "TITLE V Proof of origin",
+         "text": "[EU-Korea Free Trade Agreement, Protocol concerning the definition of 'originating products' and methods of administrative cooperation: Protocol on origin, Titles I to VIII and Annex I (introductory notes) › TITLE V Proof of origin]\nTITLE V\n\nProof of origin\n\nArticle 15\n\nGeneral requirements\n\n1. Products originating in the EU Party shall, on importation into Korea and products originating in Korea shall, on importation into the EU Party benefit from preferential tariff treatment of this Agreement on the basis of a declaration, subsequently referred to as the \"origin declaration\", given by the exporter on an invoice, a delivery note or any other commercial document which describes the products concerned in sufficient detail to enable them to be identified. The texts of the origin declarations appear in Annex III.\n\n2. Notwithstanding paragraph 1, originating products within the meaning of this Protocol shall, in the cases specified in Article 21, benefit from preferential tariff treatment of this Agreement without it being necessary to submit any of the documents referred to in paragraph 1."
+        },
+        {
+         "source": "korea/protocol_rules_of_origin.md",
+         "section": "TITLE V Proof of origin › Article 16 Conditions for making out an origin declaration",
+         "text": "[EU-Korea Free Trade Agreement, Protocol concerning the definition of 'originating products' and methods of administrative cooperation: Protocol on origin, Titles I to VIII and Annex I (introductory notes) › TITLE V Proof of origin › Article 16 Conditions for making out an origin declaration]\n5. Origin declarations shall bear the original signature of the exporter in manuscript. However, an approved exporter within the meaning of Article 17 shall not be required to sign such declarations provided that he gives the customs authorities of the exporting Party a written undertaking that he accepts full responsibility for any origin declaration which identifies him as if it had been signed in manuscript by him.\n\n6. An origin declaration may be made out by the exporter when the products to which it relates are exported, or after exportation on condition that it is presented in the importing Party no longer than two years or the period specified in the legislation of the importing Party after the importation of the products to which it relates."
+        }
+       ]
+      }
+     ],
+     "unsupported_numbers": [],
+     "statement": {}
+    },
+    "correct": true
+   },
+   {
+    "id": "kn-04",
+    "category": "conocimiento",
+    "repeat": 0,
+    "final_answer": "## Resumen\n\nEl número REX **no caduca** y **no debe renovarse** periódicamente.\n\n## Detalle\n\nSegún la base de conocimientos, la validez de un número de registro no está limitada en el tiempo y no requiere renovación periódica. Solo dejaría de ser válido si se revoca el registro, en cuyo caso mantendría su validez únicamente hasta la fecha en que la revocación surta efecto.\n\n**Fuente:** AEAT, *Guía sobre el sistema de exportadores registrados (REX)*, mayo de 2022, sección **4. VALIDEZ DEL REGISTRO** (apartado 1).",
+    "tools_worked": [],
+    "crash": null,
+    "seconds": 9.1,
+    "cost": {
+     "calls": 3.0,
+     "prompt_tokens": 5674.0,
+     "completion_tokens": 330.0,
+     "reasoning_tokens": 0.0,
+     "seconds": 9.0925034989923
+    },
+    "cost_per_agent": {
+     "orchestrator": {
+      "calls": 1.0,
+      "prompt_tokens": 1902.0,
+      "completion_tokens": 111.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 2.3204372729960596
+     },
+     "knowledge": {
+      "calls": 1.0,
+      "prompt_tokens": 2190.0,
+      "completion_tokens": 77.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 1.7031455950054806
+     },
+     "writer": {
+      "calls": 1.0,
+      "prompt_tokens": 1582.0,
+      "completion_tokens": 142.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 5.06892063099076
+     }
+    },
+    "trace": {
+     "plan": {
+      "kind": "knowledge",
+      "product": null,
+      "product_hs_code": null,
+      "exw_price_eur": null,
+      "exw_price_currency": null,
+      "agreements": [],
+      "out_of_scope": [],
+      "statement": null,
+      "knowledge_questions": [
+       "¿El número de registro REX tiene una fecha de caducidad o debe renovarse periódicamente?"
+      ],
+      "missing": []
+     },
+     "materials": [],
+     "materials_missing": [],
+     "conversions": [],
+     "evaluations": {},
+     "issues": [],
+     "attempts": 1,
+     "knowledge": [
+      {
+       "question": "¿El número de registro REX tiene una fecha de caducidad o debe renovarse periódicamente?",
+       "status": "answered",
+       "answer": "The validity of a registration number is not limited in time and does not require periodic renewal, unless it is revoked, in which case it remains valid only until the revocation takes effect (Article 4, section 1).",
+       "cited": [
+        1
+       ],
+       "passages": [
+        {
+         "source": "guides/aeat_rex.pdf",
+         "section": "4. VALIDEZ DEL REGISTRO",
+         "text": "[AEAT, Guía sobre el sistema de exportadores registrados (REX), mayo de 2022 › 4. VALIDEZ DEL REGISTRO]\n4. VALIDEZ DEL REGISTRO\n\n1. La validez de un número de registro no está limitada en el tiempo.\n\n2. Si se revoca un registro, las autoridades competentes que llevan a cabo la revocación facilitarán una fecha a partir de la cual la revocación surtirá efecto. En este caso, el registro tendrá una validez limitada hasta la fecha a partir de la cual la revocación surta efecto.\n\n3. Un exportador registrad o en la Unión podrá utilizar su número de registro en el contexto de todos los acuerdos comerciales preferenciales en los que el sistema de certificación de origen aplicado sea el sistema REX. De hecho, los datos de registro son generales y no están relaci onados con ningún elemento específico de los acuerdos comerciales preferenciales (es decir, no hay ningún vínculo con las normas específicas de origen de los acuerdos en el formulario de solicitud).\n\n4. Suiza, Noruega y Turquía también están aplicando el sistema REX en el contexto de sus respectivos SPG. Por lo tanto, un exportador de un país beneficiario del SPG solo se registrará una vez, para todas sus exportaciones a la UE, a Noruega, a Suiza o a Turquía, en virtud de la preferencia arancelaria del SPG.\n\n5. Un exportador de un PTU, que también se beneficia de los regímenes SPG o Noruega o Suiza, utilizará el mismo número REX cuando exporte a la UE con arreglo a la preferencia arancelaria OAD o a Noruega o Suiza el SPG tarifa la preferencia.\n\nModificación y revocación del registro de un exportador"
+        },
+        {
+         "source": "guides/aeat_rex.pdf",
+         "section": "1. INTRODUCCIÓN",
+         "text": "[AEAT, Guía sobre el sistema de exportadores registrados (REX), mayo de 2022 › 1. INTRODUCCIÓN]\n1. INTRODUCCIÓN\n\nEl presente documento proporciona orientaciones relativas al Sistema de Exportadores Registrados (el sistema REX), un sistema de autocertificación de origen por parte de los exportadores registrados que hace las llamadas comunicaciones sobre el origen. El sistema REX se aplica desde el 1 de enero de 2017 en el contexto del Sistema de Preferencias Generalizadas (SPG), cuyas normas de origen se establecen en el Reglamento Delegado (UE) 2015/2446 de la Comisión y en el Reglamento de Ejecución (UE) 2015/2447 de la Comisión del Código Aduanero de la Unión [Reglamento (UE) n.º 952/2013]. El sistema REX también se aplica desde el 1 de enero de 2020 por los países y territorios de ultramar (PTU), cuyas normas de origen se establecen en el anexo 2 de la Decisión (UE) 2021/1764 del Consejo (Decisión de Asociación Ultramar, OAD). Progresivamente, el sistema REX se ha aplicado en la UE para certificar el origen de las mercancías exportadas a terceros países en el contexto de acuerdos comerciales preferenciales, por ejemplo, los Acuerdos con Canadá (CETA), con Japón, con el Reino Unido o con Vietnam. Por último, el sistema REX también puede ser utilizado por un país socio de un acuerdo preferencial si ese país lo solicita. Por el momento, Zimbabue está aplicando el sistema REX en el contexto del Acuerdo de Partenariado EconómicoA para sus exportaciones a la UE."
+        },
+        {
+         "source": "guides/aeat_rex.pdf",
+         "section": "2. REVOCACIÓN DEL REGISTRO DE UN EXPORTADOR",
+         "text": "[AEAT, Guía sobre el sistema de exportadores registrados (REX), mayo de 2022 › 2. REVOCACIÓN DEL REGISTRO DE UN EXPORTADOR]\n2. REVOCACIÓN DEL REGISTRO DE UN EXPORTADOR\n\n1. El exportador registrado pedirá en persona que se retire del sistema REX en los siguientes casos:\n\na. no cumple con las condiciones requeridas por el sistema REX b. ya no tiene la intención de utilizar su número de registro. c. la empresa cesa sus operaciones\n\nEn la UE, debe presentarse una solicitud de revocación de un registro desde el portal REX Trader.\n\n2. Cuando controlen a un exportador registrado, si las autoridades competentes descubren que el exportador registrado ha elaborado de forma intencionada o negligente, o ha hecho que se elabore una declaración de origen que contenga información incorrecta, las autoridades competentes revocarán al exportador\n\nregistrado.\n\n3. Al supervisar a un exportador registrado, si las autoridades competentes descubren que el exportador registrado ya no existe, las autoridades competentes revocarán al exportador registrado.\n\n4. Al supervisar a un exportador registrado, si las autoridades competentes descubren que el exportador registrado ya no cumple las condiciones exigidas por el sistema REX (por ejemplo, no ha mantenido sus datos actualizados y esta deficiencia s e considera grave), las autoridades competentes revocarán al exportador registrado.\n\n5. El número de registro de un exportador que haya sido revocado no debe utilizarse para nuevos registros de exportadores."
+        },
+        {
+         "source": "guides/aeat_rex.pdf",
+         "section": "1. MODIFICACIÓN DEL REGISTRO DE UN EXPORTADOR",
+         "text": "[AEAT, Guía sobre el sistema de exportadores registrados (REX), mayo de 2022 › 1. MODIFICACIÓN DEL REGISTRO DE UN EXPORTADOR]\n4. Dado que el registro es automáticamente válido para todos los marcos jurídicos en los que el sistema de certificación de origen aplicado es el sistema REX, no es necesario actualizar el registro cuando un nuevo acuerdo comercial preferencial aplica el sistema REX (véase 4.4.3)."
+        },
+        {
+         "source": "guides/aeat_rex.pdf",
+         "section": "2. INFORMACIÓN GENERAL",
+         "text": "[AEAT, Guía sobre el sistema de exportadores registrados (REX), mayo de 2022 › 2. INFORMACIÓN GENERAL]\n2. INFORMACIÓN GENERAL\n\n1. El sistema REX simplifica las formalidades de exportación permitiendo al exportador registrado para certificar el origen preferencial mediante la inclusión de una declaración específica (denominadas comunicaciones sobre el origen) en la factura u otro documento en el que se identifiquen los productos exportados. Por lo tanto, el exportador registrado no necesita solicitar cada exportación para la expedición de un certificado de origen.\n\n2. La solicitud para convertirse en exportador registrado es una formalidad única, cuando el exportador facilite a la aduana competente la informaci ón necesaria para su registro.\n\n3. Una vez asignado el número REX, el exportador registrado podrá utilizarlo para todas sus exportaciones en virtud de acuerdos preferenciales cuando el sistema de certificación de origen aplicado sea el sistema REX. No se requiere formalidad para que un exportador registrado amplíe el uso de su número REX para usarlo en el contexto de una nueva preferencia.\n\n4. La certificación de origen expedida por el exportador registrado es llamada «comunicación sobre el origen». Hay una excepci ón en el Acuerdo con Canadá (CETA) donde se utiliza el término «declaración de origen».\n\n5. Acuerdos preferenciales celebrados por la Unión Europea con terceros los países y los acuerdos autónomos aplicados por la UE se enumeran en el sitio web Europa en el siguiente enlace:"
+        }
+       ]
+      }
+     ],
+     "unsupported_numbers": [],
+     "statement": {}
+    },
+    "correct": true
+   },
+   {
+    "id": "kn-05",
+    "category": "conocimiento",
+    "repeat": 0,
+    "final_answer": "## Resumen\n\n**Sí**, los hornos eléctricos (HS 8516.60) son **productos originarios** bajo el Acuerdo de Asociación Económica UE-Japón (UE-JP).\n\nEl valor máximo de un pequeño paquete que puede entrar en Japón como originario sin prueba de origen es de **100.000 yenes**.\n\n---\n\n## Detalle por acuerdo\n\n### UE-JP (Acuerdo de Asociación Económica UE-Japón)\n\n*   **Veredicto:** Originario.\n*   **Criterio cumplido:** MAXNOM (valor máximo de materiales no originarios).\n*   **Regla aplicada:** CTH or MAXNOM 50 % EXW.\n*   **Materiales no originarios:**\n    *   Heating elements (HS 8516.80) de China: 60,00 EUR.\n    *   Control boards (HS 8537.10) de China: 85,00 EUR.\n    *   Fans (HS 8414.59) de China: 30,00 EUR.\n    *   *Total no originario:* 175,00 EUR (36,46 % del precio ex-works de 480,00 EUR).\n*   **Materiales originarios:**\n    *   Steel sheet (HS 7209.17) de la UE: 55,00 EUR.\n*   **Avisos:**\n    *   *material_misma_partida:* Un material no originario tiene la misma partida (4 dígitos) que el producto, por lo que no cambia la partida.\n    *   *subdivision_distinta:* Un material no originario tiene la partida del producto pero otra subpartida: cambia la subpartida (CTSH) pero no la partida (CTH).\n*   **No verificado:**\n    *   RVC 55 % FOB: requiere el precio FOB en EUR (aunque se proporcionó, el sistema indica que no se verificó este criterio alternativo, posiblemente porque ya se cumplió MAXNOM).\n\n---\n\n## Respuesta a la pregunta sobre paquetes pequeños\n\n**Pregunta:** ¿Hasta qué valor puede entrar un pequeño paquete en Japón como originario sin una prueba de origen bajo el UE-JP?\n\n**Respuesta:** 100.000 yenes.\n\n**Fuente:**\n*   Documento: `japan/chapter3_rules_of_origin.md`\n*   Sección: `SECTION B Origin procedures › ARTICLE 3.20 Small consignments and waivers`\n*   Texto relevante: \"for Japan, 100,000 yen or such amount as Japan may establish.\"",
+    "tools_worked": [
+     "evaluate_origin",
+     "get_origin_rule"
+    ],
+    "crash": null,
+    "seconds": 28.5,
+    "cost": {
+     "calls": 5.0,
+     "prompt_tokens": 8382.0,
+     "completion_tokens": 1122.0,
+     "reasoning_tokens": 0.0,
+     "seconds": 28.223811870993813
+    },
+    "cost_per_agent": {
+     "orchestrator": {
+      "calls": 1.0,
+      "prompt_tokens": 2034.0,
+      "completion_tokens": 142.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 3.999647021992132
+     },
+     "extractor": {
+      "calls": 1.0,
+      "prompt_tokens": 1116.0,
+      "completion_tokens": 293.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 5.797665731995949
+     },
+     "origin": {
+      "calls": 1.0,
+      "prompt_tokens": 817.0,
+      "completion_tokens": 44.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 0.9829882740014
+     },
+     "knowledge": {
+      "calls": 1.0,
+      "prompt_tokens": 2021.0,
+      "completion_tokens": 38.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 0.8879746150050778
+     },
+     "writer": {
+      "calls": 1.0,
+      "prompt_tokens": 2394.0,
+      "completion_tokens": 605.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 16.555536227999255
+     }
+    },
+    "trace": {
+     "plan": {
+      "kind": "evaluate",
+      "product": "electric ovens",
+      "product_hs_code": "851660",
+      "exw_price_eur": 480.0,
+      "exw_price_currency": null,
+      "agreements": [
+       "UE-JP"
+      ],
+      "out_of_scope": [],
+      "statement": null,
+      "knowledge_questions": [
+       "What is the maximum value of a small package that can enter Japan as originating without a proof of origin under the EU-Japan EPA?"
+      ],
+      "missing": []
+     },
+     "materials": [
+      {
+       "name": "heating elements",
+       "hs_code": "851680",
+       "country_name": "China",
+       "country": "OTRO",
+       "value_eur": 60.0,
+       "supplier_declaration": false
+      },
+      {
+       "name": "control boards",
+       "hs_code": "853710",
+       "country_name": "China",
+       "country": "OTRO",
+       "value_eur": 85.0,
+       "supplier_declaration": false
+      },
+      {
+       "name": "fans",
+       "hs_code": "841459",
+       "country_name": "China",
+       "country": "OTRO",
+       "value_eur": 30.0,
+       "supplier_declaration": false
+      },
+      {
+       "name": "steel sheet",
+       "hs_code": "720917",
+       "country_name": "EU",
+       "country": "UE",
+       "value_eur": 55.0,
+       "supplier_declaration": true
+      }
+     ],
+     "materials_missing": [],
+     "conversions": [],
+     "evaluations": {
+      "UE-JP": {
+       "evaluation_id": "EV-26C430",
+       "originating": true,
+       "criterion": "MAXNOM",
+       "criteria_met": [
+        "MAXNOM"
+       ],
+       "non_originating_value_eur": 175.0,
+       "pct_non_originating": 36.46,
+       "tolerance_pct": 10,
+       "warnings": [
+        "material_misma_partida",
+        "subdivision_distinta"
+       ],
+       "trace": [
+        "heating elements [851680] 60.00: no originario (tercer país)",
+        "control boards [853710] 85.00: no originario (tercer país)",
+        "fans [841459] 30.00: no originario (tercer país)",
+        "steel sheet [720917] 55.00: originario",
+        "CTH: no cumple",
+        "MAXNOM: cumple"
+       ],
+       "rule_applied": "CTH or MAXNOM 50 % EXW",
+       "not_checked": [
+        "RVC 55 % FOB: needs fob_price_eur"
+       ]
+      }
+     },
+     "issues": [],
+     "attempts": 1,
+     "knowledge": [
+      {
+       "question": "What is the maximum value of a small package that can enter Japan as originating without a proof of origin under the EU-Japan EPA?",
+       "status": "answered",
+       "answer": "100,000 yen",
+       "cited": [
+        1,
+        3
+       ],
+       "passages": [
+        {
+         "source": "japan/chapter3_rules_of_origin.md",
+         "section": "SECTION B Origin procedures › ARTICLE 3.20 Small consignments and waivers",
+         "text": "[EU-Japan Economic Partnership Agreement: Chapter 3: Rules of origin and origin procedures › SECTION B Origin procedures › ARTICLE 3.20 Small consignments and waivers]\nARTICLE 3.20\n\nSmall consignments and waivers\n\n1. Products sent as small packages from private persons to private persons or forming part of travellers' personal luggage shall be admitted as originating products provided that such products are not imported by way of trade (13), have been declared as satisfying the requirements of this Chapter and if there is no doubt as to the veracity of such a declaration.\n\n2. Provided that the importation does not form part of importations that may reasonably be considered to have been made separately for the purpose of avoiding the requirement for a statement on origin, the total value of the products referred to in paragraph 1 shall not exceed:\n\n(a) for the European Union, 500 euros in the case of small packages or 1,200 euros in the case of products forming part of travellers' personal luggage. The amounts to be used in other currency of a Member State of the European Union shall be the equivalent in that currency of the amounts expressed in euro as at the first working day of October of each year. The amounts shall be those published for that day by the European Central Bank, unless a different amount is communicated to the European Commission by 15 October of each year, and shall apply from 1 January of the following year. The European Commission shall notify Japan of the relevant amounts.\n\n(b) for Japan, 100,000 yen or such amount as Japan may establish."
+        },
+        {
+         "source": "guides/japan_statements_on_origin.pdf",
+         "section": "2. Guidance1",
+         "text": "[European Commission, EU-Japan EPA: Guidance on statements on origin › 2. Guidance1]\nSmall errors or discrepancies in the text of the statement shall not invalidate the statement.\n\nA statement on origin is not required for certain low value consignments sent by private persons following the waiver provided for under Article\n\n3.20 of the EPA, which applies to both Japanese and EU exporters. A statement on origin may apply to a single shipment or to multiple shipments of identical products for 12 months from the date it was made out. See for the latter a specific guidance document which can be found here:\n\nhttps://ec.europa.eu/taxation_customs/sites/taxation/files/eu_japan_epa_g uidance_statement_on_origin_for_multiple_shipments_of_identical_prod ucts_en.pdf\n\nSingle or\n\nmultiple\n\nconsignments\n\nThe exporter can be any person (such as a producer or a trading company) making out the statement on origin involved in the exportation of the product, as long as this person fulfils the obligations under the EPA. It is not necessary that the exporter lodg es the customs export declaration in respect of the products.\n\nWho can act as\n\nan exporter?"
+        },
+        {
+         "source": "japan/chapter3_rules_of_origin.md",
+         "section": "SECTION B Origin procedures › ARTICLE 3.20 Small consignments and waivers",
+         "text": "[EU-Japan Economic Partnership Agreement: Chapter 3: Rules of origin and origin procedures › SECTION B Origin procedures › ARTICLE 3.20 Small consignments and waivers]\n(b) for Japan, 100,000 yen or such amount as Japan may establish.\n\n3. Each Party may provide that the basis for the claim as referred to in paragraph 2 of Article 3.16 shall not be required for an importation of a product for which the importing Party has waived the requirements."
+        },
+        {
+         "source": "guides/japan_statements_on_origin.pdf",
+         "section": "3. What is the",
+         "text": "[European Commission, EU-Japan EPA: Guidance on statements on origin › 3. What is the]\n3. What is the\n\n“any other\n\ncommercial\n\ndocument” on\n\nwhich the text\n\nof the\n\nStatement on\n\nOrigin is made\n\nout?\n\nANNEX 1\n\n“(3) Actions by the EU and Japan” of the Conclusions of the Committee on Rules of Origin and Customs -Related Matters of the EU -Japan EPA on the Actions to be Implemented by the Customs Authorities of Both Parties Relating to Certain Origin Procedures of 26 June 2019 at Brussels states that: ・ Based on the ongoing joint work between the EU and Japan to support the implementation of the Agreement, both Japan Customs and DG TAXUD will respectively issue guidance/ guidelines, or revise the existing guidance/guidelines, concerning the issues identified in point 3 of Appendix I and point 3 of Appendix II.\n\nTo implement this commitment, both Japan Customs and DG TAXUD agree on the following text, and will publish it as part of their respective relevant Guidance/ Guidelines:\n\nLegal context\n\n1. A statement on origin:\n\na) is a text by which the exporter states the originating status o f a product. This text is in Annex 3-D of the EPA;\n\nb) is made out by an exporter of an originating product;\n\nc) shall be made out on an invoice or on any other commercial document that describes the originating product in sufficient detail to enable its identification.\n\n2. The exporter:\n\na) is a person located either in the EU or in Japan, and fulfils the legal obligations established in that Party;"
+        },
+        {
+         "source": "guides/japan_statements_on_origin.pdf",
+         "section": "ANNEX 3-D TEXT OF THE STATEMENT ON ORIGIN",
+         "text": "[European Commission, EU-Japan EPA: Guidance on statements on origin › ANNEX 3-D TEXT OF THE STATEMENT ON ORIGIN]\n...……………………………………………………………………........................……… (Printed name of the exporter)\n\n...……………………………………………………………………............................…… 1 If the statement on origin is completed for multiple shipments of identical originating products within the meaning of subparagraph 5 (b) of Article 3.17, indicate the period for which the statement on origin will apply. That period shall not exceed 12 months. All importations of the product must occur within the period indicated. Where a period is not applicable, the field can be left blank. 2 Indicate the reference number through which the exporter is identified. For the European Union exporter, this will be the number assigned in a ccordance with the laws and regulations of the European Union. For the Japanese exporter, this will be the Japan Corporate Number. Where the exporter has not been assigned a number, this field may be left blank.\n\n3 Indicate the origin of the product; the European Union. or Japan 4 Indicate, depending on the case, one or more of the following codes: “A” product referred to in subparagraph 1(a) of Article 3.2 “B” product referred to in subparagraph 1(b) of Article 3.2 “C” product referred to in subparagraph 1(c) of Article 3.2 , with the following additional information on the type of PSR actually applied to the product: “1” for a change of tariff classification rule\n\n“2” for a for a maximum value of non -originating materials or a minimum regional value content rule;"
+        }
+       ]
+      }
+     ],
+     "unsupported_numbers": [],
+     "statement": {}
+    },
+    "correct": true
+   },
+   {
+    "id": "kn-06",
+    "category": "conocimiento",
+    "repeat": 0,
+    "final_answer": "## Resumen\n\n**Sí, las lavadoras (SA 8450.11) son originarias según el TCA.** Cumplen el criterio **MAXNOM 50 % EXW**.\n\nAdemás, una **declaración del proveedor de larga duración** puede cubrir, como máximo, un periodo de **dos años** desde la fecha de su emisión.\n\n---\n\n## Detalle por acuerdo\n\n### TCA (Acuerdo de Comercio y Cooperación UE-Reino Unido)\n\n*   **Veredicto:** Originarias.\n*   **Regla aplicada:** CTH o MAXNOM 50 % EXW.\n*   **Criterio cumplido:** MAXNOM 50 % EXW.\n*   **Materiales no originarios:**\n    *   Módulo de control (8537.10) de China: 60,00 € (tercer país).\n    *   Bomba de desagüe (8413.81) de China: 18,00 € (tercer país).\n    *   Tambor y partes (8450.90) de Turquía: 95,00 € (tercer país).\n*   **Cálculo:** El valor total de los materiales no originarios es de 173,00 €, lo que representa el **42,2 %** del precio franco fábrica (410,00 €). Este porcentaje es inferior al umbral del 50 %.\n*   **Avisos:**\n    *   *material_misma_partida*: Un material no originario tiene la misma partida (4 dígitos) que el producto, por lo que no cambia de partida.\n    *   *subdivision_distinta*: Un material no originario tiene la partida del producto pero otra subpartida: cambia de subpartida (CTSH) pero no de partida (CTH).\n\n---\n\n## Respuesta a la consulta sobre la declaración del proveedor\n\n**Pregunta:** ¿Cuánto tiempo puede cubrir como máximo una declaración del proveedor de larga duración?\n\n**Respuesta:** Una declaración del proveedor de larga duración es normalmente válida por un periodo de **hasta dos años** desde la fecha de su emisión.\n\n**Fuente:**\n*   **Documento:** tca/annex6_7_supplier_declaration_statement.md\n*   **Sección:** ANNEX 6 SUPPLIER’S DECLARATION\n*   **Texto relevante:** \"A long-term supplier’s declaration is normally valid for a period of up to two years from the date of making out the declaration.\"",
+    "tools_worked": [
+     "evaluate_origin",
+     "get_origin_rule"
+    ],
+    "crash": null,
+    "seconds": 26.2,
+    "cost": {
+     "calls": 5.0,
+     "prompt_tokens": 8246.0,
+     "completion_tokens": 1098.0,
+     "reasoning_tokens": 0.0,
+     "seconds": 26.047816559977946
+    },
+    "cost_per_agent": {
+     "orchestrator": {
+      "calls": 1.0,
+      "prompt_tokens": 2023.0,
+      "completion_tokens": 130.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 3.2006977349956287
+     },
+     "extractor": {
+      "calls": 1.0,
+      "prompt_tokens": 1105.0,
+      "completion_tokens": 304.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 6.453293526996276
+     },
+     "origin": {
+      "calls": 1.0,
+      "prompt_tokens": 805.0,
+      "completion_tokens": 42.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 2.1946686519950163
+     },
+     "knowledge": {
+      "calls": 1.0,
+      "prompt_tokens": 2103.0,
+      "completion_tokens": 67.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 2.8507144329923904
+     },
+     "writer": {
+      "calls": 1.0,
+      "prompt_tokens": 2210.0,
+      "completion_tokens": 555.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 11.348442212998634
+     }
+    },
+    "trace": {
+     "plan": {
+      "kind": "evaluate",
+      "product": "lavadoras",
+      "product_hs_code": "845011",
+      "exw_price_eur": 410.0,
+      "exw_price_currency": null,
+      "agreements": [
+       "TCA"
+      ],
+      "out_of_scope": [],
+      "statement": null,
+      "knowledge_questions": [
+       "¿Cuánto tiempo puede cubrir como máximo una declaración del proveedor de larga duración?"
+      ],
+      "missing": []
+     },
+     "materials": [
+      {
+       "name": "motor eléctrico",
+       "hs_code": "850140",
+       "country_name": "UE",
+       "country": "UE",
+       "value_eur": 75.0,
+       "supplier_declaration": true
+      },
+      {
+       "name": "módulo de control",
+       "hs_code": "853710",
+       "country_name": "China",
+       "country": "OTRO",
+       "value_eur": 60.0,
+       "supplier_declaration": false
+      },
+      {
+       "name": "bomba de desagüe",
+       "hs_code": "841381",
+       "country_name": "China",
+       "country": "OTRO",
+       "value_eur": 18.0,
+       "supplier_declaration": false
+      },
+      {
+       "name": "tambor y partes",
+       "hs_code": "845090",
+       "country_name": "Turquía",
+       "country": "OTRO",
+       "value_eur": 95.0,
+       "supplier_declaration": false
+      }
+     ],
+     "materials_missing": [],
+     "conversions": [],
+     "evaluations": {
+      "TCA": {
+       "evaluation_id": "EV-CC4378",
+       "originating": true,
+       "criterion": "MAXNOM",
+       "criteria_met": [
+        "MAXNOM"
+       ],
+       "non_originating_value_eur": 173.0,
+       "pct_non_originating": 42.2,
+       "tolerance_pct": 10,
+       "warnings": [
+        "material_misma_partida",
+        "subdivision_distinta"
+       ],
+       "trace": [
+        "motor eléctrico [850140] 75.00: originario",
+        "módulo de control [853710] 60.00: no originario (tercer país)",
+        "bomba de desagüe [841381] 18.00: no originario (tercer país)",
+        "tambor y partes [845090] 95.00: no originario (tercer país)",
+        "CTH: no cumple",
+        "MAXNOM: cumple"
+       ],
+       "rule_applied": "CTH or MAXNOM 50 % EXW",
+       "not_checked": []
+      }
+     },
+     "issues": [],
+     "attempts": 1,
+     "knowledge": [
+      {
+       "question": "¿Cuánto tiempo puede cubrir como máximo una declaración del proveedor de larga duración?",
+       "status": "answered",
+       "answer": "A long-term supplier's declaration is normally valid for a period of up to two years from the date of making out the declaration, as stated in Annex 6, point 3 of the TCA.",
+       "cited": [
+        1
+       ],
+       "passages": [
+        {
+         "source": "tca/annex6_7_supplier_declaration_statement.md",
+         "section": "ANNEX 6 SUPPLIER’S DECLARATION",
+         "text": "[EU-UK Trade and Cooperation Agreement: Annexes 6 and 7: Supplier's declaration and text of the statement on origin › ANNEX 6 SUPPLIER’S DECLARATION]\nANNEX 6\n\nSUPPLIER’S DECLARATION\n\n1. A supplier’s declaration shall have the content set out in this Annex.\n\n2. Except in the cases referred to in point 3, a supplier’s declaration shall be made out by the supplier for each consignment of products in the form provided for in Appendix 6-A and annexed to the invoice, or to any other document describing the products concerned in sufficient detail to enable them to be identified.\n\n3. Where a supplier regularly supplies a particular customer with products for which the production carried out in a Party is expected to remain constant for a period of time, that supplier may provide a single supplier’s declaration to cover subsequent consignments of those products (the \"long-term supplier’s declaration\"). A long-term supplier’s declaration is normally valid for a period of up to two years from the date of making out the declaration. The customs authorities of the Party where the declaration is made out may lay down the conditions under which longer periods may be used. The long-term supplier’s declaration shall be made out by the supplier in the form provided for in Appendix 6-B and shall describe the products concerned in sufficient detail to enable them to be identified. The supplier shall inform the customer immediately if the long-term supplier’s declaration ceases to apply to the products supplied."
+        },
+        {
+         "source": "guides/tca_origin_questions_answers.pdf",
+         "section": "Questions II.2. Long-term supplier’s declarations",
+         "text": "[European Commission, EU-UK Trade and Cooperation Agreement: compendium of questions and answers on rules of origin › Questions II.2. Long-term supplier’s declarations]\nQuestions II.2. Long-term supplier’s declarations\n\n19. Question: Scope of application of Commission Regulation (EU) 2020/2254 : Does this point also cover long-term supplier’s declarations according to Article 62 UCC-IA?\n\nAnswer: Both recital (4) and the introductory phrase of Article 1 of Commission Implementing Regulation (EU) 2020/2254 of 29 December 2020 on the making out of statements on origin on the basis of supplier’s declarations for preferential exports to the United Kingdom during a transitory period, refer to Article 62 UCC -IA on long -term supplier’s declarations. Those declarations are therefore covered."
+        },
+        {
+         "source": "guides/tca_origin_questions_answers.pdf",
+         "section": "Question 27",
+         "text": "[European Commission, EU-UK Trade and Cooperation Agreement: compendium of questions and answers on rules of origin › Question 27]\nmaterials have been delivered. Insofar as long -term supplier’s declarations would be made out for such products, Article 62( 2)(b) UCC IA provides for their time coverage in the past not being more than 12 months before their date of issue (making out). From the perspective of the application of the TCA and the supplier’s declaration the relevant moment is not the moment of prod uction of the goods or of the materials or when the materials were delivered in the EU but the moment in which the supplier’s declaration is made out. That moment needs to be after 1.1.2021 but the supplier’s declaration may refer to goods delivered before, provided that the supplier is able to determine the origin of those goods according to the rules of the TCA. This is without prejudice of the relationship between the suppliers and the exporter and how the making out of these supplier’s declarations may have been considered in their contracts/relationship for deliveries in 2020."
+        },
+        {
+         "source": "tca/annex6_7_supplier_declaration_statement.md",
+         "section": "Appendix 6-B LONG-TERM SUPPLIER'S DECLARATION",
+         "text": "[EU-UK Trade and Cooperation Agreement: Annexes 6 and 7: Supplier's declaration and text of the statement on origin › Appendix 6-B LONG-TERM SUPPLIER'S DECLARATION]\nAppendix 6-B\n\nLONG-TERM SUPPLIER'S DECLARATION\n\nThe long-term supplier's declaration, the text of which is given below, must be made out in accordance with the footnotes. However, the footnotes do not have to be reproduced.\n\nLONG-TERM SUPPLIER'S DECLARATION\n\nI, the undersigned, the supplier of the products covered by the annexed document, which are regularly supplied to\n(4)\n…, declare that:\n\n1. The following materials which do not originate in [indicate the name of the relevant Party] have been used in [indicate the name of the relevant Party] to produce these products:\n\nDescription of the products supplied(1)\n\nDescription of non-originating materials used\n\nHS heading of non-originating materials used(2)\n\nValue of non-originating materials used(2)(3)\n\nTotal value\n\n2. All the other materials used in [indicate the name of the relevant Party] to produce those products originate in a Party [indicate the name of the relevant Party];\nThis declaration is valid for all subsequent consignments of these products dispatched\nfrom … to … (5)\n\nI undertake to inform … (4) immediately if this declaration ceases to be valid.\n… (Place and Date)\n…\n(Name and position of the undersigned, name and address of company)\n… (Signature)(6)\n\nFootnotes\n\n(1) Where the invoice or other document to which the declaration is annexed relates to different kinds of products, or to products which do not incorporate non-originating materials to the same extent, the supplier must clearly differentiate them."
+        },
+        {
+         "source": "guides/aeat_rex.pdf",
+         "section": "1. QUIÉN PUEDE HACER DECLARACIONES SOBRE EL ORIGEN",
+         "text": "[AEAT, Guía sobre el sistema de exportadores registrados (REX), mayo de 2022 › 1. QUIÉN PUEDE HACER DECLARACIONES SOBRE EL ORIGEN]\n1. QUIÉN PUEDE HACER DECLARACIONES SOBRE EL ORIGEN\n\n1. Como principio general, el exportador registrado que extienda una declaración sobre el origen debe poder declarar y probar el origen de las mercancías y responder a las solicitudes de verificación.\n\nSi el exportador registrado que extienda la declaración de origen no es el productor (por ejemplo, un comerciante), deberá tener en su poder todos los documentos necesarios (declaraciones del proveedor...) que le permitan declarar y probar el origen de las mercancías, y responder a las solicitudes de verificación.\n\n2. En el SPG, un exportador registrado podrá extender declaraciones sobre el origen cuando esté registrado, es decir, después de que se le informe sobre su número REX y la fecha a partir de la cual el registro es válido de conformidad con el artículo 79, apar tado 3, del Reglamento de Ejecución (UE) 2015/2447 de la Comisión.Si se aplica la acumulación regional, el exportador (registrado) del país beneficiario de exportación a la Unión extenderá la declaración sobre el origen, de conformidad con el artículo 92, apartado 1, del Reglamento de Ejecución (UE) 2015/2447 de la Comisión.\n\n3. Si el valor de los productos originarios del envío es inferior al umbral de valor, cualquier exportador, registrado o no registrado, extenderá una declaración sobre el origen."
+        }
+       ]
+      }
+     ],
+     "unsupported_numbers": [],
+     "statement": {}
+    },
+    "correct": true
+   },
+   {
+    "id": "kn-01",
+    "category": "conocimiento",
+    "repeat": 1,
+    "final_answer": "## Resumen\n\nBajo el Acuerdo de Comercio y Cooperación UE-Reino Unido (TCA), una declaración de origen es válida durante **12 meses** desde su fecha de emisión, o durante un período más largo, **hasta un máximo de 24 meses**, si así lo establece la Parte importadora.\n\n## Detalle\n\n- **Regla general:** La declaración de origen es válida por 12 meses desde la fecha en que se emite.\n- **Posible extensión:** La Parte importadora puede establecer un período de validez más largo, que no puede exceder los 24 meses.\n- **Aplicación a múltiples envíos:** La declaración puede aplicarse a múltiples envíos de productos idénticos importados en la Parte dentro del período especificado en la propia declaración, el cual no debe exceder los 12 meses.\n\n**Fuentes:**\n- *tca/rules_of_origin.md*, SECTION 2 ORIGIN PROCEDURES › Article 56 Statement on origin.\n- *guides/tca_origin_questions_answers.pdf*, Question 34.\n- *guides/tca_origin_questions_answers.pdf*, Question 33.",
+    "tools_worked": [],
+    "crash": null,
+    "seconds": 15.6,
+    "cost": {
+     "calls": 3.0,
+     "prompt_tokens": 5472.0,
+     "completion_tokens": 437.0,
+     "reasoning_tokens": 0.0,
+     "seconds": 15.531599018999259
+    },
+    "cost_per_agent": {
+     "orchestrator": {
+      "calls": 1.0,
+      "prompt_tokens": 1903.0,
+      "completion_tokens": 117.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 4.663073614996392
+     },
+     "knowledge": {
+      "calls": 1.0,
+      "prompt_tokens": 1726.0,
+      "completion_tokens": 73.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 3.543276465003146
+     },
+     "writer": {
+      "calls": 1.0,
+      "prompt_tokens": 1843.0,
+      "completion_tokens": 247.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 7.325248938999721
+     }
+    },
+    "trace": {
+     "plan": {
+      "kind": "knowledge",
+      "product": null,
+      "product_hs_code": null,
+      "exw_price_eur": null,
+      "exw_price_currency": null,
+      "agreements": [
+       "TCA"
+      ],
+      "out_of_scope": [],
+      "statement": null,
+      "knowledge_questions": [
+       "How long is a statement on origin valid under the EU-UK Trade and Cooperation Agreement?"
+      ],
+      "missing": []
+     },
+     "materials": [],
+     "materials_missing": [],
+     "conversions": [],
+     "evaluations": {},
+     "issues": [],
+     "attempts": 1,
+     "knowledge": [
+      {
+       "question": "How long is a statement on origin valid under the EU-UK Trade and Cooperation Agreement?",
+       "status": "answered",
+       "answer": "A statement on origin is valid for 12 months from the date it was made out, or for a longer period up to a maximum of 24 months as provided by the Party of import.",
+       "cited": [
+        2,
+        3,
+        4
+       ],
+       "passages": [
+        {
+         "source": "tca/annex6_7_supplier_declaration_statement.md",
+         "section": "ANNEX 7 TEXT OF THE STATEMENT ON ORIGIN",
+         "text": "[EU-UK Trade and Cooperation Agreement: Annexes 6 and 7: Supplier's declaration and text of the statement on origin › ANNEX 7 TEXT OF THE STATEMENT ON ORIGIN]\n…(4)\n\n(Place and date)\n\n…\n\n(Name of the exporter)\n\n(1) If the statement on origin is completed for multiple shipments of identical originating products within the meaning of point (b) of Article 56(4) of this Agreement, indicate the period for which the statement on origin is to apply. That period shall not exceed 12 months. All importations of the product must occur within the period indicated. If a period is not applicable, the field may be left blank.\n\n(2) Indicate the reference number by which the exporter is identified. For the Union exporter, this will be the number assigned in accordance with the laws and regulations of the Union. For the United Kingdom exporter, this will be the number assigned in accordance with the laws and regulations applicable within the United Kingdom. Where the exporter has not been assigned a number, this field may be left blank.\n\n(3) Indicate the origin of the product: the United Kingdom or the Union.\n\n(4) Place and date may be omitted if the information is contained on the document itself."
+        },
+        {
+         "source": "tca/rules_of_origin.md",
+         "section": "SECTION 2 ORIGIN PROCEDURES › Article 56 Statement on origin",
+         "text": "[EU-UK Trade and Cooperation Agreement: Part Two, Heading One, Title I, Chapter 2: Rules of origin › SECTION 2 ORIGIN PROCEDURES › Article 56 Statement on origin]\nArticle 56\n\nStatement on origin\n\n1. A statement on origin shall be made out by an exporter of a product on the basis of information demonstrating that the product is originating, including, information on the originating status of materials used in the production of the product. The exporter shall be responsible for the correctness of the statement on origin and the information provided.\n\n2. A statement on origin shall be made out using one of the language versions set out in Annex 7 in an invoice or on any other document that describes the originating product in sufficient detail to enable the identification of that product. The exporter shall be responsible for providing sufficient detail to allow the identification of the originating product. The importing Party shall not require the importer to submit a translation of the statement on origin.\n\n3. A statement on origin shall be valid for 12 months from the date it was made out or for such longer period as provided by the Party of import up to a maximum of 24 months.\n\n4. A statement on origin may apply to:\n\n(a) a single shipment of one or more products imported into a Party; or\n\n(b) multiple shipments of identical products imported into a Party within the period specified in the statement on origin, which shall not exceed 12 months."
+        },
+        {
+         "source": "guides/tca_origin_questions_answers.pdf",
+         "section": "Question 34",
+         "text": "[European Commission, EU-UK Trade and Cooperation Agreement: compendium of questions and answers on rules of origin › Question 34]\n34. Question: May the Parties choose the validity of the statement? Why are there 2 validity periods?\n\nAnswer: The validity will be of 12 months, unless a Party decides to provide for a longer peri od (up to 24 months). The Commission is not liable to provide information on third countries policies.\n\nHowever, it appears that t he UK has decided to provide for such a longer period for imports in the UK of EU originating goods."
+        },
+        {
+         "source": "guides/tca_origin_questions_answers.pdf",
+         "section": "Question 33",
+         "text": "[European Commission, EU-UK Trade and Cooperation Agreement: compendium of questions and answers on rules of origin › Question 33]\n33. Question: In article ORIG-19 stands following: “3. A statement on origin shall be valid for 12 months from the date it was made out or for such longer period as provided by the Party of import up to a maximum of 24 months.” What is the validity period for imports into the EU?\n\nAnswer: When the EU is the importing Party , the validity period is 12 months . The Commission is not liable to provide information on third countries policies. However, it appears that for the UK as importing Party the validity is 24 months."
+        },
+        {
+         "source": "guides/tca_guide_for_traders.pdf",
+         "section": "A. Statement on origin",
+         "text": "[European Commission, EU-UK Trade and Cooperation Agreement: Guide for traders on rules of origin › A. Statement on origin]\nA. Statement on origin\n\nThe statement on origin is made out by the exporter of the goods. The TCA states that a statement on origin can be made out “in an invoice or on any other document that describes the originating product in sufficient detail to enable the identification of that product.”\n\nTherefore, any document meeting that condition is acceptable to make out a statement on origin. It is up to the exporter to make sure they themselves are in possession of the necessary information to make out the statement on origin and to ensure that the information provided is correct. To fulfil this obligation, the exporter can make use of any relevant source of information allowing the origin of the products to be determined, such as the so-called ‘supplier’s declarations’ which provide in particular a description and the value of the non-originating materials used. For the first year of the application of the EU-UK TCA (1.1.2021 – 31.12.2021), an exceptional trade facilitation measure is in place for the provision of supplier’s declarations to EU exporters (see point 6)."
+        }
+       ]
+      }
+     ],
+     "unsupported_numbers": [],
+     "statement": {}
+    },
+    "correct": true
+   },
+   {
+    "id": "kn-02",
+    "category": "conocimiento",
+    "repeat": 1,
+    "final_answer": "Una declaración de origen en el marco del Acuerdo de Asociación Económica UE-Japón es válida durante **12 meses** desde la fecha en que se extiende.\n\n**Fuente:**\n*   **Documento:** `japan/chapter3_rules_of_origin.md`\n*   **Sección:** SECTION B Origin procedures › ARTICLE 3.17 Statement on origin",
+    "tools_worked": [],
+    "crash": null,
+    "seconds": 9.5,
+    "cost": {
+     "calls": 3.0,
+     "prompt_tokens": 5458.0,
+     "completion_tokens": 266.0,
+     "reasoning_tokens": 0.0,
+     "seconds": 9.480886317993281
+    },
+    "cost_per_agent": {
+     "orchestrator": {
+      "calls": 1.0,
+      "prompt_tokens": 1905.0,
+      "completion_tokens": 130.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 2.6947759980103
+     },
+     "knowledge": {
+      "calls": 1.0,
+      "prompt_tokens": 2056.0,
+      "completion_tokens": 58.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 2.0467327359947376
+     },
+     "writer": {
+      "calls": 1.0,
+      "prompt_tokens": 1497.0,
+      "completion_tokens": 78.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 4.739377583988244
+     }
+    },
+    "trace": {
+     "plan": {
+      "kind": "knowledge",
+      "product": null,
+      "product_hs_code": null,
+      "exw_price_eur": null,
+      "exw_price_currency": null,
+      "agreements": [
+       "UE-JP"
+      ],
+      "out_of_scope": [],
+      "statement": null,
+      "knowledge_questions": [
+       "¿Durante cuánto tiempo es válida una declaración de origen en el marco del Acuerdo de Asociación Económica UE-Japón desde que se extiende?"
+      ],
+      "missing": []
+     },
+     "materials": [],
+     "materials_missing": [],
+     "conversions": [],
+     "evaluations": {},
+     "issues": [],
+     "attempts": 1,
+     "knowledge": [
+      {
+       "question": "¿Durante cuánto tiempo es válida una declaración de origen en el marco del Acuerdo de Asociación Económica UE-Japón desde que se extiende?",
+       "status": "answered",
+       "answer": "A statement on origin is valid for 12 months from the date it was made out, as stated in Article 3.17(4).",
+       "cited": [
+        5
+       ],
+       "passages": [
+        {
+         "source": "japan/annex3c_3d_information_statement.md",
+         "section": "ANNEX 3-D TEXT OF THE STATEMENT ON ORIGIN",
+         "text": "[EU-Japan Economic Partnership Agreement: Annexes 3-C and 3-D: Information for verification and text of the statement on origin › ANNEX 3-D TEXT OF THE STATEMENT ON ORIGIN]\n…\n\n(Plats och datum (5))\n\n…\n\n(Exportörens namn, med tryckbokstäver)\n\n…\n\n(1) If the statement on origin is completed for multiple shipments of identical originating products within the meaning of subparagraph 5(b) of Article 3.17, indicate the period for which the statement on origin will apply. That period shall not exceed 12 months. All importations of the product must occur within the period indicated. Where a period is not applicable, the field can be left blank.\n\n(2) Indicate the reference number through which the exporter is identified. For the European Union exporter, this will be the number assigned in accordance with the laws and regulations of the European Union. For the Japanese exporter, this will be the Japan Corporate Number. Where the exporter has not been assigned a number, this field may be left blank.\n\n(3) Indicate the origin of the product; the European Union or Japan.\n\n(4) Indicate, depending on the case, one or more of the following codes;\n\n‘A’\n\nfor a product referred to in subparagraph 1(a) of Article 3.2;\n\n‘B’\n\nfor a product referred to in subparagraph 1(b) of Article 3.2;\n\n‘C’\n\nfor a product referred to in subparagraph 1(c) of Article 3.2, with the following additional information on the type of product specific requirement actually applied to the product;\n\n‘1’\n\nfor a change in tariff classification rule;\n\n‘2’\n\nfor a maximum value of non-originating materials or a minimum regional value content rule;\n\n‘3’\n\nfor a specific production process rule; or"
+        },
+        {
+         "source": "guides/japan_statements_on_origin.pdf",
+         "section": "1. Legal basis",
+         "text": "[European Commission, EU-Japan EPA: Guidance on statements on origin › 1. Legal basis]\n5. A statement on origin may apply to:\n\n(a) a single shipment of one or more products into a Party; or\n\n(b) multiple shipments of identical products within any period specified in the statement on origin not exceeding 12 months."
+        },
+        {
+         "source": "guides/japan_statements_on_origin.pdf",
+         "section": "2. Guidance1",
+         "text": "[European Commission, EU-Japan EPA: Guidance on statements on origin › 2. Guidance1]\nthe statement\n\nA statement on origin shall be valid for 12 months from the date it was made out.\n\nThe date at which the statement on origin is made out is indicated in the statement but may be omitted if the date is included on the document itself (e.g. the invoice date).\n\nThe statement on origin must be valid at the time when the claim for preferential tariff treatme nt is made. This can be the time at which the import declaration in respect of the originating products is accepted by the Validity\n\nperiod of the\n\nstatement on\n\norigin\n\ncustoms, or in the EU at which an application for repayment or re mission of customs duties is submitted.\n\nA statement on origin may be made out at any time, so before, when or after the products to which it relates are exported. It can of course, only be used as the basis of a claim for preferential tariff treatment during its validity period.\n\nRetrospective\n\nmaking out of\n\na statement on\n\norigin\n\nThe issue of a replacement of the statement on origin issued in the context of the EU -Japan EPA for sending products elsewhere in the EU is an internal matter for the EU and therefore provided for (only) in Article 69 UCC-IA.\n\nReplacement\n\nstatement on\n\norigin"
+        },
+        {
+         "source": "guides/japan_statements_on_origin.pdf",
+         "section": "ANNEX 3-D TEXT OF THE STATEMENT ON ORIGIN",
+         "text": "[European Commission, EU-Japan EPA: Guidance on statements on origin › ANNEX 3-D TEXT OF THE STATEMENT ON ORIGIN]\n...……………………………………………………………………........................……… (Printed name of the exporter)\n\n...……………………………………………………………………............................…… 1 If the statement on origin is completed for multiple shipments of identical originating products within the meaning of subparagraph 5 (b) of Article 3.17, indicate the period for which the statement on origin will apply. That period shall not exceed 12 months. All importations of the product must occur within the period indicated. Where a period is not applicable, the field can be left blank. 2 Indicate the reference number through which the exporter is identified. For the European Union exporter, this will be the number assigned in a ccordance with the laws and regulations of the European Union. For the Japanese exporter, this will be the Japan Corporate Number. Where the exporter has not been assigned a number, this field may be left blank.\n\n3 Indicate the origin of the product; the European Union. or Japan 4 Indicate, depending on the case, one or more of the following codes: “A” product referred to in subparagraph 1(a) of Article 3.2 “B” product referred to in subparagraph 1(b) of Article 3.2 “C” product referred to in subparagraph 1(c) of Article 3.2 , with the following additional information on the type of PSR actually applied to the product: “1” for a change of tariff classification rule\n\n“2” for a for a maximum value of non -originating materials or a minimum regional value content rule;"
+        },
+        {
+         "source": "japan/chapter3_rules_of_origin.md",
+         "section": "SECTION B Origin procedures › ARTICLE 3.17 Statement on origin",
+         "text": "[EU-Japan Economic Partnership Agreement: Chapter 3: Rules of origin and origin procedures › SECTION B Origin procedures › ARTICLE 3.17 Statement on origin]\nARTICLE 3.17\n\nStatement on origin\n\n1. A statement on origin may be made out by an exporter of a product on the basis of information demonstrating that the product is originating, including information on the originating status of materials used in the production of the product. The exporter is responsible for the correctness of the statement on origin and of the information provided.\n\n2. A statement on origin shall be made out using one of the linguistic versions of the text set out in Annex 3-D on an invoice or on any other commercial document that describes the originating product in sufficient detail to enable its identification. The importing Party shall not require the importer to submit a translation of the statement on origin.\n\n3. The customs authority of the importing Party shall not reject a claim for preferential tariff treatment due to minor errors or discrepancies in the statement on origin or for the sole reason that an invoice was issued in a third country.\n\n4. A statement on origin shall be valid for 12 months from the date it was made out.\n\n5. A statement on origin may apply to:\n\n(a) a single shipment of one or more products imported into a Party; or\n\n(b) multiple shipments of identical products imported into a Party within any period specified in the statement on origin not exceeding 12 months."
+        }
+       ]
+      }
+     ],
+     "unsupported_numbers": [],
+     "statement": {}
+    },
+    "correct": true
+   },
+   {
+    "id": "kn-03",
+    "category": "conocimiento",
+    "repeat": 1,
+    "final_answer": "## Resumen\n\nBajo el Acuerdo de Libre Comercio UE-Corea (UE-KR), las copias de las declaraciones de origen deben conservarse durante **cinco años**.\n\n## Detalle\n\n- **Pregunta:** ¿Cuánto tiempo deben conservarse las copias de las declaraciones de origen para las exportaciones a Corea del Sur?\n- **Respuesta:** Cinco años.\n- **Base:** Artículo 23.1 del Protocolo de origen del Acuerdo de Libre Comercio UE-Corea, que establece que el exportador que emite una declaración de origen debe conservar durante cinco años una copia de dicha declaración, así como los documentos a que se refiere el artículo 16.3.\n\n**Fuente:** `korea/protocol_rules_of_origin.md`, sección *TITLE V Proof of origin › Article 23 Preservation of proof of origin and supporting documents*.",
+    "tools_worked": [],
+    "crash": null,
+    "seconds": 11.9,
+    "cost": {
+     "calls": 3.0,
+     "prompt_tokens": 5227.0,
+     "completion_tokens": 360.0,
+     "reasoning_tokens": 0.0,
+     "seconds": 11.825441234002938
+    },
+    "cost_per_agent": {
+     "orchestrator": {
+      "calls": 1.0,
+      "prompt_tokens": 1905.0,
+      "completion_tokens": 122.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 3.234066190998419
+     },
+     "knowledge": {
+      "calls": 1.0,
+      "prompt_tokens": 1955.0,
+      "completion_tokens": 57.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 1.3811614139995072
+     },
+     "writer": {
+      "calls": 1.0,
+      "prompt_tokens": 1367.0,
+      "completion_tokens": 181.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 7.210213629005011
+     }
+    },
+    "trace": {
+     "plan": {
+      "kind": "knowledge",
+      "product": null,
+      "product_hs_code": null,
+      "exw_price_eur": null,
+      "exw_price_currency": null,
+      "agreements": [
+       "UE-KR"
+      ],
+      "out_of_scope": [],
+      "statement": null,
+      "knowledge_questions": [
+       "How long must copies of origin declarations for exports to South Korea be kept under the EU-Korea FTA?"
+      ],
+      "missing": []
+     },
+     "materials": [],
+     "materials_missing": [],
+     "conversions": [],
+     "evaluations": {},
+     "issues": [],
+     "attempts": 1,
+     "knowledge": [
+      {
+       "question": "How long must copies of origin declarations for exports to South Korea be kept under the EU-Korea FTA?",
+       "status": "answered",
+       "answer": "Copies of origin declarations must be kept for five years, as stated in Article 23.1 of the EU-Korea FTA origin protocol.",
+       "cited": [
+        1
+       ],
+       "passages": [
+        {
+         "source": "korea/protocol_rules_of_origin.md",
+         "section": "TITLE V Proof of origin › Article 23 Preservation of proof of origin and supporting documents",
+         "text": "[EU-Korea Free Trade Agreement, Protocol concerning the definition of 'originating products' and methods of administrative cooperation: Protocol on origin, Titles I to VIII and Annex I (introductory notes) › TITLE V Proof of origin › Article 23 Preservation of proof of origin and supporting documents]\nArticle 23\n\nPreservation of proof of origin and supporting documents\n\n1. The exporter making out an origin declaration shall keep for five years a copy of this origin declaration as well as the documents referred to in Article 16.3.\n\n2. The importer shall keep all records related to the importation in accordance with laws and regulations of the importing Party.\n\n3. The customs authorities of the importing Party shall keep for five years the origin declarations submitted to them.\n\n4. The records to be kept in accordance with paragraphs 1 through 3 may include electronic records."
+        },
+        {
+         "source": "guides/guidance_preferential_origin_2025.pdf",
+         "section": "i. Government certificates",
+         "text": "[European Commission, Guidance on preferential rules of origin (March 2025) › i. Government certificates]\n• If a Contracting Party to the PEM Convention does not yet apply the PEM Convention, , the concerned Article of the Free Trade Agreement applies, e.g. Article 22 of Protocol No. 4 between the EU and Morocco\n\n• Article 15 of the origin protocol of the EU -Korea FTA (text of the origin declaration: Annex III of the Origin protocol)\n\nUnlike other FTAs, under the EU - Korea FTA it is not possible to use government certificates, the only applicable document on origin is the origin declaration. If the total value of the consignment of originating products (based on the ex -works price) exceeds EUR 6 000, the origin declaration has to be made out by Approved Exporters. For detailed information on Approved Exporters see:\n\nhttps://ec.europa.eu/taxation_customs/system/files/2019-02/guidance-on-approvedexporters.pdf\n\nIn trade with the Contracting Parties to the PEM Convention, under the same circumstances in which the movement certificate EUR-MED or EUR.1 is used, the invoice or origin declaration EUR-MED may be required instead of the invoice or origin declaration until the end of 2025. For further details, see the PanEuroMed Handbook (https://taxation customs.ec.europa.eu/document/download/4d27b1c7-511d-480f-be4eba3a67265d39_en?filename=handbook_en.pdf):\n\nRegistered Exporter\n\nLegal reference - examples\n\n• Articles 18 and 19 of the EU-Canada CETA origin protocol - (text of the origin declaration: Annex 2 of the EU-Canada CETA origin protocol)"
+        },
+        {
+         "source": "korea/protocol_rules_of_origin.md",
+         "section": "TITLE V Proof of origin › Article 16 Conditions for making out an origin declaration",
+         "text": "[EU-Korea Free Trade Agreement, Protocol concerning the definition of 'originating products' and methods of administrative cooperation: Protocol on origin, Titles I to VIII and Annex I (introductory notes) › TITLE V Proof of origin › Article 16 Conditions for making out an origin declaration]\nArticle 16\n\nConditions for making out an origin declaration\n\n1. An origin declaration as referred to in Article 15.1 of this Protocol may be made out:\n\n(a) by an approved exporter within the meaning of Article 17; or\n\n(b) by any exporter for any consignment consisting of one or more packages containing originating products whose total value does not exceed 6000 euros.\n\n2. Without prejudice to paragraph 3, an origin declaration may be made out if the products concerned can be considered as products originating in the EU Party or in Korea and fulfil the other requirements of this Protocol.\n\n3. The exporter making out an origin declaration shall be prepared to submit at any time, at the request of the customs authorities of the exporting Party, all appropriate documents proving the originating status of the products concerned including statements from the suppliers or producers in accordance with domestic legislation as well as the fulfilment of the other requirements of this Protocol.\n\n4. An origin declaration shall be made out by the exporter by typing, stamping or printing on the invoice, the delivery note or another commercial document, the text which appears in Annex III, using one of the linguistic versions set out in that Annex and in accordance with the legislation of the exporting Party. If the declaration is handwritten, it shall be written in ink in capital characters."
+        },
+        {
+         "source": "korea/protocol_rules_of_origin.md",
+         "section": "TITLE V Proof of origin",
+         "text": "[EU-Korea Free Trade Agreement, Protocol concerning the definition of 'originating products' and methods of administrative cooperation: Protocol on origin, Titles I to VIII and Annex I (introductory notes) › TITLE V Proof of origin]\nTITLE V\n\nProof of origin\n\nArticle 15\n\nGeneral requirements\n\n1. Products originating in the EU Party shall, on importation into Korea and products originating in Korea shall, on importation into the EU Party benefit from preferential tariff treatment of this Agreement on the basis of a declaration, subsequently referred to as the \"origin declaration\", given by the exporter on an invoice, a delivery note or any other commercial document which describes the products concerned in sufficient detail to enable them to be identified. The texts of the origin declarations appear in Annex III.\n\n2. Notwithstanding paragraph 1, originating products within the meaning of this Protocol shall, in the cases specified in Article 21, benefit from preferential tariff treatment of this Agreement without it being necessary to submit any of the documents referred to in paragraph 1."
+        },
+        {
+         "source": "korea/protocol_rules_of_origin.md",
+         "section": "TITLE V Proof of origin › Article 16 Conditions for making out an origin declaration",
+         "text": "[EU-Korea Free Trade Agreement, Protocol concerning the definition of 'originating products' and methods of administrative cooperation: Protocol on origin, Titles I to VIII and Annex I (introductory notes) › TITLE V Proof of origin › Article 16 Conditions for making out an origin declaration]\n5. Origin declarations shall bear the original signature of the exporter in manuscript. However, an approved exporter within the meaning of Article 17 shall not be required to sign such declarations provided that he gives the customs authorities of the exporting Party a written undertaking that he accepts full responsibility for any origin declaration which identifies him as if it had been signed in manuscript by him.\n\n6. An origin declaration may be made out by the exporter when the products to which it relates are exported, or after exportation on condition that it is presented in the importing Party no longer than two years or the period specified in the legislation of the importing Party after the importation of the products to which it relates."
+        }
+       ]
+      }
+     ],
+     "unsupported_numbers": [],
+     "statement": {}
+    },
+    "correct": true
+   },
+   {
+    "id": "kn-04",
+    "category": "conocimiento",
+    "repeat": 1,
+    "final_answer": "## Resumen\n\nEl número REX **no caduca** y **no debe renovarse** periódicamente.\n\n## Detalle\n\nSegún la base de conocimientos, la validez de un número de registro no está limitada en el tiempo y no requiere renovación periódica. Solo dejaría de ser válido si se revoca el registro, en cuyo caso mantendría su validez únicamente hasta la fecha en que la revocación surta efecto.\n\n**Fuente:** AEAT, *Guía sobre el sistema de exportadores registrados (REX)*, mayo de 2022, sección **4. VALIDEZ DEL REGISTRO** (apartado 1).",
+    "tools_worked": [],
+    "crash": null,
+    "seconds": 8.1,
+    "cost": {
+     "calls": 3.0,
+     "prompt_tokens": 5674.0,
+     "completion_tokens": 330.0,
+     "reasoning_tokens": 0.0,
+     "seconds": 8.013983984987135
+    },
+    "cost_per_agent": {
+     "orchestrator": {
+      "calls": 1.0,
+      "prompt_tokens": 1902.0,
+      "completion_tokens": 111.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 2.9999198470031843
+     },
+     "knowledge": {
+      "calls": 1.0,
+      "prompt_tokens": 2190.0,
+      "completion_tokens": 77.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 1.7902519719937118
+     },
+     "writer": {
+      "calls": 1.0,
+      "prompt_tokens": 1582.0,
+      "completion_tokens": 142.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 3.223812165990239
+     }
+    },
+    "trace": {
+     "plan": {
+      "kind": "knowledge",
+      "product": null,
+      "product_hs_code": null,
+      "exw_price_eur": null,
+      "exw_price_currency": null,
+      "agreements": [],
+      "out_of_scope": [],
+      "statement": null,
+      "knowledge_questions": [
+       "¿El número de registro REX tiene una fecha de caducidad o debe renovarse periódicamente?"
+      ],
+      "missing": []
+     },
+     "materials": [],
+     "materials_missing": [],
+     "conversions": [],
+     "evaluations": {},
+     "issues": [],
+     "attempts": 1,
+     "knowledge": [
+      {
+       "question": "¿El número de registro REX tiene una fecha de caducidad o debe renovarse periódicamente?",
+       "status": "answered",
+       "answer": "The validity of a registration number is not limited in time and does not require periodic renewal, unless it is revoked, in which case it remains valid only until the revocation takes effect (Article 4, section 1).",
+       "cited": [
+        1
+       ],
+       "passages": [
+        {
+         "source": "guides/aeat_rex.pdf",
+         "section": "4. VALIDEZ DEL REGISTRO",
+         "text": "[AEAT, Guía sobre el sistema de exportadores registrados (REX), mayo de 2022 › 4. VALIDEZ DEL REGISTRO]\n4. VALIDEZ DEL REGISTRO\n\n1. La validez de un número de registro no está limitada en el tiempo.\n\n2. Si se revoca un registro, las autoridades competentes que llevan a cabo la revocación facilitarán una fecha a partir de la cual la revocación surtirá efecto. En este caso, el registro tendrá una validez limitada hasta la fecha a partir de la cual la revocación surta efecto.\n\n3. Un exportador registrad o en la Unión podrá utilizar su número de registro en el contexto de todos los acuerdos comerciales preferenciales en los que el sistema de certificación de origen aplicado sea el sistema REX. De hecho, los datos de registro son generales y no están relaci onados con ningún elemento específico de los acuerdos comerciales preferenciales (es decir, no hay ningún vínculo con las normas específicas de origen de los acuerdos en el formulario de solicitud).\n\n4. Suiza, Noruega y Turquía también están aplicando el sistema REX en el contexto de sus respectivos SPG. Por lo tanto, un exportador de un país beneficiario del SPG solo se registrará una vez, para todas sus exportaciones a la UE, a Noruega, a Suiza o a Turquía, en virtud de la preferencia arancelaria del SPG.\n\n5. Un exportador de un PTU, que también se beneficia de los regímenes SPG o Noruega o Suiza, utilizará el mismo número REX cuando exporte a la UE con arreglo a la preferencia arancelaria OAD o a Noruega o Suiza el SPG tarifa la preferencia.\n\nModificación y revocación del registro de un exportador"
+        },
+        {
+         "source": "guides/aeat_rex.pdf",
+         "section": "1. INTRODUCCIÓN",
+         "text": "[AEAT, Guía sobre el sistema de exportadores registrados (REX), mayo de 2022 › 1. INTRODUCCIÓN]\n1. INTRODUCCIÓN\n\nEl presente documento proporciona orientaciones relativas al Sistema de Exportadores Registrados (el sistema REX), un sistema de autocertificación de origen por parte de los exportadores registrados que hace las llamadas comunicaciones sobre el origen. El sistema REX se aplica desde el 1 de enero de 2017 en el contexto del Sistema de Preferencias Generalizadas (SPG), cuyas normas de origen se establecen en el Reglamento Delegado (UE) 2015/2446 de la Comisión y en el Reglamento de Ejecución (UE) 2015/2447 de la Comisión del Código Aduanero de la Unión [Reglamento (UE) n.º 952/2013]. El sistema REX también se aplica desde el 1 de enero de 2020 por los países y territorios de ultramar (PTU), cuyas normas de origen se establecen en el anexo 2 de la Decisión (UE) 2021/1764 del Consejo (Decisión de Asociación Ultramar, OAD). Progresivamente, el sistema REX se ha aplicado en la UE para certificar el origen de las mercancías exportadas a terceros países en el contexto de acuerdos comerciales preferenciales, por ejemplo, los Acuerdos con Canadá (CETA), con Japón, con el Reino Unido o con Vietnam. Por último, el sistema REX también puede ser utilizado por un país socio de un acuerdo preferencial si ese país lo solicita. Por el momento, Zimbabue está aplicando el sistema REX en el contexto del Acuerdo de Partenariado EconómicoA para sus exportaciones a la UE."
+        },
+        {
+         "source": "guides/aeat_rex.pdf",
+         "section": "2. REVOCACIÓN DEL REGISTRO DE UN EXPORTADOR",
+         "text": "[AEAT, Guía sobre el sistema de exportadores registrados (REX), mayo de 2022 › 2. REVOCACIÓN DEL REGISTRO DE UN EXPORTADOR]\n2. REVOCACIÓN DEL REGISTRO DE UN EXPORTADOR\n\n1. El exportador registrado pedirá en persona que se retire del sistema REX en los siguientes casos:\n\na. no cumple con las condiciones requeridas por el sistema REX b. ya no tiene la intención de utilizar su número de registro. c. la empresa cesa sus operaciones\n\nEn la UE, debe presentarse una solicitud de revocación de un registro desde el portal REX Trader.\n\n2. Cuando controlen a un exportador registrado, si las autoridades competentes descubren que el exportador registrado ha elaborado de forma intencionada o negligente, o ha hecho que se elabore una declaración de origen que contenga información incorrecta, las autoridades competentes revocarán al exportador\n\nregistrado.\n\n3. Al supervisar a un exportador registrado, si las autoridades competentes descubren que el exportador registrado ya no existe, las autoridades competentes revocarán al exportador registrado.\n\n4. Al supervisar a un exportador registrado, si las autoridades competentes descubren que el exportador registrado ya no cumple las condiciones exigidas por el sistema REX (por ejemplo, no ha mantenido sus datos actualizados y esta deficiencia s e considera grave), las autoridades competentes revocarán al exportador registrado.\n\n5. El número de registro de un exportador que haya sido revocado no debe utilizarse para nuevos registros de exportadores."
+        },
+        {
+         "source": "guides/aeat_rex.pdf",
+         "section": "1. MODIFICACIÓN DEL REGISTRO DE UN EXPORTADOR",
+         "text": "[AEAT, Guía sobre el sistema de exportadores registrados (REX), mayo de 2022 › 1. MODIFICACIÓN DEL REGISTRO DE UN EXPORTADOR]\n4. Dado que el registro es automáticamente válido para todos los marcos jurídicos en los que el sistema de certificación de origen aplicado es el sistema REX, no es necesario actualizar el registro cuando un nuevo acuerdo comercial preferencial aplica el sistema REX (véase 4.4.3)."
+        },
+        {
+         "source": "guides/aeat_rex.pdf",
+         "section": "2. INFORMACIÓN GENERAL",
+         "text": "[AEAT, Guía sobre el sistema de exportadores registrados (REX), mayo de 2022 › 2. INFORMACIÓN GENERAL]\n2. INFORMACIÓN GENERAL\n\n1. El sistema REX simplifica las formalidades de exportación permitiendo al exportador registrado para certificar el origen preferencial mediante la inclusión de una declaración específica (denominadas comunicaciones sobre el origen) en la factura u otro documento en el que se identifiquen los productos exportados. Por lo tanto, el exportador registrado no necesita solicitar cada exportación para la expedición de un certificado de origen.\n\n2. La solicitud para convertirse en exportador registrado es una formalidad única, cuando el exportador facilite a la aduana competente la informaci ón necesaria para su registro.\n\n3. Una vez asignado el número REX, el exportador registrado podrá utilizarlo para todas sus exportaciones en virtud de acuerdos preferenciales cuando el sistema de certificación de origen aplicado sea el sistema REX. No se requiere formalidad para que un exportador registrado amplíe el uso de su número REX para usarlo en el contexto de una nueva preferencia.\n\n4. La certificación de origen expedida por el exportador registrado es llamada «comunicación sobre el origen». Hay una excepci ón en el Acuerdo con Canadá (CETA) donde se utiliza el término «declaración de origen».\n\n5. Acuerdos preferenciales celebrados por la Unión Europea con terceros los países y los acuerdos autónomos aplicados por la UE se enumeran en el sitio web Europa en el siguiente enlace:"
+        }
+       ]
+      }
+     ],
+     "unsupported_numbers": [],
+     "statement": {}
+    },
+    "correct": true
+   },
+   {
+    "id": "kn-05",
+    "category": "conocimiento",
+    "repeat": 1,
+    "final_answer": "## Resumen\n\n**Sí**, los hornos eléctricos (HS 8516.60) son **productos originarios** bajo el Acuerdo de Asociación Económica UE-Japón (UE-JP). El criterio cumplido es **MAXNOM 50 % EXW**.\n\nEl valor máximo de un pequeño paquete que puede entrar en Japón como originario sin prueba de origen es de **100.000 yenes**.\n\n---\n\n## Detalle por acuerdo\n\n### UE-JP (Acuerdo de Asociación Económica UE-Japón)\n\n*   **Veredicto:** Originario.\n*   **Regla aplicada:** CTH o MAXNOM 50 % EXW.\n*   **Criterio cumplido:** MAXNOM 50 % EXW.\n    *   El valor de los materiales no originarios es de 175,00 EUR.\n    *   El porcentaje de materiales no originarios sobre el precio ex-works (480,00 EUR) es del **36,46 %**, que es inferior al umbral del 50 %.\n*   **Materiales no originarios:**\n    *   Heating elements (HS 8516.80) de China: 60,00 EUR.\n    *   Control boards (HS 8537.10) de China: 85,00 EUR.\n    *   Fans (HS 8414.59) de China: 30,00 EUR.\n*   **Materiales originarios:**\n    *   Steel sheet (HS 7209.17) de la UE: 55,00 EUR.\n*   **Advertencias:**\n    *   *material_misma_partida*: Un material no originario tiene la misma partida (4 dígitos) que el producto, por lo que no cambia la partida.\n    *   *subdivision_distinta*: Un material no originario tiene la partida del producto pero otra subpartida: cambia la subpartida (CTSH) pero no la partida (CTH).\n*   **No verificado:**\n    *   RVC 55 % FOB: requiere el precio FOB en EUR (aunque se proporcionó, el sistema indica que no se verificó este criterio alternativo, posiblemente porque ya se cumplió MAXNOM).\n\n---\n\n## Pregunta sobre paquetes pequeños\n\n**Pregunta:** ¿Cuál es el valor máximo de un pequeño paquete que puede entrar en Japón como originario sin una prueba de origen bajo el UE-JP?\n\n**Respuesta:** 100.000 yenes.\n\n**Fuentes:**\n*   Documento: `japan/chapter3_rules_of_origin.md`\n*   Sección: `SECTION B Origin procedures › ARTICLE 3.20 Small consignments and waivers`\n*   Texto relevante: \"for Japan, 100,000 yen or such amount as Japan may establish.\"",
+    "tools_worked": [
+     "evaluate_origin",
+     "get_origin_rule"
+    ],
+    "crash": null,
+    "seconds": 28.7,
+    "cost": {
+     "calls": 5.0,
+     "prompt_tokens": 8382.0,
+     "completion_tokens": 1166.0,
+     "reasoning_tokens": 0.0,
+     "seconds": 28.70079821901163
+    },
+    "cost_per_agent": {
+     "orchestrator": {
+      "calls": 1.0,
+      "prompt_tokens": 2034.0,
+      "completion_tokens": 142.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 5.480753930009087
+     },
+     "extractor": {
+      "calls": 1.0,
+      "prompt_tokens": 1116.0,
+      "completion_tokens": 293.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 7.182535358006135
+     },
+     "origin": {
+      "calls": 1.0,
+      "prompt_tokens": 817.0,
+      "completion_tokens": 44.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 1.1920137150009396
+     },
+     "knowledge": {
+      "calls": 1.0,
+      "prompt_tokens": 2021.0,
+      "completion_tokens": 38.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 1.5873947759973817
+     },
+     "writer": {
+      "calls": 1.0,
+      "prompt_tokens": 2394.0,
+      "completion_tokens": 649.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 13.258100439998088
+     }
+    },
+    "trace": {
+     "plan": {
+      "kind": "evaluate",
+      "product": "electric ovens",
+      "product_hs_code": "851660",
+      "exw_price_eur": 480.0,
+      "exw_price_currency": null,
+      "agreements": [
+       "UE-JP"
+      ],
+      "out_of_scope": [],
+      "statement": null,
+      "knowledge_questions": [
+       "What is the maximum value of a small package that can enter Japan as originating without a proof of origin under the EU-Japan EPA?"
+      ],
+      "missing": []
+     },
+     "materials": [
+      {
+       "name": "heating elements",
+       "hs_code": "851680",
+       "country_name": "China",
+       "country": "OTRO",
+       "value_eur": 60.0,
+       "supplier_declaration": false
+      },
+      {
+       "name": "control boards",
+       "hs_code": "853710",
+       "country_name": "China",
+       "country": "OTRO",
+       "value_eur": 85.0,
+       "supplier_declaration": false
+      },
+      {
+       "name": "fans",
+       "hs_code": "841459",
+       "country_name": "China",
+       "country": "OTRO",
+       "value_eur": 30.0,
+       "supplier_declaration": false
+      },
+      {
+       "name": "steel sheet",
+       "hs_code": "720917",
+       "country_name": "EU",
+       "country": "UE",
+       "value_eur": 55.0,
+       "supplier_declaration": true
+      }
+     ],
+     "materials_missing": [],
+     "conversions": [],
+     "evaluations": {
+      "UE-JP": {
+       "evaluation_id": "EV-FBF069",
+       "originating": true,
+       "criterion": "MAXNOM",
+       "criteria_met": [
+        "MAXNOM"
+       ],
+       "non_originating_value_eur": 175.0,
+       "pct_non_originating": 36.46,
+       "tolerance_pct": 10,
+       "warnings": [
+        "material_misma_partida",
+        "subdivision_distinta"
+       ],
+       "trace": [
+        "heating elements [851680] 60.00: no originario (tercer país)",
+        "control boards [853710] 85.00: no originario (tercer país)",
+        "fans [841459] 30.00: no originario (tercer país)",
+        "steel sheet [720917] 55.00: originario",
+        "CTH: no cumple",
+        "MAXNOM: cumple"
+       ],
+       "rule_applied": "CTH or MAXNOM 50 % EXW",
+       "not_checked": [
+        "RVC 55 % FOB: needs fob_price_eur"
+       ]
+      }
+     },
+     "issues": [],
+     "attempts": 1,
+     "knowledge": [
+      {
+       "question": "What is the maximum value of a small package that can enter Japan as originating without a proof of origin under the EU-Japan EPA?",
+       "status": "answered",
+       "answer": "100,000 yen",
+       "cited": [
+        1,
+        3
+       ],
+       "passages": [
+        {
+         "source": "japan/chapter3_rules_of_origin.md",
+         "section": "SECTION B Origin procedures › ARTICLE 3.20 Small consignments and waivers",
+         "text": "[EU-Japan Economic Partnership Agreement: Chapter 3: Rules of origin and origin procedures › SECTION B Origin procedures › ARTICLE 3.20 Small consignments and waivers]\nARTICLE 3.20\n\nSmall consignments and waivers\n\n1. Products sent as small packages from private persons to private persons or forming part of travellers' personal luggage shall be admitted as originating products provided that such products are not imported by way of trade (13), have been declared as satisfying the requirements of this Chapter and if there is no doubt as to the veracity of such a declaration.\n\n2. Provided that the importation does not form part of importations that may reasonably be considered to have been made separately for the purpose of avoiding the requirement for a statement on origin, the total value of the products referred to in paragraph 1 shall not exceed:\n\n(a) for the European Union, 500 euros in the case of small packages or 1,200 euros in the case of products forming part of travellers' personal luggage. The amounts to be used in other currency of a Member State of the European Union shall be the equivalent in that currency of the amounts expressed in euro as at the first working day of October of each year. The amounts shall be those published for that day by the European Central Bank, unless a different amount is communicated to the European Commission by 15 October of each year, and shall apply from 1 January of the following year. The European Commission shall notify Japan of the relevant amounts.\n\n(b) for Japan, 100,000 yen or such amount as Japan may establish."
+        },
+        {
+         "source": "guides/japan_statements_on_origin.pdf",
+         "section": "2. Guidance1",
+         "text": "[European Commission, EU-Japan EPA: Guidance on statements on origin › 2. Guidance1]\nSmall errors or discrepancies in the text of the statement shall not invalidate the statement.\n\nA statement on origin is not required for certain low value consignments sent by private persons following the waiver provided for under Article\n\n3.20 of the EPA, which applies to both Japanese and EU exporters. A statement on origin may apply to a single shipment or to multiple shipments of identical products for 12 months from the date it was made out. See for the latter a specific guidance document which can be found here:\n\nhttps://ec.europa.eu/taxation_customs/sites/taxation/files/eu_japan_epa_g uidance_statement_on_origin_for_multiple_shipments_of_identical_prod ucts_en.pdf\n\nSingle or\n\nmultiple\n\nconsignments\n\nThe exporter can be any person (such as a producer or a trading company) making out the statement on origin involved in the exportation of the product, as long as this person fulfils the obligations under the EPA. It is not necessary that the exporter lodg es the customs export declaration in respect of the products.\n\nWho can act as\n\nan exporter?"
+        },
+        {
+         "source": "japan/chapter3_rules_of_origin.md",
+         "section": "SECTION B Origin procedures › ARTICLE 3.20 Small consignments and waivers",
+         "text": "[EU-Japan Economic Partnership Agreement: Chapter 3: Rules of origin and origin procedures › SECTION B Origin procedures › ARTICLE 3.20 Small consignments and waivers]\n(b) for Japan, 100,000 yen or such amount as Japan may establish.\n\n3. Each Party may provide that the basis for the claim as referred to in paragraph 2 of Article 3.16 shall not be required for an importation of a product for which the importing Party has waived the requirements."
+        },
+        {
+         "source": "guides/japan_statements_on_origin.pdf",
+         "section": "3. What is the",
+         "text": "[European Commission, EU-Japan EPA: Guidance on statements on origin › 3. What is the]\n3. What is the\n\n“any other\n\ncommercial\n\ndocument” on\n\nwhich the text\n\nof the\n\nStatement on\n\nOrigin is made\n\nout?\n\nANNEX 1\n\n“(3) Actions by the EU and Japan” of the Conclusions of the Committee on Rules of Origin and Customs -Related Matters of the EU -Japan EPA on the Actions to be Implemented by the Customs Authorities of Both Parties Relating to Certain Origin Procedures of 26 June 2019 at Brussels states that: ・ Based on the ongoing joint work between the EU and Japan to support the implementation of the Agreement, both Japan Customs and DG TAXUD will respectively issue guidance/ guidelines, or revise the existing guidance/guidelines, concerning the issues identified in point 3 of Appendix I and point 3 of Appendix II.\n\nTo implement this commitment, both Japan Customs and DG TAXUD agree on the following text, and will publish it as part of their respective relevant Guidance/ Guidelines:\n\nLegal context\n\n1. A statement on origin:\n\na) is a text by which the exporter states the originating status o f a product. This text is in Annex 3-D of the EPA;\n\nb) is made out by an exporter of an originating product;\n\nc) shall be made out on an invoice or on any other commercial document that describes the originating product in sufficient detail to enable its identification.\n\n2. The exporter:\n\na) is a person located either in the EU or in Japan, and fulfils the legal obligations established in that Party;"
+        },
+        {
+         "source": "guides/japan_statements_on_origin.pdf",
+         "section": "ANNEX 3-D TEXT OF THE STATEMENT ON ORIGIN",
+         "text": "[European Commission, EU-Japan EPA: Guidance on statements on origin › ANNEX 3-D TEXT OF THE STATEMENT ON ORIGIN]\n...……………………………………………………………………........................……… (Printed name of the exporter)\n\n...……………………………………………………………………............................…… 1 If the statement on origin is completed for multiple shipments of identical originating products within the meaning of subparagraph 5 (b) of Article 3.17, indicate the period for which the statement on origin will apply. That period shall not exceed 12 months. All importations of the product must occur within the period indicated. Where a period is not applicable, the field can be left blank. 2 Indicate the reference number through which the exporter is identified. For the European Union exporter, this will be the number assigned in a ccordance with the laws and regulations of the European Union. For the Japanese exporter, this will be the Japan Corporate Number. Where the exporter has not been assigned a number, this field may be left blank.\n\n3 Indicate the origin of the product; the European Union. or Japan 4 Indicate, depending on the case, one or more of the following codes: “A” product referred to in subparagraph 1(a) of Article 3.2 “B” product referred to in subparagraph 1(b) of Article 3.2 “C” product referred to in subparagraph 1(c) of Article 3.2 , with the following additional information on the type of PSR actually applied to the product: “1” for a change of tariff classification rule\n\n“2” for a for a maximum value of non -originating materials or a minimum regional value content rule;"
+        }
+       ]
+      }
+     ],
+     "unsupported_numbers": [],
+     "statement": {}
+    },
+    "correct": true
+   },
+   {
+    "id": "kn-06",
+    "category": "conocimiento",
+    "repeat": 1,
+    "final_answer": "## Resumen\n\n**Sí, las lavadoras (SA 8450.11) son originarias según el TCA.** Cumplen el criterio **MAXNOM 50 % EXW**.\n\nAdemás, una **declaración del proveedor de larga duración** puede cubrir, como máximo, un periodo de **dos años** desde la fecha de su emisión.\n\n---\n\n## Detalle por acuerdo\n\n### TCA (Acuerdo de Comercio y Cooperación UE-Reino Unido)\n\n*   **Veredicto:** Originarias.\n*   **Regla aplicada:** CTH o MAXNOM 50 % EXW.\n*   **Criterio cumplido:** MAXNOM 50 % EXW.\n*   **Materiales no originarios:**\n    *   Módulo de control (8537.10) de China: 60,00 € (tercer país).\n    *   Bomba de desagüe (8413.81) de China: 18,00 € (tercer país).\n    *   Tambor y partes (8450.90) de Turquía: 95,00 € (tercer país).\n    *   **Valor total no originario:** 173,00 €.\n    *   **Porcentaje no originario:** 42,2 % (inferior al umbral del 50 %).\n*   **Materiales originarios:**\n    *   Motor eléctrico (8501.40) de la UE: 75,00 €.\n*   **Avisos:**\n    *   *material_misma_partida:* Un material no originario tiene la misma partida (4 dígitos) que el producto, por lo que no cambia de partida.\n    *   *subdivision_distinta:* Un material no originario tiene la partida del producto pero otra subpartida: cambia de subpartida (CTSH) pero no de partida (CTH).\n\n---\n\n## Respuesta a la pregunta sobre la declaración del proveedor\n\n**Pregunta:** ¿Cuánto tiempo puede cubrir como máximo una declaración del proveedor de larga duración?\n\n**Respuesta:** Una declaración del proveedor de larga duración es normalmente válida por un periodo de **hasta dos años** desde la fecha de su emisión.\n\n**Fuente:**\n*   **Documento:** `tca/annex6_7_supplier_declaration_statement.md`\n*   **Sección:** ANNEX 6 SUPPLIER’S DECLARATION\n*   **Texto relevante:** \"A long-term supplier’s declaration is normally valid for a period of up to two years from the date of making out the declaration.\"",
+    "tools_worked": [
+     "evaluate_origin",
+     "get_origin_rule"
+    ],
+    "crash": null,
+    "seconds": 24.0,
+    "cost": {
+     "calls": 5.0,
+     "prompt_tokens": 8246.0,
+     "completion_tokens": 1121.0,
+     "reasoning_tokens": 0.0,
+     "seconds": 23.93575446899922
+    },
+    "cost_per_agent": {
+     "orchestrator": {
+      "calls": 1.0,
+      "prompt_tokens": 2023.0,
+      "completion_tokens": 130.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 2.6864799530012533
+     },
+     "extractor": {
+      "calls": 1.0,
+      "prompt_tokens": 1105.0,
+      "completion_tokens": 304.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 6.49073034900357
+     },
+     "origin": {
+      "calls": 1.0,
+      "prompt_tokens": 805.0,
+      "completion_tokens": 42.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 1.225745546995313
+     },
+     "knowledge": {
+      "calls": 1.0,
+      "prompt_tokens": 2103.0,
+      "completion_tokens": 67.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 1.3824909050017595
+     },
+     "writer": {
+      "calls": 1.0,
+      "prompt_tokens": 2210.0,
+      "completion_tokens": 578.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 12.150307714997325
+     }
+    },
+    "trace": {
+     "plan": {
+      "kind": "evaluate",
+      "product": "lavadoras",
+      "product_hs_code": "845011",
+      "exw_price_eur": 410.0,
+      "exw_price_currency": null,
+      "agreements": [
+       "TCA"
+      ],
+      "out_of_scope": [],
+      "statement": null,
+      "knowledge_questions": [
+       "¿Cuánto tiempo puede cubrir como máximo una declaración del proveedor de larga duración?"
+      ],
+      "missing": []
+     },
+     "materials": [
+      {
+       "name": "motor eléctrico",
+       "hs_code": "850140",
+       "country_name": "UE",
+       "country": "UE",
+       "value_eur": 75.0,
+       "supplier_declaration": true
+      },
+      {
+       "name": "módulo de control",
+       "hs_code": "853710",
+       "country_name": "China",
+       "country": "OTRO",
+       "value_eur": 60.0,
+       "supplier_declaration": false
+      },
+      {
+       "name": "bomba de desagüe",
+       "hs_code": "841381",
+       "country_name": "China",
+       "country": "OTRO",
+       "value_eur": 18.0,
+       "supplier_declaration": false
+      },
+      {
+       "name": "tambor y partes",
+       "hs_code": "845090",
+       "country_name": "Turquía",
+       "country": "OTRO",
+       "value_eur": 95.0,
+       "supplier_declaration": false
+      }
+     ],
+     "materials_missing": [],
+     "conversions": [],
+     "evaluations": {
+      "TCA": {
+       "evaluation_id": "EV-ECB3D5",
+       "originating": true,
+       "criterion": "MAXNOM",
+       "criteria_met": [
+        "MAXNOM"
+       ],
+       "non_originating_value_eur": 173.0,
+       "pct_non_originating": 42.2,
+       "tolerance_pct": 10,
+       "warnings": [
+        "material_misma_partida",
+        "subdivision_distinta"
+       ],
+       "trace": [
+        "motor eléctrico [850140] 75.00: originario",
+        "módulo de control [853710] 60.00: no originario (tercer país)",
+        "bomba de desagüe [841381] 18.00: no originario (tercer país)",
+        "tambor y partes [845090] 95.00: no originario (tercer país)",
+        "CTH: no cumple",
+        "MAXNOM: cumple"
+       ],
+       "rule_applied": "CTH or MAXNOM 50 % EXW",
+       "not_checked": []
+      }
+     },
+     "issues": [],
+     "attempts": 1,
+     "knowledge": [
+      {
+       "question": "¿Cuánto tiempo puede cubrir como máximo una declaración del proveedor de larga duración?",
+       "status": "answered",
+       "answer": "A long-term supplier's declaration is normally valid for a period of up to two years from the date of making out the declaration, as stated in Annex 6, point 3 of the TCA.",
+       "cited": [
+        1
+       ],
+       "passages": [
+        {
+         "source": "tca/annex6_7_supplier_declaration_statement.md",
+         "section": "ANNEX 6 SUPPLIER’S DECLARATION",
+         "text": "[EU-UK Trade and Cooperation Agreement: Annexes 6 and 7: Supplier's declaration and text of the statement on origin › ANNEX 6 SUPPLIER’S DECLARATION]\nANNEX 6\n\nSUPPLIER’S DECLARATION\n\n1. A supplier’s declaration shall have the content set out in this Annex.\n\n2. Except in the cases referred to in point 3, a supplier’s declaration shall be made out by the supplier for each consignment of products in the form provided for in Appendix 6-A and annexed to the invoice, or to any other document describing the products concerned in sufficient detail to enable them to be identified.\n\n3. Where a supplier regularly supplies a particular customer with products for which the production carried out in a Party is expected to remain constant for a period of time, that supplier may provide a single supplier’s declaration to cover subsequent consignments of those products (the \"long-term supplier’s declaration\"). A long-term supplier’s declaration is normally valid for a period of up to two years from the date of making out the declaration. The customs authorities of the Party where the declaration is made out may lay down the conditions under which longer periods may be used. The long-term supplier’s declaration shall be made out by the supplier in the form provided for in Appendix 6-B and shall describe the products concerned in sufficient detail to enable them to be identified. The supplier shall inform the customer immediately if the long-term supplier’s declaration ceases to apply to the products supplied."
+        },
+        {
+         "source": "guides/tca_origin_questions_answers.pdf",
+         "section": "Questions II.2. Long-term supplier’s declarations",
+         "text": "[European Commission, EU-UK Trade and Cooperation Agreement: compendium of questions and answers on rules of origin › Questions II.2. Long-term supplier’s declarations]\nQuestions II.2. Long-term supplier’s declarations\n\n19. Question: Scope of application of Commission Regulation (EU) 2020/2254 : Does this point also cover long-term supplier’s declarations according to Article 62 UCC-IA?\n\nAnswer: Both recital (4) and the introductory phrase of Article 1 of Commission Implementing Regulation (EU) 2020/2254 of 29 December 2020 on the making out of statements on origin on the basis of supplier’s declarations for preferential exports to the United Kingdom during a transitory period, refer to Article 62 UCC -IA on long -term supplier’s declarations. Those declarations are therefore covered."
+        },
+        {
+         "source": "guides/tca_origin_questions_answers.pdf",
+         "section": "Question 27",
+         "text": "[European Commission, EU-UK Trade and Cooperation Agreement: compendium of questions and answers on rules of origin › Question 27]\nmaterials have been delivered. Insofar as long -term supplier’s declarations would be made out for such products, Article 62( 2)(b) UCC IA provides for their time coverage in the past not being more than 12 months before their date of issue (making out). From the perspective of the application of the TCA and the supplier’s declaration the relevant moment is not the moment of prod uction of the goods or of the materials or when the materials were delivered in the EU but the moment in which the supplier’s declaration is made out. That moment needs to be after 1.1.2021 but the supplier’s declaration may refer to goods delivered before, provided that the supplier is able to determine the origin of those goods according to the rules of the TCA. This is without prejudice of the relationship between the suppliers and the exporter and how the making out of these supplier’s declarations may have been considered in their contracts/relationship for deliveries in 2020."
+        },
+        {
+         "source": "tca/annex6_7_supplier_declaration_statement.md",
+         "section": "Appendix 6-B LONG-TERM SUPPLIER'S DECLARATION",
+         "text": "[EU-UK Trade and Cooperation Agreement: Annexes 6 and 7: Supplier's declaration and text of the statement on origin › Appendix 6-B LONG-TERM SUPPLIER'S DECLARATION]\nAppendix 6-B\n\nLONG-TERM SUPPLIER'S DECLARATION\n\nThe long-term supplier's declaration, the text of which is given below, must be made out in accordance with the footnotes. However, the footnotes do not have to be reproduced.\n\nLONG-TERM SUPPLIER'S DECLARATION\n\nI, the undersigned, the supplier of the products covered by the annexed document, which are regularly supplied to\n(4)\n…, declare that:\n\n1. The following materials which do not originate in [indicate the name of the relevant Party] have been used in [indicate the name of the relevant Party] to produce these products:\n\nDescription of the products supplied(1)\n\nDescription of non-originating materials used\n\nHS heading of non-originating materials used(2)\n\nValue of non-originating materials used(2)(3)\n\nTotal value\n\n2. All the other materials used in [indicate the name of the relevant Party] to produce those products originate in a Party [indicate the name of the relevant Party];\nThis declaration is valid for all subsequent consignments of these products dispatched\nfrom … to … (5)\n\nI undertake to inform … (4) immediately if this declaration ceases to be valid.\n… (Place and Date)\n…\n(Name and position of the undersigned, name and address of company)\n… (Signature)(6)\n\nFootnotes\n\n(1) Where the invoice or other document to which the declaration is annexed relates to different kinds of products, or to products which do not incorporate non-originating materials to the same extent, the supplier must clearly differentiate them."
+        },
+        {
+         "source": "guides/aeat_rex.pdf",
+         "section": "1. QUIÉN PUEDE HACER DECLARACIONES SOBRE EL ORIGEN",
+         "text": "[AEAT, Guía sobre el sistema de exportadores registrados (REX), mayo de 2022 › 1. QUIÉN PUEDE HACER DECLARACIONES SOBRE EL ORIGEN]\n1. QUIÉN PUEDE HACER DECLARACIONES SOBRE EL ORIGEN\n\n1. Como principio general, el exportador registrado que extienda una declaración sobre el origen debe poder declarar y probar el origen de las mercancías y responder a las solicitudes de verificación.\n\nSi el exportador registrado que extienda la declaración de origen no es el productor (por ejemplo, un comerciante), deberá tener en su poder todos los documentos necesarios (declaraciones del proveedor...) que le permitan declarar y probar el origen de las mercancías, y responder a las solicitudes de verificación.\n\n2. En el SPG, un exportador registrado podrá extender declaraciones sobre el origen cuando esté registrado, es decir, después de que se le informe sobre su número REX y la fecha a partir de la cual el registro es válido de conformidad con el artículo 79, apar tado 3, del Reglamento de Ejecución (UE) 2015/2447 de la Comisión.Si se aplica la acumulación regional, el exportador (registrado) del país beneficiario de exportación a la Unión extenderá la declaración sobre el origen, de conformidad con el artículo 92, apartado 1, del Reglamento de Ejecución (UE) 2015/2447 de la Comisión.\n\n3. Si el valor de los productos originarios del envío es inferior al umbral de valor, cualquier exportador, registrado o no registrado, extenderá una declaración sobre el origen."
+        }
+       ]
+      }
+     ],
+     "unsupported_numbers": [],
+     "statement": {}
+    },
+    "correct": true
+   },
+   {
+    "id": "kn-01",
+    "category": "conocimiento",
+    "repeat": 2,
+    "final_answer": "## Resumen\n\nBajo el **Acuerdo de Comercio y Cooperación UE-Reino Unido (TCA)**, una declaración de origen es válida durante **12 meses** desde la fecha en que se emite, o durante un período más largo, **hasta un máximo de 24 meses**, si así lo establece la Parte importadora (Artículo 56).\n\n## Detalle\n\n- **Vigencia general:** 12 meses desde la fecha de emisión.\n- **Vigencia extendida:** Hasta 24 meses, si la Parte importadora lo prevé.\n- **Aplicación a múltiples envíos:** La declaración puede aplicarse a múltiples envíos de productos idénticos importados dentro del período especificado en la declaración, que no debe exceder los 12 meses.\n\n**Fuentes:**\n- *tca/rules_of_origin.md*, SECTION 2 ORIGIN PROCEDURES › Article 56 Statement on origin.\n- *guides/tca_origin_questions_answers.pdf*, Question 34.\n- *guides/tca_origin_questions_answers.pdf*, Question 33.",
+    "tools_worked": [],
+    "crash": null,
+    "seconds": 14.3,
+    "cost": {
+     "calls": 3.0,
+     "prompt_tokens": 5478.0,
+     "completion_tokens": 437.0,
+     "reasoning_tokens": 0.0,
+     "seconds": 14.28071438401821
+    },
+    "cost_per_agent": {
+     "orchestrator": {
+      "calls": 1.0,
+      "prompt_tokens": 1903.0,
+      "completion_tokens": 117.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 3.06258173500828
+     },
+     "knowledge": {
+      "calls": 1.0,
+      "prompt_tokens": 1726.0,
+      "completion_tokens": 88.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 3.6345224950055126
+     },
+     "writer": {
+      "calls": 1.0,
+      "prompt_tokens": 1849.0,
+      "completion_tokens": 232.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 7.583610154004418
+     }
+    },
+    "trace": {
+     "plan": {
+      "kind": "knowledge",
+      "product": null,
+      "product_hs_code": null,
+      "exw_price_eur": null,
+      "exw_price_currency": null,
+      "agreements": [
+       "TCA"
+      ],
+      "out_of_scope": [],
+      "statement": null,
+      "knowledge_questions": [
+       "How long is a statement on origin valid under the EU-UK Trade and Cooperation Agreement?"
+      ],
+      "missing": []
+     },
+     "materials": [],
+     "materials_missing": [],
+     "conversions": [],
+     "evaluations": {},
+     "issues": [],
+     "attempts": 1,
+     "knowledge": [
+      {
+       "question": "How long is a statement on origin valid under the EU-UK Trade and Cooperation Agreement?",
+       "status": "answered",
+       "answer": "A statement on origin is valid for 12 months from the date it was made out, or for a longer period up to a maximum of 24 months as provided by the Party of import (Article 56).",
+       "cited": [
+        2,
+        3,
+        4
+       ],
+       "passages": [
+        {
+         "source": "tca/annex6_7_supplier_declaration_statement.md",
+         "section": "ANNEX 7 TEXT OF THE STATEMENT ON ORIGIN",
+         "text": "[EU-UK Trade and Cooperation Agreement: Annexes 6 and 7: Supplier's declaration and text of the statement on origin › ANNEX 7 TEXT OF THE STATEMENT ON ORIGIN]\n…(4)\n\n(Place and date)\n\n…\n\n(Name of the exporter)\n\n(1) If the statement on origin is completed for multiple shipments of identical originating products within the meaning of point (b) of Article 56(4) of this Agreement, indicate the period for which the statement on origin is to apply. That period shall not exceed 12 months. All importations of the product must occur within the period indicated. If a period is not applicable, the field may be left blank.\n\n(2) Indicate the reference number by which the exporter is identified. For the Union exporter, this will be the number assigned in accordance with the laws and regulations of the Union. For the United Kingdom exporter, this will be the number assigned in accordance with the laws and regulations applicable within the United Kingdom. Where the exporter has not been assigned a number, this field may be left blank.\n\n(3) Indicate the origin of the product: the United Kingdom or the Union.\n\n(4) Place and date may be omitted if the information is contained on the document itself."
+        },
+        {
+         "source": "tca/rules_of_origin.md",
+         "section": "SECTION 2 ORIGIN PROCEDURES › Article 56 Statement on origin",
+         "text": "[EU-UK Trade and Cooperation Agreement: Part Two, Heading One, Title I, Chapter 2: Rules of origin › SECTION 2 ORIGIN PROCEDURES › Article 56 Statement on origin]\nArticle 56\n\nStatement on origin\n\n1. A statement on origin shall be made out by an exporter of a product on the basis of information demonstrating that the product is originating, including, information on the originating status of materials used in the production of the product. The exporter shall be responsible for the correctness of the statement on origin and the information provided.\n\n2. A statement on origin shall be made out using one of the language versions set out in Annex 7 in an invoice or on any other document that describes the originating product in sufficient detail to enable the identification of that product. The exporter shall be responsible for providing sufficient detail to allow the identification of the originating product. The importing Party shall not require the importer to submit a translation of the statement on origin.\n\n3. A statement on origin shall be valid for 12 months from the date it was made out or for such longer period as provided by the Party of import up to a maximum of 24 months.\n\n4. A statement on origin may apply to:\n\n(a) a single shipment of one or more products imported into a Party; or\n\n(b) multiple shipments of identical products imported into a Party within the period specified in the statement on origin, which shall not exceed 12 months."
+        },
+        {
+         "source": "guides/tca_origin_questions_answers.pdf",
+         "section": "Question 34",
+         "text": "[European Commission, EU-UK Trade and Cooperation Agreement: compendium of questions and answers on rules of origin › Question 34]\n34. Question: May the Parties choose the validity of the statement? Why are there 2 validity periods?\n\nAnswer: The validity will be of 12 months, unless a Party decides to provide for a longer peri od (up to 24 months). The Commission is not liable to provide information on third countries policies.\n\nHowever, it appears that t he UK has decided to provide for such a longer period for imports in the UK of EU originating goods."
+        },
+        {
+         "source": "guides/tca_origin_questions_answers.pdf",
+         "section": "Question 33",
+         "text": "[European Commission, EU-UK Trade and Cooperation Agreement: compendium of questions and answers on rules of origin › Question 33]\n33. Question: In article ORIG-19 stands following: “3. A statement on origin shall be valid for 12 months from the date it was made out or for such longer period as provided by the Party of import up to a maximum of 24 months.” What is the validity period for imports into the EU?\n\nAnswer: When the EU is the importing Party , the validity period is 12 months . The Commission is not liable to provide information on third countries policies. However, it appears that for the UK as importing Party the validity is 24 months."
+        },
+        {
+         "source": "guides/tca_guide_for_traders.pdf",
+         "section": "A. Statement on origin",
+         "text": "[European Commission, EU-UK Trade and Cooperation Agreement: Guide for traders on rules of origin › A. Statement on origin]\nA. Statement on origin\n\nThe statement on origin is made out by the exporter of the goods. The TCA states that a statement on origin can be made out “in an invoice or on any other document that describes the originating product in sufficient detail to enable the identification of that product.”\n\nTherefore, any document meeting that condition is acceptable to make out a statement on origin. It is up to the exporter to make sure they themselves are in possession of the necessary information to make out the statement on origin and to ensure that the information provided is correct. To fulfil this obligation, the exporter can make use of any relevant source of information allowing the origin of the products to be determined, such as the so-called ‘supplier’s declarations’ which provide in particular a description and the value of the non-originating materials used. For the first year of the application of the EU-UK TCA (1.1.2021 – 31.12.2021), an exceptional trade facilitation measure is in place for the provision of supplier’s declarations to EU exporters (see point 6)."
+        }
+       ]
+      }
+     ],
+     "unsupported_numbers": [],
+     "statement": {}
+    },
+    "correct": true
+   },
+   {
+    "id": "kn-02",
+    "category": "conocimiento",
+    "repeat": 2,
+    "final_answer": "## Resumen\n\nUna declaración de origen en el marco del Acuerdo de Asociación Económica UE-Japón es válida durante **12 meses** desde la fecha en que se extiende.\n\n## Detalle\n\n- **Pregunta:** ¿Durante cuánto tiempo es válida una declaración de origen en el marco del Acuerdo de Asociación Económica UE-Japón desde que se extiende?\n- **Respuesta:** La declaración de origen es válida durante 12 meses desde la fecha en que se extiende.\n- **Fuente:** *japan/chapter3_rules_of_origin.md*, sección *SECTION B Origin procedures › ARTICLE 3.17 Statement on origin* (Artículo 3.17, apartado 4).",
+    "tools_worked": [],
+    "crash": null,
+    "seconds": 11.4,
+    "cost": {
+     "calls": 3.0,
+     "prompt_tokens": 5458.0,
+     "completion_tokens": 339.0,
+     "reasoning_tokens": 0.0,
+     "seconds": 11.397294377995422
+    },
+    "cost_per_agent": {
+     "orchestrator": {
+      "calls": 1.0,
+      "prompt_tokens": 1905.0,
+      "completion_tokens": 130.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 3.540236583998194
+     },
+     "knowledge": {
+      "calls": 1.0,
+      "prompt_tokens": 2056.0,
+      "completion_tokens": 58.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 2.5907407159975264
+     },
+     "writer": {
+      "calls": 1.0,
+      "prompt_tokens": 1497.0,
+      "completion_tokens": 151.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 5.266317077999702
+     }
+    },
+    "trace": {
+     "plan": {
+      "kind": "knowledge",
+      "product": null,
+      "product_hs_code": null,
+      "exw_price_eur": null,
+      "exw_price_currency": null,
+      "agreements": [
+       "UE-JP"
+      ],
+      "out_of_scope": [],
+      "statement": null,
+      "knowledge_questions": [
+       "¿Durante cuánto tiempo es válida una declaración de origen en el marco del Acuerdo de Asociación Económica UE-Japón desde que se extiende?"
+      ],
+      "missing": []
+     },
+     "materials": [],
+     "materials_missing": [],
+     "conversions": [],
+     "evaluations": {},
+     "issues": [],
+     "attempts": 1,
+     "knowledge": [
+      {
+       "question": "¿Durante cuánto tiempo es válida una declaración de origen en el marco del Acuerdo de Asociación Económica UE-Japón desde que se extiende?",
+       "status": "answered",
+       "answer": "A statement on origin is valid for 12 months from the date it was made out, as stated in Article 3.17(4).",
+       "cited": [
+        5
+       ],
+       "passages": [
+        {
+         "source": "japan/annex3c_3d_information_statement.md",
+         "section": "ANNEX 3-D TEXT OF THE STATEMENT ON ORIGIN",
+         "text": "[EU-Japan Economic Partnership Agreement: Annexes 3-C and 3-D: Information for verification and text of the statement on origin › ANNEX 3-D TEXT OF THE STATEMENT ON ORIGIN]\n…\n\n(Plats och datum (5))\n\n…\n\n(Exportörens namn, med tryckbokstäver)\n\n…\n\n(1) If the statement on origin is completed for multiple shipments of identical originating products within the meaning of subparagraph 5(b) of Article 3.17, indicate the period for which the statement on origin will apply. That period shall not exceed 12 months. All importations of the product must occur within the period indicated. Where a period is not applicable, the field can be left blank.\n\n(2) Indicate the reference number through which the exporter is identified. For the European Union exporter, this will be the number assigned in accordance with the laws and regulations of the European Union. For the Japanese exporter, this will be the Japan Corporate Number. Where the exporter has not been assigned a number, this field may be left blank.\n\n(3) Indicate the origin of the product; the European Union or Japan.\n\n(4) Indicate, depending on the case, one or more of the following codes;\n\n‘A’\n\nfor a product referred to in subparagraph 1(a) of Article 3.2;\n\n‘B’\n\nfor a product referred to in subparagraph 1(b) of Article 3.2;\n\n‘C’\n\nfor a product referred to in subparagraph 1(c) of Article 3.2, with the following additional information on the type of product specific requirement actually applied to the product;\n\n‘1’\n\nfor a change in tariff classification rule;\n\n‘2’\n\nfor a maximum value of non-originating materials or a minimum regional value content rule;\n\n‘3’\n\nfor a specific production process rule; or"
+        },
+        {
+         "source": "guides/japan_statements_on_origin.pdf",
+         "section": "1. Legal basis",
+         "text": "[European Commission, EU-Japan EPA: Guidance on statements on origin › 1. Legal basis]\n5. A statement on origin may apply to:\n\n(a) a single shipment of one or more products into a Party; or\n\n(b) multiple shipments of identical products within any period specified in the statement on origin not exceeding 12 months."
+        },
+        {
+         "source": "guides/japan_statements_on_origin.pdf",
+         "section": "2. Guidance1",
+         "text": "[European Commission, EU-Japan EPA: Guidance on statements on origin › 2. Guidance1]\nthe statement\n\nA statement on origin shall be valid for 12 months from the date it was made out.\n\nThe date at which the statement on origin is made out is indicated in the statement but may be omitted if the date is included on the document itself (e.g. the invoice date).\n\nThe statement on origin must be valid at the time when the claim for preferential tariff treatme nt is made. This can be the time at which the import declaration in respect of the originating products is accepted by the Validity\n\nperiod of the\n\nstatement on\n\norigin\n\ncustoms, or in the EU at which an application for repayment or re mission of customs duties is submitted.\n\nA statement on origin may be made out at any time, so before, when or after the products to which it relates are exported. It can of course, only be used as the basis of a claim for preferential tariff treatment during its validity period.\n\nRetrospective\n\nmaking out of\n\na statement on\n\norigin\n\nThe issue of a replacement of the statement on origin issued in the context of the EU -Japan EPA for sending products elsewhere in the EU is an internal matter for the EU and therefore provided for (only) in Article 69 UCC-IA.\n\nReplacement\n\nstatement on\n\norigin"
+        },
+        {
+         "source": "guides/japan_statements_on_origin.pdf",
+         "section": "ANNEX 3-D TEXT OF THE STATEMENT ON ORIGIN",
+         "text": "[European Commission, EU-Japan EPA: Guidance on statements on origin › ANNEX 3-D TEXT OF THE STATEMENT ON ORIGIN]\n...……………………………………………………………………........................……… (Printed name of the exporter)\n\n...……………………………………………………………………............................…… 1 If the statement on origin is completed for multiple shipments of identical originating products within the meaning of subparagraph 5 (b) of Article 3.17, indicate the period for which the statement on origin will apply. That period shall not exceed 12 months. All importations of the product must occur within the period indicated. Where a period is not applicable, the field can be left blank. 2 Indicate the reference number through which the exporter is identified. For the European Union exporter, this will be the number assigned in a ccordance with the laws and regulations of the European Union. For the Japanese exporter, this will be the Japan Corporate Number. Where the exporter has not been assigned a number, this field may be left blank.\n\n3 Indicate the origin of the product; the European Union. or Japan 4 Indicate, depending on the case, one or more of the following codes: “A” product referred to in subparagraph 1(a) of Article 3.2 “B” product referred to in subparagraph 1(b) of Article 3.2 “C” product referred to in subparagraph 1(c) of Article 3.2 , with the following additional information on the type of PSR actually applied to the product: “1” for a change of tariff classification rule\n\n“2” for a for a maximum value of non -originating materials or a minimum regional value content rule;"
+        },
+        {
+         "source": "japan/chapter3_rules_of_origin.md",
+         "section": "SECTION B Origin procedures › ARTICLE 3.17 Statement on origin",
+         "text": "[EU-Japan Economic Partnership Agreement: Chapter 3: Rules of origin and origin procedures › SECTION B Origin procedures › ARTICLE 3.17 Statement on origin]\nARTICLE 3.17\n\nStatement on origin\n\n1. A statement on origin may be made out by an exporter of a product on the basis of information demonstrating that the product is originating, including information on the originating status of materials used in the production of the product. The exporter is responsible for the correctness of the statement on origin and of the information provided.\n\n2. A statement on origin shall be made out using one of the linguistic versions of the text set out in Annex 3-D on an invoice or on any other commercial document that describes the originating product in sufficient detail to enable its identification. The importing Party shall not require the importer to submit a translation of the statement on origin.\n\n3. The customs authority of the importing Party shall not reject a claim for preferential tariff treatment due to minor errors or discrepancies in the statement on origin or for the sole reason that an invoice was issued in a third country.\n\n4. A statement on origin shall be valid for 12 months from the date it was made out.\n\n5. A statement on origin may apply to:\n\n(a) a single shipment of one or more products imported into a Party; or\n\n(b) multiple shipments of identical products imported into a Party within any period specified in the statement on origin not exceeding 12 months."
+        }
+       ]
+      }
+     ],
+     "unsupported_numbers": [],
+     "statement": {}
+    },
+    "correct": true
+   },
+   {
+    "id": "kn-03",
+    "category": "conocimiento",
+    "repeat": 2,
+    "final_answer": "## Resumen\n\nBajo el Acuerdo de Libre Comercio UE-Corea (UE-KR), las copias de las declaraciones de origen deben conservarse durante **cinco años**.\n\n## Detalle\n\n- **Pregunta:** ¿Cuánto tiempo deben conservarse las copias de las declaraciones de origen para exportaciones a Corea del Sur?\n- **Respuesta:** Cinco años.\n- **Base:** Artículo 23.1 del Protocolo de origen del Acuerdo UE-KR, que establece que el exportador que emite una declaración de origen debe conservar durante cinco años una copia de dicha declaración, así como los documentos a que se refiere el Artículo 16.3.\n\n**Fuente:** `korea/protocol_rules_of_origin.md`, sección *TITLE V Proof of origin › Article 23 Preservation of proof of origin and supporting documents*.",
+    "tools_worked": [],
+    "crash": null,
+    "seconds": 10.2,
+    "cost": {
+     "calls": 3.0,
+     "prompt_tokens": 5227.0,
+     "completion_tokens": 356.0,
+     "reasoning_tokens": 0.0,
+     "seconds": 10.117277952012955
+    },
+    "cost_per_agent": {
+     "orchestrator": {
+      "calls": 1.0,
+      "prompt_tokens": 1905.0,
+      "completion_tokens": 122.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 3.3963944249990163
+     },
+     "knowledge": {
+      "calls": 1.0,
+      "prompt_tokens": 1955.0,
+      "completion_tokens": 57.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 1.934295151004335
+     },
+     "writer": {
+      "calls": 1.0,
+      "prompt_tokens": 1367.0,
+      "completion_tokens": 177.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 4.786588376009604
+     }
+    },
+    "trace": {
+     "plan": {
+      "kind": "knowledge",
+      "product": null,
+      "product_hs_code": null,
+      "exw_price_eur": null,
+      "exw_price_currency": null,
+      "agreements": [
+       "UE-KR"
+      ],
+      "out_of_scope": [],
+      "statement": null,
+      "knowledge_questions": [
+       "How long must copies of origin declarations for exports to South Korea be kept under the EU-Korea FTA?"
+      ],
+      "missing": []
+     },
+     "materials": [],
+     "materials_missing": [],
+     "conversions": [],
+     "evaluations": {},
+     "issues": [],
+     "attempts": 1,
+     "knowledge": [
+      {
+       "question": "How long must copies of origin declarations for exports to South Korea be kept under the EU-Korea FTA?",
+       "status": "answered",
+       "answer": "Copies of origin declarations must be kept for five years, as stated in Article 23.1 of the EU-Korea FTA origin protocol.",
+       "cited": [
+        1
+       ],
+       "passages": [
+        {
+         "source": "korea/protocol_rules_of_origin.md",
+         "section": "TITLE V Proof of origin › Article 23 Preservation of proof of origin and supporting documents",
+         "text": "[EU-Korea Free Trade Agreement, Protocol concerning the definition of 'originating products' and methods of administrative cooperation: Protocol on origin, Titles I to VIII and Annex I (introductory notes) › TITLE V Proof of origin › Article 23 Preservation of proof of origin and supporting documents]\nArticle 23\n\nPreservation of proof of origin and supporting documents\n\n1. The exporter making out an origin declaration shall keep for five years a copy of this origin declaration as well as the documents referred to in Article 16.3.\n\n2. The importer shall keep all records related to the importation in accordance with laws and regulations of the importing Party.\n\n3. The customs authorities of the importing Party shall keep for five years the origin declarations submitted to them.\n\n4. The records to be kept in accordance with paragraphs 1 through 3 may include electronic records."
+        },
+        {
+         "source": "guides/guidance_preferential_origin_2025.pdf",
+         "section": "i. Government certificates",
+         "text": "[European Commission, Guidance on preferential rules of origin (March 2025) › i. Government certificates]\n• If a Contracting Party to the PEM Convention does not yet apply the PEM Convention, , the concerned Article of the Free Trade Agreement applies, e.g. Article 22 of Protocol No. 4 between the EU and Morocco\n\n• Article 15 of the origin protocol of the EU -Korea FTA (text of the origin declaration: Annex III of the Origin protocol)\n\nUnlike other FTAs, under the EU - Korea FTA it is not possible to use government certificates, the only applicable document on origin is the origin declaration. If the total value of the consignment of originating products (based on the ex -works price) exceeds EUR 6 000, the origin declaration has to be made out by Approved Exporters. For detailed information on Approved Exporters see:\n\nhttps://ec.europa.eu/taxation_customs/system/files/2019-02/guidance-on-approvedexporters.pdf\n\nIn trade with the Contracting Parties to the PEM Convention, under the same circumstances in which the movement certificate EUR-MED or EUR.1 is used, the invoice or origin declaration EUR-MED may be required instead of the invoice or origin declaration until the end of 2025. For further details, see the PanEuroMed Handbook (https://taxation customs.ec.europa.eu/document/download/4d27b1c7-511d-480f-be4eba3a67265d39_en?filename=handbook_en.pdf):\n\nRegistered Exporter\n\nLegal reference - examples\n\n• Articles 18 and 19 of the EU-Canada CETA origin protocol - (text of the origin declaration: Annex 2 of the EU-Canada CETA origin protocol)"
+        },
+        {
+         "source": "korea/protocol_rules_of_origin.md",
+         "section": "TITLE V Proof of origin › Article 16 Conditions for making out an origin declaration",
+         "text": "[EU-Korea Free Trade Agreement, Protocol concerning the definition of 'originating products' and methods of administrative cooperation: Protocol on origin, Titles I to VIII and Annex I (introductory notes) › TITLE V Proof of origin › Article 16 Conditions for making out an origin declaration]\nArticle 16\n\nConditions for making out an origin declaration\n\n1. An origin declaration as referred to in Article 15.1 of this Protocol may be made out:\n\n(a) by an approved exporter within the meaning of Article 17; or\n\n(b) by any exporter for any consignment consisting of one or more packages containing originating products whose total value does not exceed 6000 euros.\n\n2. Without prejudice to paragraph 3, an origin declaration may be made out if the products concerned can be considered as products originating in the EU Party or in Korea and fulfil the other requirements of this Protocol.\n\n3. The exporter making out an origin declaration shall be prepared to submit at any time, at the request of the customs authorities of the exporting Party, all appropriate documents proving the originating status of the products concerned including statements from the suppliers or producers in accordance with domestic legislation as well as the fulfilment of the other requirements of this Protocol.\n\n4. An origin declaration shall be made out by the exporter by typing, stamping or printing on the invoice, the delivery note or another commercial document, the text which appears in Annex III, using one of the linguistic versions set out in that Annex and in accordance with the legislation of the exporting Party. If the declaration is handwritten, it shall be written in ink in capital characters."
+        },
+        {
+         "source": "korea/protocol_rules_of_origin.md",
+         "section": "TITLE V Proof of origin",
+         "text": "[EU-Korea Free Trade Agreement, Protocol concerning the definition of 'originating products' and methods of administrative cooperation: Protocol on origin, Titles I to VIII and Annex I (introductory notes) › TITLE V Proof of origin]\nTITLE V\n\nProof of origin\n\nArticle 15\n\nGeneral requirements\n\n1. Products originating in the EU Party shall, on importation into Korea and products originating in Korea shall, on importation into the EU Party benefit from preferential tariff treatment of this Agreement on the basis of a declaration, subsequently referred to as the \"origin declaration\", given by the exporter on an invoice, a delivery note or any other commercial document which describes the products concerned in sufficient detail to enable them to be identified. The texts of the origin declarations appear in Annex III.\n\n2. Notwithstanding paragraph 1, originating products within the meaning of this Protocol shall, in the cases specified in Article 21, benefit from preferential tariff treatment of this Agreement without it being necessary to submit any of the documents referred to in paragraph 1."
+        },
+        {
+         "source": "korea/protocol_rules_of_origin.md",
+         "section": "TITLE V Proof of origin › Article 16 Conditions for making out an origin declaration",
+         "text": "[EU-Korea Free Trade Agreement, Protocol concerning the definition of 'originating products' and methods of administrative cooperation: Protocol on origin, Titles I to VIII and Annex I (introductory notes) › TITLE V Proof of origin › Article 16 Conditions for making out an origin declaration]\n5. Origin declarations shall bear the original signature of the exporter in manuscript. However, an approved exporter within the meaning of Article 17 shall not be required to sign such declarations provided that he gives the customs authorities of the exporting Party a written undertaking that he accepts full responsibility for any origin declaration which identifies him as if it had been signed in manuscript by him.\n\n6. An origin declaration may be made out by the exporter when the products to which it relates are exported, or after exportation on condition that it is presented in the importing Party no longer than two years or the period specified in the legislation of the importing Party after the importation of the products to which it relates."
+        }
+       ]
+      }
+     ],
+     "unsupported_numbers": [],
+     "statement": {}
+    },
+    "correct": true
+   },
+   {
+    "id": "kn-04",
+    "category": "conocimiento",
+    "repeat": 2,
+    "final_answer": "## Resumen\n\n**No, el número REX no caduca ni es necesario renovarlo.**\n\n## Detalle\n\nSegún la base de conocimiento, la validez de un número de registro REX no está limitada en el tiempo. Además, no es necesario actualizar el registro cuando un nuevo acuerdo comercial preferencial aplica el sistema REX, ya que el registro es automáticamente válido para todos los marcos jurídicos donde se utiliza este sistema.\n\n**Fuentes:**\n- *AEAT, Guía sobre el sistema de exportadores registrados (REX), mayo de 2022*, sección **4. VALIDEZ DEL REGISTRO** (párrafo 1: \"La validez de un número de registro no está limitada en el tiempo\").\n- *AEAT, Guía sobre el sistema de exportadores registrados (REX), mayo de 2022*, sección **1. MODIFICACIÓN DEL REGISTRO DE UN EXPORTADOR** (párrafo 4: \"no es necesario actualizar el registro cuando un nuevo acuerdo comercial preferencial aplica el sistema REX\").",
+    "tools_worked": [],
+    "crash": null,
+    "seconds": 12.3,
+    "cost": {
+     "calls": 3.0,
+     "prompt_tokens": 5722.0,
+     "completion_tokens": 431.0,
+     "reasoning_tokens": 0.0,
+     "seconds": 12.218854256992927
+    },
+    "cost_per_agent": {
+     "orchestrator": {
+      "calls": 1.0,
+      "prompt_tokens": 1902.0,
+      "completion_tokens": 106.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 4.538202673997148
+     },
+     "knowledge": {
+      "calls": 1.0,
+      "prompt_tokens": 2075.0,
+      "completion_tokens": 96.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 2.418307845000527
+     },
+     "writer": {
+      "calls": 1.0,
+      "prompt_tokens": 1745.0,
+      "completion_tokens": 229.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 5.262343737995252
+     }
+    },
+    "trace": {
+     "plan": {
+      "kind": "knowledge",
+      "product": null,
+      "product_hs_code": null,
+      "exw_price_eur": null,
+      "exw_price_currency": null,
+      "agreements": [],
+      "out_of_scope": [],
+      "statement": null,
+      "knowledge_questions": [
+       "¿El número REX de exportador caduca o es necesario renovarlo?"
+      ],
+      "missing": []
+     },
+     "materials": [],
+     "materials_missing": [],
+     "conversions": [],
+     "evaluations": {},
+     "issues": [],
+     "attempts": 1,
+     "knowledge": [
+      {
+       "question": "¿El número REX de exportador caduca o es necesario renovarlo?",
+       "status": "answered",
+       "answer": "No, el número REX no caduca ni es necesario renovarlo. Según la sección 4.1, la validez de un número de registro no está limitada en el tiempo. Además, la sección 4.3 indica que no es necesario actualizar el registro cuando un nuevo acuerdo comercial preferencial aplica el sistema REX.",
+       "cited": [
+        1,
+        3
+       ],
+       "passages": [
+        {
+         "source": "guides/aeat_rex.pdf",
+         "section": "4. VALIDEZ DEL REGISTRO",
+         "text": "[AEAT, Guía sobre el sistema de exportadores registrados (REX), mayo de 2022 › 4. VALIDEZ DEL REGISTRO]\n4. VALIDEZ DEL REGISTRO\n\n1. La validez de un número de registro no está limitada en el tiempo.\n\n2. Si se revoca un registro, las autoridades competentes que llevan a cabo la revocación facilitarán una fecha a partir de la cual la revocación surtirá efecto. En este caso, el registro tendrá una validez limitada hasta la fecha a partir de la cual la revocación surta efecto.\n\n3. Un exportador registrad o en la Unión podrá utilizar su número de registro en el contexto de todos los acuerdos comerciales preferenciales en los que el sistema de certificación de origen aplicado sea el sistema REX. De hecho, los datos de registro son generales y no están relaci onados con ningún elemento específico de los acuerdos comerciales preferenciales (es decir, no hay ningún vínculo con las normas específicas de origen de los acuerdos en el formulario de solicitud).\n\n4. Suiza, Noruega y Turquía también están aplicando el sistema REX en el contexto de sus respectivos SPG. Por lo tanto, un exportador de un país beneficiario del SPG solo se registrará una vez, para todas sus exportaciones a la UE, a Noruega, a Suiza o a Turquía, en virtud de la preferencia arancelaria del SPG.\n\n5. Un exportador de un PTU, que también se beneficia de los regímenes SPG o Noruega o Suiza, utilizará el mismo número REX cuando exporte a la UE con arreglo a la preferencia arancelaria OAD o a Noruega o Suiza el SPG tarifa la preferencia.\n\nModificación y revocación del registro de un exportador"
+        },
+        {
+         "source": "guides/aeat_rex.pdf",
+         "section": "2. REVOCACIÓN DEL REGISTRO DE UN EXPORTADOR",
+         "text": "[AEAT, Guía sobre el sistema de exportadores registrados (REX), mayo de 2022 › 2. REVOCACIÓN DEL REGISTRO DE UN EXPORTADOR]\n2. REVOCACIÓN DEL REGISTRO DE UN EXPORTADOR\n\n1. El exportador registrado pedirá en persona que se retire del sistema REX en los siguientes casos:\n\na. no cumple con las condiciones requeridas por el sistema REX b. ya no tiene la intención de utilizar su número de registro. c. la empresa cesa sus operaciones\n\nEn la UE, debe presentarse una solicitud de revocación de un registro desde el portal REX Trader.\n\n2. Cuando controlen a un exportador registrado, si las autoridades competentes descubren que el exportador registrado ha elaborado de forma intencionada o negligente, o ha hecho que se elabore una declaración de origen que contenga información incorrecta, las autoridades competentes revocarán al exportador\n\nregistrado.\n\n3. Al supervisar a un exportador registrado, si las autoridades competentes descubren que el exportador registrado ya no existe, las autoridades competentes revocarán al exportador registrado.\n\n4. Al supervisar a un exportador registrado, si las autoridades competentes descubren que el exportador registrado ya no cumple las condiciones exigidas por el sistema REX (por ejemplo, no ha mantenido sus datos actualizados y esta deficiencia s e considera grave), las autoridades competentes revocarán al exportador registrado.\n\n5. El número de registro de un exportador que haya sido revocado no debe utilizarse para nuevos registros de exportadores."
+        },
+        {
+         "source": "guides/aeat_rex.pdf",
+         "section": "1. MODIFICACIÓN DEL REGISTRO DE UN EXPORTADOR",
+         "text": "[AEAT, Guía sobre el sistema de exportadores registrados (REX), mayo de 2022 › 1. MODIFICACIÓN DEL REGISTRO DE UN EXPORTADOR]\n4. Dado que el registro es automáticamente válido para todos los marcos jurídicos en los que el sistema de certificación de origen aplicado es el sistema REX, no es necesario actualizar el registro cuando un nuevo acuerdo comercial preferencial aplica el sistema REX (véase 4.4.3)."
+        },
+        {
+         "source": "guides/aeat_rex.pdf",
+         "section": "2. INFORMACIÓN GENERAL",
+         "text": "[AEAT, Guía sobre el sistema de exportadores registrados (REX), mayo de 2022 › 2. INFORMACIÓN GENERAL]\n2. INFORMACIÓN GENERAL\n\n1. El sistema REX simplifica las formalidades de exportación permitiendo al exportador registrado para certificar el origen preferencial mediante la inclusión de una declaración específica (denominadas comunicaciones sobre el origen) en la factura u otro documento en el que se identifiquen los productos exportados. Por lo tanto, el exportador registrado no necesita solicitar cada exportación para la expedición de un certificado de origen.\n\n2. La solicitud para convertirse en exportador registrado es una formalidad única, cuando el exportador facilite a la aduana competente la informaci ón necesaria para su registro.\n\n3. Una vez asignado el número REX, el exportador registrado podrá utilizarlo para todas sus exportaciones en virtud de acuerdos preferenciales cuando el sistema de certificación de origen aplicado sea el sistema REX. No se requiere formalidad para que un exportador registrado amplíe el uso de su número REX para usarlo en el contexto de una nueva preferencia.\n\n4. La certificación de origen expedida por el exportador registrado es llamada «comunicación sobre el origen». Hay una excepci ón en el Acuerdo con Canadá (CETA) donde se utiliza el término «declaración de origen».\n\n5. Acuerdos preferenciales celebrados por la Unión Europea con terceros los países y los acuerdos autónomos aplicados por la UE se enumeran en el sitio web Europa en el siguiente enlace:"
+        },
+        {
+         "source": "guides/aeat_rex.pdf",
+         "section": "",
+         "text": "[AEAT, Guía sobre el sistema de exportadores registrados (REX), mayo de 2022]\nGUÍA DE ORIENTACIÓN SOBRE\n\nEL SISTEMA DE REGISTRO DE EXPORTADORES (REX).\n\nLa Comisión europea ha elaborado, entre otras, una guía de orientación sobre el Sistema de Exportadores Registrados (REX) que ha publicado, en la página WEB siguiente:\n\nhttps://taxation-customs.ec.europa.eu/system/files/2022- 05/Registered%20Exporter%20System%20%28REX%29%20-\n\n%20Guidance%20document.doc.pdf\n\nPor considerar de interés las explicaciones recogidas, se presenta a continuación una traducción no oficial de dicha guía de orientación sobre el Sistema de Registro de Exportadores (REX). Documento de orientación\n\nSistema de Exportador Registrado\n\n(REX)\n\nDocumento de orientación\n\nExención de responsabilidad general\n\nEstos documentos orientativos son de carácter explicativo e ilustrativo. La legislación aduanera prevalece sobre el contenido de estos documentos y debe consultarse siempre. Los textos auténticos de los actos jurídicos de la UE son los publicados en el Diario Oficial de la Unión Europea. También puede haber instrucciones nacionales. Actualización: Mayo de 2022\n\nTabla de Contenidos"
+        }
+       ]
+      }
+     ],
+     "unsupported_numbers": [],
+     "statement": {}
+    },
+    "correct": true
+   },
+   {
+    "id": "kn-05",
+    "category": "conocimiento",
+    "repeat": 2,
+    "final_answer": "## Resumen\n\n**Sí**, los hornos eléctricos (HS 8516.60) son **productos originarios** bajo el Acuerdo de Asociación Económica UE-Japón (UE-JP).\n\nEl valor máximo de un pequeño paquete que puede entrar en Japón como originario sin certificado de origen es de **100.000 yenes**.\n\n---\n\n## Detalle por acuerdo\n\n### UE-JP (Acuerdo de Asociación Económica UE-Japón)\n\n*   **Veredicto:** Originario.\n*   **Criterio cumplido:** MAXNOM 50 % EXW.\n*   **Regla aplicada:** CTH or MAXNOM 50 % EXW.\n*   **Materiales no originarios:**\n    *   Heating elements (HS 8516.80) de China: 60,00 EUR.\n    *   Control boards (HS 8537.10) de China: 85,00 EUR.\n    *   Fans (HS 8414.59) de China: 30,00 EUR.\n    *   *Total no originario:* 175,00 EUR (36,46 % del precio ex-works de 480,00 EUR).\n*   **Materiales originarios:**\n    *   Steel sheet (HS 7209.17) de la UE: 55,00 EUR.\n*   **Advertencias:**\n    *   *material_misma_partida:* Un material no originario tiene la misma partida (4 dígitos) que el producto, por lo que no cambia la partida.\n    *   *subdivision_distinta:* Un material no originario tiene la partida del producto pero otra subpartida: cambia la subpartida (CTSH) pero no la partida (CTH).\n*   **No verificado:**\n    *   RVC 55 % FOB: requiere el precio FOB en EUR (aunque se proporcionó, el sistema indica que no se verificó este criterio alternativo, posiblemente porque ya se cumplió el MAXNOM).\n\n---\n\n## Pregunta sobre paquetes pequeños\n\n**Pregunta:** ¿Cuál es el valor máximo de un pequeño paquete que puede entrar en Japón como originario sin un certificado de origen bajo el UE-JP?\n\n**Respuesta:** 100.000 yenes.\n\n**Fuentes:**\n*   *japan/chapter3_rules_of_origin.md*, sección \"SECTION B Origin procedures › ARTICLE 3.20 Small consignments and waivers\".\n*   *japan/chapter3_rules_of_origin.md*, sección \"SECTION B Origin procedures › ARTICLE 3.20 Small consignments and waivers\".",
+    "tools_worked": [
+     "evaluate_origin",
+     "get_origin_rule"
+    ],
+    "crash": null,
+    "seconds": 23.2,
+    "cost": {
+     "calls": 5.0,
+     "prompt_tokens": 8382.0,
+     "completion_tokens": 1120.0,
+     "reasoning_tokens": 0.0,
+     "seconds": 23.166561507983715
+    },
+    "cost_per_agent": {
+     "orchestrator": {
+      "calls": 1.0,
+      "prompt_tokens": 2034.0,
+      "completion_tokens": 142.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 3.313192371002515
+     },
+     "extractor": {
+      "calls": 1.0,
+      "prompt_tokens": 1116.0,
+      "completion_tokens": 293.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 6.14392763399519
+     },
+     "origin": {
+      "calls": 1.0,
+      "prompt_tokens": 817.0,
+      "completion_tokens": 44.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 0.839652936992934
+     },
+     "knowledge": {
+      "calls": 1.0,
+      "prompt_tokens": 2021.0,
+      "completion_tokens": 38.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 1.0417991549911676
+     },
+     "writer": {
+      "calls": 1.0,
+      "prompt_tokens": 2394.0,
+      "completion_tokens": 603.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 11.827989411001909
+     }
+    },
+    "trace": {
+     "plan": {
+      "kind": "evaluate",
+      "product": "electric ovens",
+      "product_hs_code": "851660",
+      "exw_price_eur": 480.0,
+      "exw_price_currency": null,
+      "agreements": [
+       "UE-JP"
+      ],
+      "out_of_scope": [],
+      "statement": null,
+      "knowledge_questions": [
+       "What is the maximum value of a small package that can enter Japan as originating without a proof of origin under the EU-Japan EPA?"
+      ],
+      "missing": []
+     },
+     "materials": [
+      {
+       "name": "heating elements",
+       "hs_code": "851680",
+       "country_name": "China",
+       "country": "OTRO",
+       "value_eur": 60.0,
+       "supplier_declaration": false
+      },
+      {
+       "name": "control boards",
+       "hs_code": "853710",
+       "country_name": "China",
+       "country": "OTRO",
+       "value_eur": 85.0,
+       "supplier_declaration": false
+      },
+      {
+       "name": "fans",
+       "hs_code": "841459",
+       "country_name": "China",
+       "country": "OTRO",
+       "value_eur": 30.0,
+       "supplier_declaration": false
+      },
+      {
+       "name": "steel sheet",
+       "hs_code": "720917",
+       "country_name": "EU",
+       "country": "UE",
+       "value_eur": 55.0,
+       "supplier_declaration": true
+      }
+     ],
+     "materials_missing": [],
+     "conversions": [],
+     "evaluations": {
+      "UE-JP": {
+       "evaluation_id": "EV-BD5982",
+       "originating": true,
+       "criterion": "MAXNOM",
+       "criteria_met": [
+        "MAXNOM"
+       ],
+       "non_originating_value_eur": 175.0,
+       "pct_non_originating": 36.46,
+       "tolerance_pct": 10,
+       "warnings": [
+        "material_misma_partida",
+        "subdivision_distinta"
+       ],
+       "trace": [
+        "heating elements [851680] 60.00: no originario (tercer país)",
+        "control boards [853710] 85.00: no originario (tercer país)",
+        "fans [841459] 30.00: no originario (tercer país)",
+        "steel sheet [720917] 55.00: originario",
+        "CTH: no cumple",
+        "MAXNOM: cumple"
+       ],
+       "rule_applied": "CTH or MAXNOM 50 % EXW",
+       "not_checked": [
+        "RVC 55 % FOB: needs fob_price_eur"
+       ]
+      }
+     },
+     "issues": [],
+     "attempts": 1,
+     "knowledge": [
+      {
+       "question": "What is the maximum value of a small package that can enter Japan as originating without a proof of origin under the EU-Japan EPA?",
+       "status": "answered",
+       "answer": "100,000 yen",
+       "cited": [
+        1,
+        3
+       ],
+       "passages": [
+        {
+         "source": "japan/chapter3_rules_of_origin.md",
+         "section": "SECTION B Origin procedures › ARTICLE 3.20 Small consignments and waivers",
+         "text": "[EU-Japan Economic Partnership Agreement: Chapter 3: Rules of origin and origin procedures › SECTION B Origin procedures › ARTICLE 3.20 Small consignments and waivers]\nARTICLE 3.20\n\nSmall consignments and waivers\n\n1. Products sent as small packages from private persons to private persons or forming part of travellers' personal luggage shall be admitted as originating products provided that such products are not imported by way of trade (13), have been declared as satisfying the requirements of this Chapter and if there is no doubt as to the veracity of such a declaration.\n\n2. Provided that the importation does not form part of importations that may reasonably be considered to have been made separately for the purpose of avoiding the requirement for a statement on origin, the total value of the products referred to in paragraph 1 shall not exceed:\n\n(a) for the European Union, 500 euros in the case of small packages or 1,200 euros in the case of products forming part of travellers' personal luggage. The amounts to be used in other currency of a Member State of the European Union shall be the equivalent in that currency of the amounts expressed in euro as at the first working day of October of each year. The amounts shall be those published for that day by the European Central Bank, unless a different amount is communicated to the European Commission by 15 October of each year, and shall apply from 1 January of the following year. The European Commission shall notify Japan of the relevant amounts.\n\n(b) for Japan, 100,000 yen or such amount as Japan may establish."
+        },
+        {
+         "source": "guides/japan_statements_on_origin.pdf",
+         "section": "2. Guidance1",
+         "text": "[European Commission, EU-Japan EPA: Guidance on statements on origin › 2. Guidance1]\nSmall errors or discrepancies in the text of the statement shall not invalidate the statement.\n\nA statement on origin is not required for certain low value consignments sent by private persons following the waiver provided for under Article\n\n3.20 of the EPA, which applies to both Japanese and EU exporters. A statement on origin may apply to a single shipment or to multiple shipments of identical products for 12 months from the date it was made out. See for the latter a specific guidance document which can be found here:\n\nhttps://ec.europa.eu/taxation_customs/sites/taxation/files/eu_japan_epa_g uidance_statement_on_origin_for_multiple_shipments_of_identical_prod ucts_en.pdf\n\nSingle or\n\nmultiple\n\nconsignments\n\nThe exporter can be any person (such as a producer or a trading company) making out the statement on origin involved in the exportation of the product, as long as this person fulfils the obligations under the EPA. It is not necessary that the exporter lodg es the customs export declaration in respect of the products.\n\nWho can act as\n\nan exporter?"
+        },
+        {
+         "source": "japan/chapter3_rules_of_origin.md",
+         "section": "SECTION B Origin procedures › ARTICLE 3.20 Small consignments and waivers",
+         "text": "[EU-Japan Economic Partnership Agreement: Chapter 3: Rules of origin and origin procedures › SECTION B Origin procedures › ARTICLE 3.20 Small consignments and waivers]\n(b) for Japan, 100,000 yen or such amount as Japan may establish.\n\n3. Each Party may provide that the basis for the claim as referred to in paragraph 2 of Article 3.16 shall not be required for an importation of a product for which the importing Party has waived the requirements."
+        },
+        {
+         "source": "guides/japan_statements_on_origin.pdf",
+         "section": "3. What is the",
+         "text": "[European Commission, EU-Japan EPA: Guidance on statements on origin › 3. What is the]\n3. What is the\n\n“any other\n\ncommercial\n\ndocument” on\n\nwhich the text\n\nof the\n\nStatement on\n\nOrigin is made\n\nout?\n\nANNEX 1\n\n“(3) Actions by the EU and Japan” of the Conclusions of the Committee on Rules of Origin and Customs -Related Matters of the EU -Japan EPA on the Actions to be Implemented by the Customs Authorities of Both Parties Relating to Certain Origin Procedures of 26 June 2019 at Brussels states that: ・ Based on the ongoing joint work between the EU and Japan to support the implementation of the Agreement, both Japan Customs and DG TAXUD will respectively issue guidance/ guidelines, or revise the existing guidance/guidelines, concerning the issues identified in point 3 of Appendix I and point 3 of Appendix II.\n\nTo implement this commitment, both Japan Customs and DG TAXUD agree on the following text, and will publish it as part of their respective relevant Guidance/ Guidelines:\n\nLegal context\n\n1. A statement on origin:\n\na) is a text by which the exporter states the originating status o f a product. This text is in Annex 3-D of the EPA;\n\nb) is made out by an exporter of an originating product;\n\nc) shall be made out on an invoice or on any other commercial document that describes the originating product in sufficient detail to enable its identification.\n\n2. The exporter:\n\na) is a person located either in the EU or in Japan, and fulfils the legal obligations established in that Party;"
+        },
+        {
+         "source": "guides/japan_statements_on_origin.pdf",
+         "section": "ANNEX 3-D TEXT OF THE STATEMENT ON ORIGIN",
+         "text": "[European Commission, EU-Japan EPA: Guidance on statements on origin › ANNEX 3-D TEXT OF THE STATEMENT ON ORIGIN]\n...……………………………………………………………………........................……… (Printed name of the exporter)\n\n...……………………………………………………………………............................…… 1 If the statement on origin is completed for multiple shipments of identical originating products within the meaning of subparagraph 5 (b) of Article 3.17, indicate the period for which the statement on origin will apply. That period shall not exceed 12 months. All importations of the product must occur within the period indicated. Where a period is not applicable, the field can be left blank. 2 Indicate the reference number through which the exporter is identified. For the European Union exporter, this will be the number assigned in a ccordance with the laws and regulations of the European Union. For the Japanese exporter, this will be the Japan Corporate Number. Where the exporter has not been assigned a number, this field may be left blank.\n\n3 Indicate the origin of the product; the European Union. or Japan 4 Indicate, depending on the case, one or more of the following codes: “A” product referred to in subparagraph 1(a) of Article 3.2 “B” product referred to in subparagraph 1(b) of Article 3.2 “C” product referred to in subparagraph 1(c) of Article 3.2 , with the following additional information on the type of PSR actually applied to the product: “1” for a change of tariff classification rule\n\n“2” for a for a maximum value of non -originating materials or a minimum regional value content rule;"
+        }
+       ]
+      }
+     ],
+     "unsupported_numbers": [],
+     "statement": {}
+    },
+    "correct": true
+   },
+   {
+    "id": "kn-06",
+    "category": "conocimiento",
+    "repeat": 2,
+    "final_answer": "## Resumen\n\n**Sí, las lavadoras (SA 8450.11) son originarias según el TCA.** Cumplen el criterio **MAXNOM 50 % EXW**.\n\nAdemás, una **declaración del proveedor de larga duración** puede cubrir, como máximo, un periodo de **dos años** desde la fecha de su emisión.\n\n---\n\n## Detalle por acuerdo\n\n### TCA (Acuerdo de Comercio y Cooperación UE-Reino Unido)\n\n*   **Veredicto:** Producto originario.\n*   **Regla aplicada:** CTH or MAXNOM 50 % EXW.\n*   **Criterio cumplido:** MAXNOM 50 % EXW.\n*   **Valor de materiales no originarios:** 173,00 € (42,2 % del precio franco fábrica de 410,00 €).\n\n**Materiales no originarios:**\n*   Módulo de control (SA 8537.10) de China: 60,00 €.\n*   Bomba de desagüe (SA 8413.81) de China: 18,00 €.\n*   Tambor y partes (SA 8450.90) de Turquía: 95,00 €.\n\n**Materiales originarios:**\n*   Motor eléctrico (SA 8501.40) de la UE: 75,00 €.\n\n**Avisos:**\n*   *material_misma_partida:* Un material no originario tiene la misma partida (4 dígitos) que el producto, por lo que no cambia de partida.\n*   *subdivision_distinta:* Un material no originario tiene la partida del producto pero otra subpartida: cambia de subpartida (CTSH) pero no de partida (CTH).\n\n---\n\n## Respuesta a la pregunta sobre la declaración del proveedor\n\n**Pregunta:** ¿Cuánto tiempo puede cubrir como máximo una declaración del proveedor de larga duración?\n\n**Respuesta:** Una declaración del proveedor de larga duración es normalmente válida por un periodo de hasta **dos años** desde la fecha de su emisión.\n\n**Fuente:**\n*   Documento: `tca/annex6_7_supplier_declaration_statement.md`\n*   Sección: ANNEX 6 SUPPLIER’S DECLARATION",
+    "tools_worked": [
+     "evaluate_origin",
+     "get_origin_rule"
+    ],
+    "crash": null,
+    "seconds": 21.6,
+    "cost": {
+     "calls": 5.0,
+     "prompt_tokens": 8246.0,
+     "completion_tokens": 1058.0,
+     "reasoning_tokens": 0.0,
+     "seconds": 21.57761040495825
+    },
+    "cost_per_agent": {
+     "orchestrator": {
+      "calls": 1.0,
+      "prompt_tokens": 2023.0,
+      "completion_tokens": 130.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 2.6057215389882913
+     },
+     "extractor": {
+      "calls": 1.0,
+      "prompt_tokens": 1105.0,
+      "completion_tokens": 304.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 6.228815144990222
+     },
+     "origin": {
+      "calls": 1.0,
+      "prompt_tokens": 805.0,
+      "completion_tokens": 42.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 0.9064356289891293
+     },
+     "knowledge": {
+      "calls": 1.0,
+      "prompt_tokens": 2103.0,
+      "completion_tokens": 67.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 1.5314286649954738
+     },
+     "writer": {
+      "calls": 1.0,
+      "prompt_tokens": 2210.0,
+      "completion_tokens": 515.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 10.305209426995134
+     }
+    },
+    "trace": {
+     "plan": {
+      "kind": "evaluate",
+      "product": "lavadoras",
+      "product_hs_code": "845011",
+      "exw_price_eur": 410.0,
+      "exw_price_currency": null,
+      "agreements": [
+       "TCA"
+      ],
+      "out_of_scope": [],
+      "statement": null,
+      "knowledge_questions": [
+       "¿Cuánto tiempo puede cubrir como máximo una declaración del proveedor de larga duración?"
+      ],
+      "missing": []
+     },
+     "materials": [
+      {
+       "name": "motor eléctrico",
+       "hs_code": "850140",
+       "country_name": "UE",
+       "country": "UE",
+       "value_eur": 75.0,
+       "supplier_declaration": true
+      },
+      {
+       "name": "módulo de control",
+       "hs_code": "853710",
+       "country_name": "China",
+       "country": "OTRO",
+       "value_eur": 60.0,
+       "supplier_declaration": false
+      },
+      {
+       "name": "bomba de desagüe",
+       "hs_code": "841381",
+       "country_name": "China",
+       "country": "OTRO",
+       "value_eur": 18.0,
+       "supplier_declaration": false
+      },
+      {
+       "name": "tambor y partes",
+       "hs_code": "845090",
+       "country_name": "Turquía",
+       "country": "OTRO",
+       "value_eur": 95.0,
+       "supplier_declaration": false
+      }
+     ],
+     "materials_missing": [],
+     "conversions": [],
+     "evaluations": {
+      "TCA": {
+       "evaluation_id": "EV-719EFD",
+       "originating": true,
+       "criterion": "MAXNOM",
+       "criteria_met": [
+        "MAXNOM"
+       ],
+       "non_originating_value_eur": 173.0,
+       "pct_non_originating": 42.2,
+       "tolerance_pct": 10,
+       "warnings": [
+        "material_misma_partida",
+        "subdivision_distinta"
+       ],
+       "trace": [
+        "motor eléctrico [850140] 75.00: originario",
+        "módulo de control [853710] 60.00: no originario (tercer país)",
+        "bomba de desagüe [841381] 18.00: no originario (tercer país)",
+        "tambor y partes [845090] 95.00: no originario (tercer país)",
+        "CTH: no cumple",
+        "MAXNOM: cumple"
+       ],
+       "rule_applied": "CTH or MAXNOM 50 % EXW",
+       "not_checked": []
+      }
+     },
+     "issues": [],
+     "attempts": 1,
+     "knowledge": [
+      {
+       "question": "¿Cuánto tiempo puede cubrir como máximo una declaración del proveedor de larga duración?",
+       "status": "answered",
+       "answer": "A long-term supplier's declaration is normally valid for a period of up to two years from the date of making out the declaration, as stated in Annex 6, point 3 of the TCA.",
+       "cited": [
+        1
+       ],
+       "passages": [
+        {
+         "source": "tca/annex6_7_supplier_declaration_statement.md",
+         "section": "ANNEX 6 SUPPLIER’S DECLARATION",
+         "text": "[EU-UK Trade and Cooperation Agreement: Annexes 6 and 7: Supplier's declaration and text of the statement on origin › ANNEX 6 SUPPLIER’S DECLARATION]\nANNEX 6\n\nSUPPLIER’S DECLARATION\n\n1. A supplier’s declaration shall have the content set out in this Annex.\n\n2. Except in the cases referred to in point 3, a supplier’s declaration shall be made out by the supplier for each consignment of products in the form provided for in Appendix 6-A and annexed to the invoice, or to any other document describing the products concerned in sufficient detail to enable them to be identified.\n\n3. Where a supplier regularly supplies a particular customer with products for which the production carried out in a Party is expected to remain constant for a period of time, that supplier may provide a single supplier’s declaration to cover subsequent consignments of those products (the \"long-term supplier’s declaration\"). A long-term supplier’s declaration is normally valid for a period of up to two years from the date of making out the declaration. The customs authorities of the Party where the declaration is made out may lay down the conditions under which longer periods may be used. The long-term supplier’s declaration shall be made out by the supplier in the form provided for in Appendix 6-B and shall describe the products concerned in sufficient detail to enable them to be identified. The supplier shall inform the customer immediately if the long-term supplier’s declaration ceases to apply to the products supplied."
+        },
+        {
+         "source": "guides/tca_origin_questions_answers.pdf",
+         "section": "Questions II.2. Long-term supplier’s declarations",
+         "text": "[European Commission, EU-UK Trade and Cooperation Agreement: compendium of questions and answers on rules of origin › Questions II.2. Long-term supplier’s declarations]\nQuestions II.2. Long-term supplier’s declarations\n\n19. Question: Scope of application of Commission Regulation (EU) 2020/2254 : Does this point also cover long-term supplier’s declarations according to Article 62 UCC-IA?\n\nAnswer: Both recital (4) and the introductory phrase of Article 1 of Commission Implementing Regulation (EU) 2020/2254 of 29 December 2020 on the making out of statements on origin on the basis of supplier’s declarations for preferential exports to the United Kingdom during a transitory period, refer to Article 62 UCC -IA on long -term supplier’s declarations. Those declarations are therefore covered."
+        },
+        {
+         "source": "guides/tca_origin_questions_answers.pdf",
+         "section": "Question 27",
+         "text": "[European Commission, EU-UK Trade and Cooperation Agreement: compendium of questions and answers on rules of origin › Question 27]\nmaterials have been delivered. Insofar as long -term supplier’s declarations would be made out for such products, Article 62( 2)(b) UCC IA provides for their time coverage in the past not being more than 12 months before their date of issue (making out). From the perspective of the application of the TCA and the supplier’s declaration the relevant moment is not the moment of prod uction of the goods or of the materials or when the materials were delivered in the EU but the moment in which the supplier’s declaration is made out. That moment needs to be after 1.1.2021 but the supplier’s declaration may refer to goods delivered before, provided that the supplier is able to determine the origin of those goods according to the rules of the TCA. This is without prejudice of the relationship between the suppliers and the exporter and how the making out of these supplier’s declarations may have been considered in their contracts/relationship for deliveries in 2020."
+        },
+        {
+         "source": "tca/annex6_7_supplier_declaration_statement.md",
+         "section": "Appendix 6-B LONG-TERM SUPPLIER'S DECLARATION",
+         "text": "[EU-UK Trade and Cooperation Agreement: Annexes 6 and 7: Supplier's declaration and text of the statement on origin › Appendix 6-B LONG-TERM SUPPLIER'S DECLARATION]\nAppendix 6-B\n\nLONG-TERM SUPPLIER'S DECLARATION\n\nThe long-term supplier's declaration, the text of which is given below, must be made out in accordance with the footnotes. However, the footnotes do not have to be reproduced.\n\nLONG-TERM SUPPLIER'S DECLARATION\n\nI, the undersigned, the supplier of the products covered by the annexed document, which are regularly supplied to\n(4)\n…, declare that:\n\n1. The following materials which do not originate in [indicate the name of the relevant Party] have been used in [indicate the name of the relevant Party] to produce these products:\n\nDescription of the products supplied(1)\n\nDescription of non-originating materials used\n\nHS heading of non-originating materials used(2)\n\nValue of non-originating materials used(2)(3)\n\nTotal value\n\n2. All the other materials used in [indicate the name of the relevant Party] to produce those products originate in a Party [indicate the name of the relevant Party];\nThis declaration is valid for all subsequent consignments of these products dispatched\nfrom … to … (5)\n\nI undertake to inform … (4) immediately if this declaration ceases to be valid.\n… (Place and Date)\n…\n(Name and position of the undersigned, name and address of company)\n… (Signature)(6)\n\nFootnotes\n\n(1) Where the invoice or other document to which the declaration is annexed relates to different kinds of products, or to products which do not incorporate non-originating materials to the same extent, the supplier must clearly differentiate them."
+        },
+        {
+         "source": "guides/aeat_rex.pdf",
+         "section": "1. QUIÉN PUEDE HACER DECLARACIONES SOBRE EL ORIGEN",
+         "text": "[AEAT, Guía sobre el sistema de exportadores registrados (REX), mayo de 2022 › 1. QUIÉN PUEDE HACER DECLARACIONES SOBRE EL ORIGEN]\n1. QUIÉN PUEDE HACER DECLARACIONES SOBRE EL ORIGEN\n\n1. Como principio general, el exportador registrado que extienda una declaración sobre el origen debe poder declarar y probar el origen de las mercancías y responder a las solicitudes de verificación.\n\nSi el exportador registrado que extienda la declaración de origen no es el productor (por ejemplo, un comerciante), deberá tener en su poder todos los documentos necesarios (declaraciones del proveedor...) que le permitan declarar y probar el origen de las mercancías, y responder a las solicitudes de verificación.\n\n2. En el SPG, un exportador registrado podrá extender declaraciones sobre el origen cuando esté registrado, es decir, después de que se le informe sobre su número REX y la fecha a partir de la cual el registro es válido de conformidad con el artículo 79, apar tado 3, del Reglamento de Ejecución (UE) 2015/2447 de la Comisión.Si se aplica la acumulación regional, el exportador (registrado) del país beneficiario de exportación a la Unión extenderá la declaración sobre el origen, de conformidad con el artículo 92, apartado 1, del Reglamento de Ejecución (UE) 2015/2447 de la Comisión.\n\n3. Si el valor de los productos originarios del envío es inferior al umbral de valor, cualquier exportador, registrado o no registrado, extenderá una declaración sobre el origen."
+        }
+       ]
+      }
+     ],
+     "unsupported_numbers": [],
+     "statement": {}
+    },
+    "correct": true
+   }
+  ]
+ }
+}

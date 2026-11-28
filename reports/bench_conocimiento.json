@@ -1,0 +1,1489 @@
+{
+ "origo": {
+  "n_rows": 9,
+  "success_rate": 0.6666666666666666,
+  "success_by_repeat": [
+   0.6666666666666666,
+   0.6666666666666666,
+   0.6666666666666666
+  ],
+  "by_category": {
+   "conocimiento": 0.6666666666666666
+  },
+  "crashes": 0,
+  "mean_calls": 4.555555555555555,
+  "mean_tokens": 8444.888888888889,
+  "mean_seconds": 27.08888888888889,
+  "rows": [
+   {
+    "id": "conocimiento-01",
+    "category": "conocimiento",
+    "repeat": 0,
+    "final_answer": "## Resumen\n\n- **Límite para pequeños paquetes en Corea del Sur (UE-KR):** 1.000 dólares de los Estados Unidos (USD).\n- **Equivalente en euros con el tipo medio del BCE de octubre de 2026:** la base de conocimiento no responde a esta pregunta.\n\n## Detalle\n\n### 1. Valor máximo de los pequeños paquetes sin prueba de origen (UE-KR)\n\n- **Respuesta:** 1.000 USD.\n- **Fuente:** *korea/protocol_rules_of_origin.md*, sección *TITLE V Proof of origin › Article 21 Exemptions from proof of origin*.\n- **Texto relevante:** “(b) for importation into Korea, 1000 US dollars both in the case of small packages and in the case of the products forming part of a traveller’s personal luggage.”\n\n### 2. Equivalente en euros con el tipo medio del BCE de octubre de 2026\n\n- **Estado:** la base de conocimiento no responde a esta pregunta.\n- No se proporciona ninguna cifra en euros, ya que el sistema no dispone del tipo de cambio medio del BCE de octubre de 2026 ni de una conversión autorizada en la base de conocimiento.",
+    "tools_worked": [],
+    "crash": null,
+    "seconds": 34.8,
+    "cost": {
+     "calls": 4.0,
+     "prompt_tokens": 7425.0,
+     "completion_tokens": 492.0,
+     "reasoning_tokens": 0.0,
+     "seconds": 19.79071404399292
+    },
+    "cost_per_agent": {
+     "orchestrator": {
+      "calls": 1.0,
+      "prompt_tokens": 1917.0,
+      "completion_tokens": 166.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 4.165954886004329
+     },
+     "knowledge": {
+      "calls": 2.0,
+      "prompt_tokens": 3924.0,
+      "completion_tokens": 57.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 2.4407636419928167
+     },
+     "writer": {
+      "calls": 1.0,
+      "prompt_tokens": 1584.0,
+      "completion_tokens": 269.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 13.183995515995775
+     }
+    },
+    "trace": {
+     "plan": {
+      "kind": "knowledge",
+      "product": null,
+      "product_hs_code": null,
+      "exw_price_eur": null,
+      "exw_price_currency": null,
+      "agreements": [
+       "UE-KR"
+      ],
+      "out_of_scope": [],
+      "statement": null,
+      "knowledge_questions": [
+       "¿Cuál es el valor máximo de los pequeños paquetes que pueden entrar en Corea del Sur sin prueba de origen bajo el acuerdo UE-Corea?",
+       "¿Cuál es el equivalente en euros de ese límite de valor para pequeños paquetes, calculado con el tipo de cambio medio del BCE de octubre de 2026?"
+      ],
+      "missing": []
+     },
+     "materials": [],
+     "materials_missing": [],
+     "conversions": [],
+     "evaluations": {},
+     "issues": [],
+     "attempts": 1,
+     "knowledge": [
+      {
+       "question": "¿Cuál es el valor máximo de los pequeños paquetes que pueden entrar en Corea del Sur sin prueba de origen bajo el acuerdo UE-Corea?",
+       "status": "answered",
+       "answer": "1000 US dollars",
+       "cited": [
+        1
+       ],
+       "passages": [
+        {
+         "source": "korea/protocol_rules_of_origin.md",
+         "section": "TITLE V Proof of origin › Article 21 Exemptions from proof of origin",
+         "text": "[EU-Korea Free Trade Agreement, Protocol concerning the definition of 'originating products' and methods of administrative cooperation: Protocol on origin, Titles I to VIII and Annex I (introductory notes) › TITLE V Proof of origin › Article 21 Exemptions from proof of origin]\nArticle 21\n\nExemptions from proof of origin\n\n1. Products sent as small packages from private persons to private persons or forming part of a traveller’s personal luggage shall be admitted as originating products without requiring the submission of a proof of origin, provided that such products are not imported by way of trade and have been declared as meeting the requirements of this Protocol and where there is no doubt as to the veracity of such a declaration. In the case of products sent by post, this declaration may be made on a postal customs declaration or on a sheet of paper annexed to that document.\n\n2. Imports which are occasional and consist solely of products for the personal use of the recipients or travellers or their families shall not be considered as imports by way of trade if it is evident from the nature and quantity of the products that no commercial purpose is intended.\n\n3. Furthermore, the total value of these products shall not exceed:\n\n(a) for importation into the EU Party, 500 euros in the case of small packages or 1200 euros in the case of products forming part of a traveller’s personal luggage;\n\n(b) for importation into Korea, 1000 US dollars both in the case of small packages and in the case of the products forming part of a traveller’s personal luggage."
+        },
+        {
+         "source": "korea/protocol_rules_of_origin.md",
+         "section": "TITLE V Proof of origin › Article 21 Exemptions from proof of origin",
+         "text": "[EU-Korea Free Trade Agreement, Protocol concerning the definition of 'originating products' and methods of administrative cooperation: Protocol on origin, Titles I to VIII and Annex I (introductory notes) › TITLE V Proof of origin › Article 21 Exemptions from proof of origin]\n4. For the purpose of paragraph 3, in cases where the products are invoiced in a currency other than euro or US dollars, amounts in the national currencies of the Parties equivalent to the amounts expressed in euro or US dollars shall be fixed in accordance with the current exchange rate applicable in the importing Party."
+        },
+        {
+         "source": "guides/aeat_authorised_exporter.pdf",
+         "section": "2. CONDICIONES PARA LA OBTENCIÓN DEL ESTATUTO DE EXPORTADOR AUTORIZADO",
+         "text": "[AEAT, Guía sobre el exportador autorizado › 2. CONDICIONES PARA LA OBTENCIÓN DEL ESTATUTO DE EXPORTADOR AUTORIZADO]\n2. CONDICIONES PARA LA OBTENCIÓN DEL ESTATUTO DE EXPORTADOR AUTORIZADO\n\n2.1. A todo exportador de mercancías originarias, fabricante o comerciante, establecido en el territorio de la Unión Europea, le asiste el derecho a solicitar una autorización de EA, siempre que aporte, en cualquier momento, datos apropiados acreditativos del origen de los productos que se propone exportar, a efectos de los controles que llevan a cabo las autoridades aduaneras.\n\n2.2. Para solicitar el estatuto de EA, el exportador no tiene que beneficiarse necesariamente de otros procedimientos simplificados aplicados sobre la base de la legislación aduanera de la UE.\n\n2.3. Aunque con arreglo a las disposiciones legales correspondientes, la frecuencia de los envíos es una condición para la expedición de la autorización, puede suponerse que todo solicitante que reúna todas las demás condiciones hará uso de la autorización regularmente. Entre los acuerdos de libre comercio (ALC) que se aplican actualmente, la condición de frecuencia no se incluye en el establecido entre la UE y Corea, en el que la declaración de origen constituye la única prueba posible del origen.\n\n2.4. Por otra parte, la fiabilidad del exportador ha de estar reconocida. Una condición puede consistir en que el interesado no se encuentre sujeto a procedimientos concursales, ni en situaciones de dem ora respecto al pago de derechos aduaneros o impuestos."
+        },
+        {
+         "source": "korea/protocol_rules_of_origin.md",
+         "section": "TITLE II Definition of \"originating products\" › Article 5 Sufficiently worked or processed products",
+         "text": "[EU-Korea Free Trade Agreement, Protocol concerning the definition of 'originating products' and methods of administrative cooperation: Protocol on origin, Titles I to VIII and Annex I (introductory notes) › TITLE II Definition of \"originating products\" › Article 5 Sufficiently worked or processed products]\n(a) their total value does not exceed 10 percent of the ex-works price of the product; and\n\n(b) any of the percentages given in the list in Annex II for the maximum value of non-originating materials are not exceeded through the application of this paragraph.\n\n3. Paragraph 2 shall not apply to products falling within Chapters 50 to 63 of the HS.\n\n4. Paragraphs 1 through 3 shall apply subject to the provisions of Article 6."
+        },
+        {
+         "source": "guides/aeat_rex.pdf",
+         "section": "2. REDACCIÓN DE LA DECLARACIÓN SOBRE EL ORIGEN",
+         "text": "[AEAT, Guía sobre el sistema de exportadores registrados (REX), mayo de 2022 › 2. REDACCIÓN DE LA DECLARACIÓN SOBRE EL ORIGEN]\n2. REDACCIÓN DE LA DECLARACIÓN SOBRE EL ORIGEN\n\n1. El texto de la declaración sobre el origen en el contexto del SPG figura en el anexo 22- 07 del Reglamento de Ejecución (UE) 2015/2447 de la Comisión (presentado en el anexo 1 del presente documento).\n\n2. Cuando el sistema REX se aplica en el contexto de un ALC, el texto del documento sobre el origen se define en el ALC y debe ser utiliza do por los exportadores y reexpedientes de la UE. Por ejemplo, para el AECG, el Acuerdo con Canadá, los exportadores registrados en la UE emiten declaraciones de origen con arreglo al texto del AECG.\n\n3. El número de registro deberá indicarse en la declaración de origen si el valor de los productos originarios de la partida supera un umbral de valor (6 000 EUR en el contexto del SPG y los ALC, 10 000 EUR en el contexto de los PTU). Si el valor de los productos originarios del envío es inferior al umbral de valor, cualquier exportador, registrado o no registrado, podrá hacer una declaración sobre el origen."
+        }
+       ]
+      },
+      {
+       "question": "¿Cuál es el equivalente en euros de ese límite de valor para pequeños paquetes, calculado con el tipo de cambio medio del BCE de octubre de 2026?",
+       "status": "not_found",
+       "answer": "",
+       "cited": [],
+       "passages": [
+        {
+         "source": "korea/protocol_rules_of_origin.md",
+         "section": "TITLE V Proof of origin › Article 25 Amounts expressed in euro",
+         "text": "[EU-Korea Free Trade Agreement, Protocol concerning the definition of 'originating products' and methods of administrative cooperation: Protocol on origin, Titles I to VIII and Annex I (introductory notes) › TITLE V Proof of origin › Article 25 Amounts expressed in euro]\nArticle 25\n\nAmounts expressed in euro\n\n1. For the application of the provisions of Article 16.1(b) in cases where products are invoiced in a currency other than euro, amounts in the national currencies of the Member States of the European Union equivalent to the amounts expressed in euro shall be fixed annually by the EU Party and submitted to Korea.\n\n2. A consignment shall benefit from the provisions of Article 16.1(b) by reference to the currency in which the invoice is drawn up, according to the amount fixed by the EU Party.\n\n3. The amounts to be used in any given national currency of the Member States of the European Union shall be the equivalent in that currency of the amounts expressed in euro as at the first working day of October. The European Commission shall notify Korea of these amounts by 15 October and these amounts shall apply from 1 January the following year."
+        },
+        {
+         "source": "korea/protocol_rules_of_origin.md",
+         "section": "TITLE V Proof of origin › Article 21 Exemptions from proof of origin",
+         "text": "[EU-Korea Free Trade Agreement, Protocol concerning the definition of 'originating products' and methods of administrative cooperation: Protocol on origin, Titles I to VIII and Annex I (introductory notes) › TITLE V Proof of origin › Article 21 Exemptions from proof of origin]\nArticle 21\n\nExemptions from proof of origin\n\n1. Products sent as small packages from private persons to private persons or forming part of a traveller’s personal luggage shall be admitted as originating products without requiring the submission of a proof of origin, provided that such products are not imported by way of trade and have been declared as meeting the requirements of this Protocol and where there is no doubt as to the veracity of such a declaration. In the case of products sent by post, this declaration may be made on a postal customs declaration or on a sheet of paper annexed to that document.\n\n2. Imports which are occasional and consist solely of products for the personal use of the recipients or travellers or their families shall not be considered as imports by way of trade if it is evident from the nature and quantity of the products that no commercial purpose is intended.\n\n3. Furthermore, the total value of these products shall not exceed:\n\n(a) for importation into the EU Party, 500 euros in the case of small packages or 1200 euros in the case of products forming part of a traveller’s personal luggage;\n\n(b) for importation into Korea, 1000 US dollars both in the case of small packages and in the case of the products forming part of a traveller’s personal luggage."
+        },
+        {
+         "source": "guides/guidance_preferential_origin_2025.pdf",
+         "section": "i. Government certificates",
+         "text": "[European Commission, Guidance on preferential rules of origin (March 2025) › i. Government certificates]\nGoods forming part of travellers' personal luggage\n\nIn passenger traffic, goods shall be admitted as originating products without requiring the submission of a document on origin, provided that:\n\n• the products are part of a traveller’s personal luggage and their total value (price paid) does not exceed the value limit of the concerned preferential arrangement, usually EUR 1 200.\n\n• the imports are occasional and consist solely of products for the personal use of the travellers, their families or are intended to be a present and it is evident from the nature and quantity of the products that they are not considered for commercial purposes.\n\n• the traveller declares orally that the products are eligible for preferential treatment and there is no doubt as to the veracity of such a declaration.\n\nAt the following link the value limits expressed in EURO and the corresponding amounts in national currencies are published:\n\nhttp://ec.europa.eu/taxation_customs/business/calculation-customs-duties/rulesorigin/general-aspects-preferential-origin/common-provisions_en\n\nf) Importation by instalments"
+        },
+        {
+         "source": "korea/protocol_rules_of_origin.md",
+         "section": "TITLE V Proof of origin › Article 25 Amounts expressed in euro",
+         "text": "[EU-Korea Free Trade Agreement, Protocol concerning the definition of 'originating products' and methods of administrative cooperation: Protocol on origin, Titles I to VIII and Annex I (introductory notes) › TITLE V Proof of origin › Article 25 Amounts expressed in euro]\n4. The Member States of the European Union may round up or down the amount resulting from the conversion into their national currency of an amount expressed in euro. The rounded-off amount may not differ from the amount resulting from the conversion by more than five percent. The Member States of the European Union may retain unchanged their national currency equivalent of an amount expressed in euro if, at the time of the annual adjustment provided for in paragraph 3, the conversion of that amount, prior to any rounding-off, results in an increase of less than 15 percent in the national currency equivalent. The national currency equivalent may be retained unchanged if the conversion would result in a decrease in that equivalent value.\n\n5. The amounts expressed in euro shall be reviewed by the Customs Committee at the request of a Party. When carrying out this review, the Customs Committee shall consider the desirability of preserving the effects of the limits concerned in real terms. For this purpose, it may decide to modify the amounts expressed in euro."
+        },
+        {
+         "source": "guides/guidance_preferential_origin_2025.pdf",
+         "section": "Annex 7 & Art. 68",
+         "text": "[European Commission, Guidance on preferential rules of origin (March 2025) › Annex 7 & Art. 68]\nAnnex 7\n\n& Art. 68\n\nUCC-IA\n\nImports into\n\nthe EU\n\nImports into\n\nthe UK\n\nArt. 56\n\nImports into\n\nthe EU:\n\nEUR 500\n\nImports into\n\nthe UK:\n\nGBP 1 000\n\n(limits set\n\nunder the UK\n\ndomestic law)\n\nArt 60 Imports into\n\nthe EU:\n\nEUR 1 200\n\nImports into\n\nthe UK::\n\nGBP 1 000(l\n\nimits set\n\nunder the\n\nUK\n\ndomestic\n\nlaw)\n\nArt 60\n\nUK: Additional exception from proof of origin :\n\nImports into the UK\n\nother low value consignments 1.000 GBP (Art. 60)\n\nVietnam Imports into the EU from\n\nVietnam\n\n•Certificate of origin EUR.1\n\n•Origin declaration\n\nImports into Vietnam from\n\nthe EU\n\nStatement of origin\n\nArt 15 In Vietnam :\n\nApproved\n\nExporter\n\n(over\n\nEUR 6 000)\n\nIn the EU :\n\nRegistered\n\nexporter\n\n(over 6.000\n\nEUR)\n\nArt 15 &\n\nArt 68\n\nUCC-DA"
+        }
+       ]
+      }
+     ],
+     "unsupported_numbers": [],
+     "statement": {}
+    },
+    "correct": false
+   },
+   {
+    "id": "conocimiento-02",
+    "category": "conocimiento",
+    "repeat": 0,
+    "final_answer": "## Resumen\n\n**Sí, el producto es originario** según el Acuerdo de Libre Comercio UE-Corea (UE-KR).\n\n**No, no podemos extender la declaración de origen en la factura** para un envío de 8.500 € porque falta el número REX, que es obligatorio para importaciones superiores a 6.000 €.\n\n---\n\n## Detalle por acuerdo\n\n### UE-KR (Acuerdo de Libre Comercio UE-Corea)\n\n*   **Veredicto:** Originario.\n*   **Criterio cumplido:** CTH (cambio de partida).\n*   **Regla aplicada:** CTH o MAXNOM 45 % EXW.\n*   **Materiales no originarios:**\n    *   Placas base (8473.30) de China: 180,00 € (tercer país).\n    *   Pantallas (8524.11) de Taiwán: 120,00 € (tercer país).\n    *   Baterías (8507.60) de China: 40,00 € (tercer país).\n    *   *Total no originario:* 340,00 € (48,57 % del precio franco fábrica).\n*   **Materiales originarios:**\n    *   Carcasa de aluminio (7616.99) de la UE: 30,00 €.\n*   **Aviso:** El producto no cumple el umbral de MAXNOM (45 %), pero la tolerancia general (10 %) nunca amplía los umbrales de MAXNOM o RVC. Sin embargo, al cumplir el criterio CTH, el producto es originario.\n\n---\n\n## Sobre la declaración de origen\n\nLa base de conocimientos no responde a la pregunta general sobre si un no exportador autorizado puede extender la declaración. No obstante, el sistema indica que la declaración **no está lista** para emitirse porque faltan los siguientes datos:\n\n*   Número de factura.\n*   Nombre del exportador.\n*   Lugar.\n*   **Referencia del exportador (número REX):** obligatorio para importaciones superiores a 6.000 €.\n\nDado que el valor del envío es de 8.500 €, se requiere el número REX para poder emitir la declaración.",
+    "tools_worked": [
+     "evaluate_origin",
+     "get_origin_rule"
+    ],
+    "crash": null,
+    "seconds": 36.8,
+    "cost": {
+     "calls": 5.0,
+     "prompt_tokens": 7902.0,
+     "completion_tokens": 1108.0,
+     "reasoning_tokens": 0.0,
+     "seconds": 36.63928852099343
+    },
+    "cost_per_agent": {
+     "orchestrator": {
+      "calls": 1.0,
+      "prompt_tokens": 2034.0,
+      "completion_tokens": 215.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 5.861546187006752
+     },
+     "extractor": {
+      "calls": 1.0,
+      "prompt_tokens": 1116.0,
+      "completion_tokens": 302.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 5.800154059994384
+     },
+     "origin": {
+      "calls": 1.0,
+      "prompt_tokens": 816.0,
+      "completion_tokens": 47.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 3.0630665689968737
+     },
+     "knowledge": {
+      "calls": 1.0,
+      "prompt_tokens": 2089.0,
+      "completion_tokens": 24.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 4.412860448996071
+     },
+     "writer": {
+      "calls": 1.0,
+      "prompt_tokens": 1847.0,
+      "completion_tokens": 520.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 17.501661255999352
+     }
+    },
+    "trace": {
+     "plan": {
+      "kind": "evaluate",
+      "product": "portátiles",
+      "product_hs_code": "847130",
+      "exw_price_eur": 700.0,
+      "exw_price_currency": null,
+      "agreements": [
+       "UE-KR"
+      ],
+      "out_of_scope": [],
+      "statement": {
+       "invoice_number": null,
+       "exporter_name": null,
+       "place": null,
+       "consignment_value_eur": 8500.0,
+       "exporter_reference": null,
+       "agreement": "UE-KR"
+      },
+      "knowledge_questions": [
+       "Si no somos exportador autorizado, ¿podemos extender nosotros la declaración de origen en la factura de un envío de 8.500 € según el acuerdo UE-Corea?"
+      ],
+      "missing": []
+     },
+     "materials": [
+      {
+       "name": "placas base",
+       "hs_code": "847330",
+       "country_name": "China",
+       "country": "OTRO",
+       "value_eur": 180.0,
+       "supplier_declaration": false
+      },
+      {
+       "name": "pantallas",
+       "hs_code": "852411",
+       "country_name": "Taiwán",
+       "country": "OTRO",
+       "value_eur": 120.0,
+       "supplier_declaration": false
+      },
+      {
+       "name": "baterías",
+       "hs_code": "850760",
+       "country_name": "China",
+       "country": "OTRO",
+       "value_eur": 40.0,
+       "supplier_declaration": false
+      },
+      {
+       "name": "carcasa de aluminio",
+       "hs_code": "761699",
+       "country_name": "UE",
+       "country": "UE",
+       "value_eur": 30.0,
+       "supplier_declaration": true
+      }
+     ],
+     "materials_missing": [],
+     "conversions": [],
+     "evaluations": {
+      "UE-KR": {
+       "evaluation_id": "EV-EC7A2F",
+       "originating": true,
+       "criterion": "CTH",
+       "criteria_met": [
+        "CTH"
+       ],
+       "non_originating_value_eur": 340.0,
+       "pct_non_originating": 48.57,
+       "tolerance_pct": 10,
+       "warnings": [
+        "tolerancia_no_amplia_maxnom"
+       ],
+       "trace": [
+        "placas base [847330] 180.00: no originario (tercer país)",
+        "pantallas [852411] 120.00: no originario (tercer país)",
+        "baterías [850760] 40.00: no originario (tercer país)",
+        "carcasa de aluminio [761699] 30.00: originario",
+        "CTH: cumple",
+        "MAXNOM: no cumple"
+       ],
+       "rule_applied": "CTH or MAXNOM 45 % EXW",
+       "not_checked": []
+      }
+     },
+     "issues": [],
+     "attempts": 1,
+     "knowledge": [
+      {
+       "question": "Si no somos exportador autorizado, ¿podemos extender nosotros la declaración de origen en la factura de un envío de 8.500 € según el acuerdo UE-Corea?",
+       "status": "not_found",
+       "answer": "",
+       "cited": [],
+       "passages": [
+        {
+         "source": "guides/aeat_authorised_exporter.pdf",
+         "section": "5.6. Resultados de las acciones de control",
+         "text": "[AEAT, Guía sobre el exportador autorizado › 5.6. Resultados de las acciones de control]\n6. Cuando el régimen preferencial aplicable no precise la forma que deberán tomar las declaraciones en factura o las declaraciones de origen, dichos documentos se elaborarán de acuerdo con el formulario que figura en el anexo 22-13.\n\n7. Cuando el régimen preferencial aplicable no precise el valor límite hasta el que los exportadores que no sean exportadores autorizados puedan extender una declaración en factura o una declaración de origen, dicho valor será de 6 000 EUR por cada envío.\n\n Extracto del Convenio regional sobre las normas de origen preferenciales PANEUROMED (Diario Oficial L 54 de 26/02/2013)\n\nArtículo 22 del Apéndice I Exportador autorizado\n\n1. Las autoridades aduaneras de la Parte contratante de exportación podrán autorizar a todo exportador (denominado en lo sucesivo «exportador autorizado») que efectúe exportaciones frecuentes de\n\nproductos al amparo del presente Convenio a extender declaraciones de origen o declaraciones de origen EUR-MED independientemente del valor de los productos de que se trate. Los exportadores que soliciten estas autorizaciones deberán ofrecer, a satisfacción de las autoridades aduaneras, todas las garantías necesarias para verificar el carácter originario de los productos, así como el cumplimiento de las demás condiciones del presente Convenio.\n\n2. Las autoridades aduaneras podrán subordinar la concesión del estatuto de exportador autorizado a las condiciones que consideren apropiadas."
+        },
+        {
+         "source": "guides/aeat_authorised_exporter.pdf",
+         "section": "4.3. Extender una declaración de origen",
+         "text": "[AEAT, Guía sobre el exportador autorizado › 4.3. Extender una declaración de origen]\n4.3. Extender una declaración de origen\n\nUna buena práctica es adjuntar una instrucción de uso a la autorización de EA. Este anexo puede proporcionar la siguiente información útil para el exportador."
+        },
+        {
+         "source": "guides/aeat_authorised_exporter.pdf",
+         "section": "4.3.1. Texto de la declaración de origen",
+         "text": "[AEAT, Guía sobre el exportador autorizado › 4.3.1. Texto de la declaración de origen]\n4.3.1. Texto de la declaración de origen\n\nEl texto de la declaración de origen se menciona en cada acuerdo. Dependiendo del país de destino, el texto de la declaración de origen puede ser diferente; el EA debe asegurarse de utilizar la redacción correcta del régimen preferencial al que se refiere la declaración de origen, a modo de ejemplo, el texto de la declaración de origen se recoge en el anexo 3. El número de autorización deberá figurar en la declaración de origen. La declaración de origen llevará la firma manuscrita original del exportador, salvo que al titular se le haya concedido la dispensa de firma (véase el apartado 3.3.5). El nombre completo del firmante deberá figurar de manera legible bajo la firma.\n\nEn la declaración de origen deberá identificarse claramente al titular de la autorización, y tal identidad deberá resultar evidente asimismo para terceros.\n\nLa declaración de origen se expide mediante el mecanografiado, la impresión o la estampación del texto en la factura u otro documento comercial en el que se identifiquen claramente los productos originarios.\n\nLa declaración de origen en una etiqueta fijada de manera permanente a un documen to mercantil solo se permite si no cabe duda de que la etiqueta la ha adherido el EA (por ejemplo, colocando un sello o la firma tanto en la etiqueta como en el documento)."
+        },
+        {
+         "source": "guides/aeat_rex.pdf",
+         "section": "1. QUIÉN PUEDE HACER DECLARACIONES SOBRE EL ORIGEN",
+         "text": "[AEAT, Guía sobre el sistema de exportadores registrados (REX), mayo de 2022 › 1. QUIÉN PUEDE HACER DECLARACIONES SOBRE EL ORIGEN]\n1. QUIÉN PUEDE HACER DECLARACIONES SOBRE EL ORIGEN\n\n1. Como principio general, el exportador registrado que extienda una declaración sobre el origen debe poder declarar y probar el origen de las mercancías y responder a las solicitudes de verificación.\n\nSi el exportador registrado que extienda la declaración de origen no es el productor (por ejemplo, un comerciante), deberá tener en su poder todos los documentos necesarios (declaraciones del proveedor...) que le permitan declarar y probar el origen de las mercancías, y responder a las solicitudes de verificación.\n\n2. En el SPG, un exportador registrado podrá extender declaraciones sobre el origen cuando esté registrado, es decir, después de que se le informe sobre su número REX y la fecha a partir de la cual el registro es válido de conformidad con el artículo 79, apar tado 3, del Reglamento de Ejecución (UE) 2015/2447 de la Comisión.Si se aplica la acumulación regional, el exportador (registrado) del país beneficiario de exportación a la Unión extenderá la declaración sobre el origen, de conformidad con el artículo 92, apartado 1, del Reglamento de Ejecución (UE) 2015/2447 de la Comisión.\n\n3. Si el valor de los productos originarios del envío es inferior al umbral de valor, cualquier exportador, registrado o no registrado, extenderá una declaración sobre el origen."
+        },
+        {
+         "source": "guides/aeat_rex.pdf",
+         "section": "9. DISPOSICIÓN QUE PERMITE LA APLICACIÓN DEL SISTEMA REX EN LOS ALC",
+         "text": "[AEAT, Guía sobre el sistema de exportadores registrados (REX), mayo de 2022 › 9. DISPOSICIÓN QUE PERMITE LA APLICACIÓN DEL SISTEMA REX EN LOS ALC]\n5. La autoridad aduanera de la Parte de importación podrá permitir la aplicación de una declaración de origen a los envíos múltiples de productos originarios idénticos que tengan lugar en un plazo que no exceda de 12 meses según lo establecido por el exportador en dicha declaración.\n\n6. El exportador que haya cumplimentado una declaración de orig en y tenga conocimiento o tenga motivos para creer que la declaración de origen contiene información incorrecta notificará inmediatamente por escrito al importador cualquier cambio que afecte al carácter originario de cada producto al que se aplique la declaración de origen.\n\n7. Las Partes podrán permitir el establecimiento de un sistema que permita que una declaración de origen se presente electrónica y directamente del exportador en el\n\nterritorio de una Parte a un importador en el territorio de la otra Parte, incluida la sustitución de la firma del exportador en la declaración de origen por una firma electrónica o un código de identificación.\n\n12.ANEXO 3 —POR EJEMPLO, PARA EL AGRREEMENT UE -VIETNAM — DISPOSICIÓN\n\nPERMITIR LA APLICACIÓN DEL SISTEMA REX A LAS EXPORTACIONES DE LA UE\n\nExtracto del protocolo de origen del Acuerdo entre la UE y Vietnam Artículo 15\n\nNecesidades generales\n\n1. Los productos originarios de la Unión, en el momento de su importación en Vietnam, se beneficiarán del presente Acuerdo previa presentación de cualquiera de las siguientes pruebas de origen:"
+        }
+       ]
+      }
+     ],
+     "unsupported_numbers": [],
+     "statement": {}
+    },
+    "correct": true
+   },
+   {
+    "id": "conocimiento-03",
+    "category": "conocimiento",
+    "repeat": 0,
+    "final_answer": "## Resumen\n\n**Sí, los cocineros de gas (HS 7321.11) son originarios bajo el CETA.** El criterio cumplido es **CTH** (cambio de partida), apoyado en la **tolerancia general** del 10 %.\n\n---\n\n## Detalle por acuerdo\n\n### CETA (Acuerdo Económico y Comercial Global UE-Canadá)\n\n- **Veredicto:** Originario.\n- **Criterio cumplido:** CTH (cambio de partida).\n- **Regla aplicada:** CTH.\n- **Valor de materiales no originarios:** 100,00 EUR (33,33 % del precio ex-works de 300,00 EUR).\n\n**Materiales no originarios y motivo:**\n\n| Material | HS | País | Valor (EUR) | Motivo |\n|---|---|---|---|---|\n| Quemadores y otras partes de cocineros | 7321.90 | China | 25,00 | Tercer país |\n| Chapa de acero | 7209.17 | Turquía | 60,00 | Tercer país |\n| Termostatos | 9032.10 | China | 15,00 | Tercer país |\n\n**Material originario:**\n- Válvulas de gas (HS 8481.80, Italia, 30,00 EUR): originario (declaración del proveedor).\n\n**Avisos:**\n- **material_misma_partida:** Un material no originario tiene la misma partida (4 dígitos) que el producto, por lo que no cambia de partida.\n- **subdivision_distinta:** Un material no originario tiene la partida del producto pero otra subpartida: cambia de subpartida (CTSH) pero no de partida (CTH).\n- **tolerancia_usada:** El veredicto se apoya en la tolerancia general (10 %).\n\n**No verificado:**\n- No se ha verificado la alternativa: “un cambio desde dentro de esta partida, con o sin cambio desde otra partida, siempre que el valor de los materiales no originarios de esta partida no supere el 50 % del valor de transacción o del precio ex-works del producto.”\n\n---\n\n## Conservación de documentos (CETA)\n\nSegún el **Artículo 26 del Protocolo de CETA**, el exportador debe conservar una copia de la declaración de origen y los documentos de apoyo durante **tres años** tras la finalización de la declaración de origen, o durante un período más largo si la Parte de exportación lo especifica. Si la declaración se basó en una declaración escrita del productor, el productor también debe mantener los registros durante tres años.\n\n*Fuente: ceta/protocol_rules_of_origin.md, SECTION C ORIGIN PROCEDURES › Article 26 Preservation of records.*",
+    "tools_worked": [
+     "evaluate_origin",
+     "get_origin_rule"
+    ],
+    "crash": null,
+    "seconds": 28.4,
+    "cost": {
+     "calls": 5.0,
+     "prompt_tokens": 7937.0,
+     "completion_tokens": 1221.0,
+     "reasoning_tokens": 0.0,
+     "seconds": 28.293302003017743
+    },
+    "cost_per_agent": {
+     "orchestrator": {
+      "calls": 1.0,
+      "prompt_tokens": 2022.0,
+      "completion_tokens": 132.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 2.8944517859927146
+     },
+     "extractor": {
+      "calls": 1.0,
+      "prompt_tokens": 1104.0,
+      "completion_tokens": 298.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 5.954859581004712
+     },
+     "origin": {
+      "calls": 1.0,
+      "prompt_tokens": 805.0,
+      "completion_tokens": 45.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 0.9892899190017488
+     },
+     "knowledge": {
+      "calls": 1.0,
+      "prompt_tokens": 1701.0,
+      "completion_tokens": 99.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 2.2315105050074635
+     },
+     "writer": {
+      "calls": 1.0,
+      "prompt_tokens": 2305.0,
+      "completion_tokens": 647.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 16.223190212011104
+     }
+    },
+    "trace": {
+     "plan": {
+      "kind": "evaluate",
+      "product": "gas cookers",
+      "product_hs_code": "732111",
+      "exw_price_eur": 300.0,
+      "exw_price_currency": null,
+      "agreements": [
+       "CETA"
+      ],
+      "out_of_scope": [],
+      "statement": null,
+      "knowledge_questions": [
+       "How long do we have to keep the origin declaration and the supporting documents for CETA?"
+      ],
+      "missing": []
+     },
+     "materials": [
+      {
+       "name": "burners and other cooker parts",
+       "hs_code": "732190",
+       "country_name": "China",
+       "country": "OTRO",
+       "value_eur": 25.0,
+       "supplier_declaration": false
+      },
+      {
+       "name": "gas valves",
+       "hs_code": "848180",
+       "country_name": "Italy",
+       "country": "UE",
+       "value_eur": 30.0,
+       "supplier_declaration": true
+      },
+      {
+       "name": "steel sheet",
+       "hs_code": "720917",
+       "country_name": "Turkey",
+       "country": "OTRO",
+       "value_eur": 60.0,
+       "supplier_declaration": false
+      },
+      {
+       "name": "thermostats",
+       "hs_code": "903210",
+       "country_name": "China",
+       "country": "OTRO",
+       "value_eur": 15.0,
+       "supplier_declaration": false
+      }
+     ],
+     "materials_missing": [],
+     "conversions": [],
+     "evaluations": {
+      "CETA": {
+       "evaluation_id": "EV-86080B",
+       "originating": true,
+       "criterion": "CTH",
+       "criteria_met": [
+        "CTH"
+       ],
+       "non_originating_value_eur": 100.0,
+       "pct_non_originating": 33.33,
+       "tolerance_pct": 10,
+       "warnings": [
+        "material_misma_partida",
+        "subdivision_distinta",
+        "tolerancia_usada"
+       ],
+       "trace": [
+        "burners and other cooker parts [732190] 25.00: no originario (tercer país)",
+        "gas valves [848180] 30.00: originario",
+        "steel sheet [720917] 60.00: no originario (tercer país)",
+        "thermostats [903210] 15.00: no originario (tercer país)",
+        "CTH: cumple (con tolerancia)"
+       ],
+       "rule_applied": "CTH",
+       "not_checked": [
+        "A change from within this heading, whether or not there is also a change from any other heading, provided that the value of non-originating materials of this heading does not exceed 50% of the transaction value or ex-works price of the product."
+       ]
+      }
+     },
+     "issues": [],
+     "attempts": 1,
+     "knowledge": [
+      {
+       "question": "How long do we have to keep the origin declaration and the supporting documents for CETA?",
+       "status": "answered",
+       "answer": "Under Article 26 of the CETA Protocol, an exporter shall keep a copy of the origin declaration and supporting documents for three years after the completion of the origin declaration, or for a longer period of time as the Party of export may specify. If the declaration was based on a written statement from the producer, the producer must also maintain records for three years.",
+       "cited": [
+        1
+       ],
+       "passages": [
+        {
+         "source": "ceta/protocol_rules_of_origin.md",
+         "section": "SECTION C ORIGIN PROCEDURES › Article 26 Preservation of records",
+         "text": "[EU-Canada Comprehensive Economic and Trade Agreement (CETA): Protocol on rules of origin and origin procedures, Sections A to E and Annexes 1 to 4 › SECTION C ORIGIN PROCEDURES › Article 26 Preservation of records]\nArticle 26\n\nPreservation of records\n\n1. An exporter that has completed an origin declaration shall keep a copy of the origin declaration, as well as the supporting documents referred to in Article 25, for three years after the completion of the origin declaration or for a longer period of time as the Party of export may specify.\n\n2. If an exporter has based an origin declaration on a written statement from the producer, the producer shall be required to maintain records in accordance with paragraph 1.\n\n3. When provided for in laws of the Party of import, an importer that has been granted preferential tariff treatment shall keep documentation relating to the importation of the product, including a copy of the origin declaration, for three years after the date on which preferential treatment was granted, or for a longer period of time as that Party may specify.\n\n4. Each Party shall permit, in accordance with that Party's laws, importers, exporters, and producers in its territory to maintain documentation or records in any medium, provided that the documentation or records can be retrieved and printed.\n\n5. A Party may deny preferential tariff treatment to a product that is the subject of an origin verification when the importer, exporter, or producer of the product that is required to maintain records or documentation under this Article:"
+        },
+        {
+         "source": "ceta/protocol_rules_of_origin.md",
+         "section": "SECTION C ORIGIN PROCEDURES › Article 26 Preservation of records",
+         "text": "[EU-Canada Comprehensive Economic and Trade Agreement (CETA): Protocol on rules of origin and origin procedures, Sections A to E and Annexes 1 to 4 › SECTION C ORIGIN PROCEDURES › Article 26 Preservation of records]\n(a) fails to maintain records or documentation relevant to determining the origin of the product in accordance with the requirements of this Protocol; or\n\n(b) denies access to those records or documentation."
+        },
+        {
+         "source": "ceta/protocol_rules_of_origin.md",
+         "section": "ANNEX 2 Text of image",
+         "text": "[EU-Canada Comprehensive Economic and Trade Agreement (CETA): Protocol on rules of origin and origin procedures, Sections A to E and Annexes 1 to 4 › ANNEX 2 Text of image]\nANNEX 2\n\nText of image\n\nTEXT OF THE ORIGIN DECLARATION\n\nThe origin declaration, the text of which is given below, must be completed in accordance with the footnotes. However, the footnotes do not have to be reproduced.\n\n(Period: from to (1))\n\nThe exporter of the products covered by this document (customs authorisation No … (2)) declares that, except where otherwise clearly indicated, these products are of … (3) preferential origin.\n\n(4) (Place and date)\n\n(5) (Signature and printed name of the exporter)\n\n(1) When the origin declaration is completed for multiple shipments of identical originating products within the meaning of Article 19.5, indicate the period of time for which the origin declaration will apply. The period of time must not exceed 12 months. All importations of the product must occur within the period indicated. Where a period of time is not applicable, the field can be left blank.\n\n(2) For EU exporters: When the origin declaration is completed by an approved or registered exporter the exporter's customs authorisation or registration number must be included. A customs authorisation number is required only if the exporter is an approved exporter. When the origin declaration is not completed by an approved or registered exporter, the words in brackets must be omitted or the space left blank."
+        },
+        {
+         "source": "ceta/protocol_rules_of_origin.md",
+         "section": "SECTION C ORIGIN PROCEDURES › Article 20 Validity of the origin declaration",
+         "text": "[EU-Canada Comprehensive Economic and Trade Agreement (CETA): Protocol on rules of origin and origin procedures, Sections A to E and Annexes 1 to 4 › SECTION C ORIGIN PROCEDURES › Article 20 Validity of the origin declaration]\nArticle 20\n\nValidity of the origin declaration\n\n1. An origin declaration shall be valid for 12 months from the date it was completed by the exporter, or for such longer period of time as provided by the Party of import. The preferential tariff treatment may be claimed, within this validity period, to the customs authority of the Party of import.\n\n2. The Party of import may accept an origin declaration submitted to its customs authority after the validity period referred to in paragraph 1 for the purpose of preferential tariff treatment in accordance with that Party's laws."
+        },
+        {
+         "source": "ceta/protocol_rules_of_origin.md",
+         "section": "SECTION C ORIGIN PROCEDURES › Article 27 Discrepancies and formal errors",
+         "text": "[EU-Canada Comprehensive Economic and Trade Agreement (CETA): Protocol on rules of origin and origin procedures, Sections A to E and Annexes 1 to 4 › SECTION C ORIGIN PROCEDURES › Article 27 Discrepancies and formal errors]\nArticle 27\n\nDiscrepancies and formal errors\n\n1. The discovery of slight discrepancies between the statements made in the origin declaration and those made in the documents submitted to the customs authorities for the purpose of carrying out the formalities for importing the products shall not, because of that fact, render the origin declaration null and void if it is established that this document corresponds to the products submitted.\n\n2. Obvious formal errors such as typing errors on an origin declaration shall not cause this document to be rejected if these errors do not create doubts concerning the correctness of the statements made in the document."
+        }
+       ]
+      }
+     ],
+     "unsupported_numbers": [],
+     "statement": {}
+    },
+    "correct": true
+   },
+   {
+    "id": "conocimiento-01",
+    "category": "conocimiento",
+    "repeat": 1,
+    "final_answer": "## Resumen\n\nSegún el **Acuerdo de Libre Comercio UE-Corea (UE-KR)**, los pequeños paquetes pueden entrar en Corea del Sur sin prueba de origen hasta un valor máximo de **1.000 dólares de los EE. UU.**\n\n## Detalle\n\n- **Límite para importación en Corea:** 1.000 USD, tanto para pequeños paquetes como para productos que formen parte del equipaje personal de un viajero.\n- **Fuente:** Protocolo sobre la definición de productos originarios y métodos de cooperación administrativa, Título V (Prueba de origen), Artículo 21, apartado 3(b).\n\n### Sobre la conversión a euros\n\nNo puedo proporcionar el límite en euros, ya que el **tipo medio del BCE de octubre de 2026** no figura en los hechos proporcionados ni en la base de conocimiento. Además, el acuerdo establece el límite específicamente en **dólares de los EE. UU.** para la importación en Corea, no en euros.",
+    "tools_worked": [],
+    "crash": null,
+    "seconds": 11.9,
+    "cost": {
+     "calls": 3.0,
+     "prompt_tokens": 5334.0,
+     "completion_tokens": 386.0,
+     "reasoning_tokens": 0.0,
+     "seconds": 11.889191800990375
+    },
+    "cost_per_agent": {
+     "orchestrator": {
+      "calls": 1.0,
+      "prompt_tokens": 1917.0,
+      "completion_tokens": 128.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 3.227499328990234
+     },
+     "knowledge": {
+      "calls": 1.0,
+      "prompt_tokens": 1896.0,
+      "completion_tokens": 43.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 1.691610911002499
+     },
+     "writer": {
+      "calls": 1.0,
+      "prompt_tokens": 1521.0,
+      "completion_tokens": 215.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 6.970081560997642
+     }
+    },
+    "trace": {
+     "plan": {
+      "kind": "knowledge",
+      "product": null,
+      "product_hs_code": null,
+      "exw_price_eur": null,
+      "exw_price_currency": null,
+      "agreements": [
+       "UE-KR"
+      ],
+      "out_of_scope": [],
+      "statement": null,
+      "knowledge_questions": [
+       "¿Cuál es el valor máximo de los pequeños paquetes que pueden entrar en Corea del Sur sin prueba de origen bajo el acuerdo UE-Corea?"
+      ],
+      "missing": []
+     },
+     "materials": [],
+     "materials_missing": [],
+     "conversions": [],
+     "evaluations": {},
+     "issues": [],
+     "attempts": 1,
+     "knowledge": [
+      {
+       "question": "¿Cuál es el valor máximo de los pequeños paquetes que pueden entrar en Corea del Sur sin prueba de origen bajo el acuerdo UE-Corea?",
+       "status": "answered",
+       "answer": "1000 US dollars (Article 21(3)(b))",
+       "cited": [
+        1
+       ],
+       "passages": [
+        {
+         "source": "korea/protocol_rules_of_origin.md",
+         "section": "TITLE V Proof of origin › Article 21 Exemptions from proof of origin",
+         "text": "[EU-Korea Free Trade Agreement, Protocol concerning the definition of 'originating products' and methods of administrative cooperation: Protocol on origin, Titles I to VIII and Annex I (introductory notes) › TITLE V Proof of origin › Article 21 Exemptions from proof of origin]\nArticle 21\n\nExemptions from proof of origin\n\n1. Products sent as small packages from private persons to private persons or forming part of a traveller’s personal luggage shall be admitted as originating products without requiring the submission of a proof of origin, provided that such products are not imported by way of trade and have been declared as meeting the requirements of this Protocol and where there is no doubt as to the veracity of such a declaration. In the case of products sent by post, this declaration may be made on a postal customs declaration or on a sheet of paper annexed to that document.\n\n2. Imports which are occasional and consist solely of products for the personal use of the recipients or travellers or their families shall not be considered as imports by way of trade if it is evident from the nature and quantity of the products that no commercial purpose is intended.\n\n3. Furthermore, the total value of these products shall not exceed:\n\n(a) for importation into the EU Party, 500 euros in the case of small packages or 1200 euros in the case of products forming part of a traveller’s personal luggage;\n\n(b) for importation into Korea, 1000 US dollars both in the case of small packages and in the case of the products forming part of a traveller’s personal luggage."
+        },
+        {
+         "source": "korea/protocol_rules_of_origin.md",
+         "section": "TITLE V Proof of origin › Article 21 Exemptions from proof of origin",
+         "text": "[EU-Korea Free Trade Agreement, Protocol concerning the definition of 'originating products' and methods of administrative cooperation: Protocol on origin, Titles I to VIII and Annex I (introductory notes) › TITLE V Proof of origin › Article 21 Exemptions from proof of origin]\n4. For the purpose of paragraph 3, in cases where the products are invoiced in a currency other than euro or US dollars, amounts in the national currencies of the Parties equivalent to the amounts expressed in euro or US dollars shall be fixed in accordance with the current exchange rate applicable in the importing Party."
+        },
+        {
+         "source": "guides/aeat_authorised_exporter.pdf",
+         "section": "2. CONDICIONES PARA LA OBTENCIÓN DEL ESTATUTO DE EXPORTADOR AUTORIZADO",
+         "text": "[AEAT, Guía sobre el exportador autorizado › 2. CONDICIONES PARA LA OBTENCIÓN DEL ESTATUTO DE EXPORTADOR AUTORIZADO]\n2. CONDICIONES PARA LA OBTENCIÓN DEL ESTATUTO DE EXPORTADOR AUTORIZADO\n\n2.1. A todo exportador de mercancías originarias, fabricante o comerciante, establecido en el territorio de la Unión Europea, le asiste el derecho a solicitar una autorización de EA, siempre que aporte, en cualquier momento, datos apropiados acreditativos del origen de los productos que se propone exportar, a efectos de los controles que llevan a cabo las autoridades aduaneras.\n\n2.2. Para solicitar el estatuto de EA, el exportador no tiene que beneficiarse necesariamente de otros procedimientos simplificados aplicados sobre la base de la legislación aduanera de la UE.\n\n2.3. Aunque con arreglo a las disposiciones legales correspondientes, la frecuencia de los envíos es una condición para la expedición de la autorización, puede suponerse que todo solicitante que reúna todas las demás condiciones hará uso de la autorización regularmente. Entre los acuerdos de libre comercio (ALC) que se aplican actualmente, la condición de frecuencia no se incluye en el establecido entre la UE y Corea, en el que la declaración de origen constituye la única prueba posible del origen.\n\n2.4. Por otra parte, la fiabilidad del exportador ha de estar reconocida. Una condición puede consistir en que el interesado no se encuentre sujeto a procedimientos concursales, ni en situaciones de dem ora respecto al pago de derechos aduaneros o impuestos."
+        },
+        {
+         "source": "korea/protocol_rules_of_origin.md",
+         "section": "TITLE II Definition of \"originating products\" › Article 5 Sufficiently worked or processed products",
+         "text": "[EU-Korea Free Trade Agreement, Protocol concerning the definition of 'originating products' and methods of administrative cooperation: Protocol on origin, Titles I to VIII and Annex I (introductory notes) › TITLE II Definition of \"originating products\" › Article 5 Sufficiently worked or processed products]\n(a) their total value does not exceed 10 percent of the ex-works price of the product; and\n\n(b) any of the percentages given in the list in Annex II for the maximum value of non-originating materials are not exceeded through the application of this paragraph.\n\n3. Paragraph 2 shall not apply to products falling within Chapters 50 to 63 of the HS.\n\n4. Paragraphs 1 through 3 shall apply subject to the provisions of Article 6."
+        },
+        {
+         "source": "guides/aeat_rex.pdf",
+         "section": "2. REDACCIÓN DE LA DECLARACIÓN SOBRE EL ORIGEN",
+         "text": "[AEAT, Guía sobre el sistema de exportadores registrados (REX), mayo de 2022 › 2. REDACCIÓN DE LA DECLARACIÓN SOBRE EL ORIGEN]\n2. REDACCIÓN DE LA DECLARACIÓN SOBRE EL ORIGEN\n\n1. El texto de la declaración sobre el origen en el contexto del SPG figura en el anexo 22- 07 del Reglamento de Ejecución (UE) 2015/2447 de la Comisión (presentado en el anexo 1 del presente documento).\n\n2. Cuando el sistema REX se aplica en el contexto de un ALC, el texto del documento sobre el origen se define en el ALC y debe ser utiliza do por los exportadores y reexpedientes de la UE. Por ejemplo, para el AECG, el Acuerdo con Canadá, los exportadores registrados en la UE emiten declaraciones de origen con arreglo al texto del AECG.\n\n3. El número de registro deberá indicarse en la declaración de origen si el valor de los productos originarios de la partida supera un umbral de valor (6 000 EUR en el contexto del SPG y los ALC, 10 000 EUR en el contexto de los PTU). Si el valor de los productos originarios del envío es inferior al umbral de valor, cualquier exportador, registrado o no registrado, podrá hacer una declaración sobre el origen."
+        }
+       ]
+      }
+     ],
+     "unsupported_numbers": [],
+     "statement": {}
+    },
+    "correct": false
+   },
+   {
+    "id": "conocimiento-02",
+    "category": "conocimiento",
+    "repeat": 1,
+    "final_answer": "## Resumen\n\n**Sí, el producto es originario** según el Acuerdo de Libre Comercio UE-Corea (UE-KR).\n\n**No, no podemos emitir la declaración de origen en la factura** para un envío de 8.500 € porque falta el número REX, que es obligatorio para importaciones superiores a 6.000 €.\n\n---\n\n## Detalle por acuerdo\n\n### Acuerdo de Libre Comercio UE-Corea (UE-KR)\n\n*   **Veredicto:** Originario.\n*   **Criterio cumplido:** CTH (cambio de partida).\n*   **Regla aplicada:** CTH o MAXNOM 45 % EXW.\n*   **Materiales no originarios:**\n    *   Placas base (8473.30) de China: 180,00 € (tercer país).\n    *   Pantallas (8524.11) de Taiwán: 120,00 € (tercer país).\n    *   Baterías (8507.60) de China: 40,00 € (tercer país).\n    *   *Total no originario:* 340,00 € (48,57 % del precio franco fábrica).\n*   **Materiales originarios:**\n    *   Carcasa de aluminio (7616.99) de la UE: 30,00 €.\n*   **Aviso:** El producto no cumple el umbral MAXNOM (48,57 % > 45 %). La tolerancia general (10 %) no amplía los umbrales de MAXNOM o RVC, por lo que este criterio no se cumple. Sin embargo, el producto sí es originario porque cumple el criterio CTH.\n\n---\n\n## Sobre la declaración de origen en la factura\n\nLa base de conocimientos no responde a la pregunta general sobre si un fabricante no autorizado puede extender la declaración.\n\nSin embargo, para este envío concreto de **8.500 €**, la declaración **no puede emitirse todavía** porque faltan los siguientes datos obligatorios:\n\n*   Número de factura (*invoice_number*)\n*   Nombre del exportador (*exporter_name*)\n*   Lugar (*place*)\n*   **Número REX** (*exporter_reference*): Es obligatorio para importaciones superiores a 6.000 €. Al no ser exportador autorizado, es necesario obtener este número para poder extender la declaración.",
+    "tools_worked": [
+     "evaluate_origin",
+     "get_origin_rule"
+    ],
+    "crash": null,
+    "seconds": 26.6,
+    "cost": {
+     "calls": 5.0,
+     "prompt_tokens": 7805.0,
+     "completion_tokens": 1122.0,
+     "reasoning_tokens": 0.0,
+     "seconds": 26.48424034898926
+    },
+    "cost_per_agent": {
+     "orchestrator": {
+      "calls": 1.0,
+      "prompt_tokens": 2034.0,
+      "completion_tokens": 204.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 4.0216718629963
+     },
+     "extractor": {
+      "calls": 1.0,
+      "prompt_tokens": 1116.0,
+      "completion_tokens": 302.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 7.43107372400118
+     },
+     "origin": {
+      "calls": 1.0,
+      "prompt_tokens": 816.0,
+      "completion_tokens": 47.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 1.234909995997441
+     },
+     "knowledge": {
+      "calls": 1.0,
+      "prompt_tokens": 2003.0,
+      "completion_tokens": 24.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 1.1955077099992195
+     },
+     "writer": {
+      "calls": 1.0,
+      "prompt_tokens": 1836.0,
+      "completion_tokens": 545.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 12.60107705599512
+     }
+    },
+    "trace": {
+     "plan": {
+      "kind": "evaluate",
+      "product": "portátiles",
+      "product_hs_code": "847130",
+      "exw_price_eur": 700.0,
+      "exw_price_currency": null,
+      "agreements": [
+       "UE-KR"
+      ],
+      "out_of_scope": [],
+      "statement": {
+       "invoice_number": null,
+       "exporter_name": null,
+       "place": null,
+       "consignment_value_eur": 8500.0,
+       "exporter_reference": null,
+       "agreement": "UE-KR"
+      },
+      "knowledge_questions": [
+       "Si un fabricante no es exportador autorizado, ¿puede extender él mismo la declaración de origen en la factura de un envío?"
+      ],
+      "missing": []
+     },
+     "materials": [
+      {
+       "name": "placas base",
+       "hs_code": "847330",
+       "country_name": "China",
+       "country": "OTRO",
+       "value_eur": 180.0,
+       "supplier_declaration": false
+      },
+      {
+       "name": "pantallas",
+       "hs_code": "852411",
+       "country_name": "Taiwán",
+       "country": "OTRO",
+       "value_eur": 120.0,
+       "supplier_declaration": false
+      },
+      {
+       "name": "baterías",
+       "hs_code": "850760",
+       "country_name": "China",
+       "country": "OTRO",
+       "value_eur": 40.0,
+       "supplier_declaration": false
+      },
+      {
+       "name": "carcasa de aluminio",
+       "hs_code": "761699",
+       "country_name": "UE",
+       "country": "UE",
+       "value_eur": 30.0,
+       "supplier_declaration": true
+      }
+     ],
+     "materials_missing": [],
+     "conversions": [],
+     "evaluations": {
+      "UE-KR": {
+       "evaluation_id": "EV-DBA697",
+       "originating": true,
+       "criterion": "CTH",
+       "criteria_met": [
+        "CTH"
+       ],
+       "non_originating_value_eur": 340.0,
+       "pct_non_originating": 48.57,
+       "tolerance_pct": 10,
+       "warnings": [
+        "tolerancia_no_amplia_maxnom"
+       ],
+       "trace": [
+        "placas base [847330] 180.00: no originario (tercer país)",
+        "pantallas [852411] 120.00: no originario (tercer país)",
+        "baterías [850760] 40.00: no originario (tercer país)",
+        "carcasa de aluminio [761699] 30.00: originario",
+        "CTH: cumple",
+        "MAXNOM: no cumple"
+       ],
+       "rule_applied": "CTH or MAXNOM 45 % EXW",
+       "not_checked": []
+      }
+     },
+     "issues": [],
+     "attempts": 1,
+     "knowledge": [
+      {
+       "question": "Si un fabricante no es exportador autorizado, ¿puede extender él mismo la declaración de origen en la factura de un envío?",
+       "status": "not_found",
+       "answer": "",
+       "cited": [],
+       "passages": [
+        {
+         "source": "guides/aeat_rex.pdf",
+         "section": "1. QUIÉN PUEDE HACER DECLARACIONES SOBRE EL ORIGEN",
+         "text": "[AEAT, Guía sobre el sistema de exportadores registrados (REX), mayo de 2022 › 1. QUIÉN PUEDE HACER DECLARACIONES SOBRE EL ORIGEN]\n1. QUIÉN PUEDE HACER DECLARACIONES SOBRE EL ORIGEN\n\n1. Como principio general, el exportador registrado que extienda una declaración sobre el origen debe poder declarar y probar el origen de las mercancías y responder a las solicitudes de verificación.\n\nSi el exportador registrado que extienda la declaración de origen no es el productor (por ejemplo, un comerciante), deberá tener en su poder todos los documentos necesarios (declaraciones del proveedor...) que le permitan declarar y probar el origen de las mercancías, y responder a las solicitudes de verificación.\n\n2. En el SPG, un exportador registrado podrá extender declaraciones sobre el origen cuando esté registrado, es decir, después de que se le informe sobre su número REX y la fecha a partir de la cual el registro es válido de conformidad con el artículo 79, apar tado 3, del Reglamento de Ejecución (UE) 2015/2447 de la Comisión.Si se aplica la acumulación regional, el exportador (registrado) del país beneficiario de exportación a la Unión extenderá la declaración sobre el origen, de conformidad con el artículo 92, apartado 1, del Reglamento de Ejecución (UE) 2015/2447 de la Comisión.\n\n3. Si el valor de los productos originarios del envío es inferior al umbral de valor, cualquier exportador, registrado o no registrado, extenderá una declaración sobre el origen."
+        },
+        {
+         "source": "guides/aeat_authorised_exporter.pdf",
+         "section": "4.3. Extender una declaración de origen",
+         "text": "[AEAT, Guía sobre el exportador autorizado › 4.3. Extender una declaración de origen]\n4.3. Extender una declaración de origen\n\nUna buena práctica es adjuntar una instrucción de uso a la autorización de EA. Este anexo puede proporcionar la siguiente información útil para el exportador."
+        },
+        {
+         "source": "guides/aeat_authorised_exporter.pdf",
+         "section": "4.3.1. Texto de la declaración de origen",
+         "text": "[AEAT, Guía sobre el exportador autorizado › 4.3.1. Texto de la declaración de origen]\n4.3.1. Texto de la declaración de origen\n\nEl texto de la declaración de origen se menciona en cada acuerdo. Dependiendo del país de destino, el texto de la declaración de origen puede ser diferente; el EA debe asegurarse de utilizar la redacción correcta del régimen preferencial al que se refiere la declaración de origen, a modo de ejemplo, el texto de la declaración de origen se recoge en el anexo 3. El número de autorización deberá figurar en la declaración de origen. La declaración de origen llevará la firma manuscrita original del exportador, salvo que al titular se le haya concedido la dispensa de firma (véase el apartado 3.3.5). El nombre completo del firmante deberá figurar de manera legible bajo la firma.\n\nEn la declaración de origen deberá identificarse claramente al titular de la autorización, y tal identidad deberá resultar evidente asimismo para terceros.\n\nLa declaración de origen se expide mediante el mecanografiado, la impresión o la estampación del texto en la factura u otro documento comercial en el que se identifiquen claramente los productos originarios.\n\nLa declaración de origen en una etiqueta fijada de manera permanente a un documen to mercantil solo se permite si no cabe duda de que la etiqueta la ha adherido el EA (por ejemplo, colocando un sello o la firma tanto en la etiqueta como en el documento)."
+        },
+        {
+         "source": "guides/aeat_authorised_exporter.pdf",
+         "section": "4.2. El exportador se compromete a",
+         "text": "[AEAT, Guía sobre el exportador autorizado › 4.2. El exportador se compromete a]\n4.2. El exportador se compromete a\n\n extender las declaraciones de origen únicamente para los productos respecto a los que se dispone, en la fecha de expedición de la declaración de origen, los documentos justificativos y las cuentas pertinentes que demuestren que los productos son originarios;  presentar en cualquier momento, a petición de la autoridad aduanera competente del Estado miembro en el que se haya otorgado la autorización, todos los documentos justificativos pertinentes que demuestren la condición de originarios de los productos en cuestión, así como la observancia de los demás requisitos del Protocolo de origen de que se trate;  aceptar la verificación, por parte de las autoridades aduaneras referidas, de su contabilidad y del proceso de fabricación de los productos;\n\n conservar durante tres años (o más, dependiendo del período establecido en el acuerdo preferencial) copias de las declaraciones de origen y de los documentos justificativos relacionados con las declaraciones; dicho período comienza en la fecha de extensión de la declaración de origen. Cuando la normativa nacional prevea un período más largo, éste se aplicará independientemente de la duración del período para la solicitud de verificación de una prueba de origen.\n\n asumir plenamente las responsabilidades que se deriven del uso de la autorización;  informar a las autoridades aduaneras de las alteraciones que afecten a la autorización."
+        },
+        {
+         "source": "guides/aeat_authorised_exporter.pdf",
+         "section": "5.6. Resultados de las acciones de control",
+         "text": "[AEAT, Guía sobre el exportador autorizado › 5.6. Resultados de las acciones de control]\nde crédito)\n\nc) Cliente que rechaza la\n\ndeclaración de origen\n\nd) Otros\n\nAcción registrada en paralelo en la\n\nbase de datos del registro de\n\nquejas (Base de datos de acceso al\n\nmercado)\n\nSí □\n\nNo □\n\n(http://madb.europa.eu/madb/complaint_register_form.htm)\n\nDocumentos a adjuntar\n\nSe solicita al operador económico que envíe una copia de los siguientes documentos:\n\n- Documento comercial con la declaración original (después de ocultar las referencias apropiadas consideradas sensibles, como los precios de los productos básicos)\n\n- Documento proporcionado por las autoridades aduaneras que procedieron a la denegación\n\n- Documento proporcionado por terceros\n\n- Cualquier otro documento\n\nANEXO 2: MARCO JURÍDICO GENERAL\n\n Artículo 67 del AE-CAU\n\nAutorización de exportador autorizado\n\n(Artículo 64, apartado 1, del Código)\n\n1. Cuando la Unión mantenga un régimen preferencial con un tercer país que establezca que la prueba de origen tendrá la forma de una declaración en factura o una declaración de origen extendida por un exportador autorizado, los exportadores y re-expedidores establecidos en el territorio aduanero de la Unión podrán solicitar una autorización como exportador autorizado a efectos de extender y sustituir tales declaraciones."
+        }
+       ]
+      }
+     ],
+     "unsupported_numbers": [],
+     "statement": {}
+    },
+    "correct": true
+   },
+   {
+    "id": "conocimiento-03",
+    "category": "conocimiento",
+    "repeat": 1,
+    "final_answer": "## Resumen\n\n**Sí, los hornos de gas (HS 7321.11) son originarios bajo el CETA.** El criterio cumplido es **CTH** (cambio de partida), apoyado en la **tolerancia general** del 10 %.\n\n**Conservación de documentos:** Deben conservar una copia de la declaración de origen y los documentos de soporte durante **tres años** desde la finalización de la declaración de origen, o por un período más largo si la Parte de exportación lo especifica.\n\n---\n\n## Detalle por acuerdo\n\n### CETA (Acuerdo Económico y Comercial Global UE-Canadá)\n\n*   **Veredicto:** Originario.\n*   **Criterio cumplido:** CTH (cambio de partida).\n*   **Regla aplicada:** CTH.\n*   **Valor de materiales no originarios:** 100,00 EUR (33,33 % del precio ex-works de 300,00 EUR).\n\n**Materiales no originarios y motivo:**\n*   **Burners and other cooker parts** (HS 7321.90, 25,00 EUR): No originario (tercer país).\n*   **Steel sheet** (HS 7209.17, 60,00 EUR): No originario (tercer país).\n*   **Thermostats** (HS 9032.10, 15,00 EUR): No originario (tercer país).\n\n**Materiales originarios:**\n*   **Gas valves** (HS 8481.80, 30,00 EUR): Originario (Italia, con declaración del proveedor).\n\n**Avisos:**\n*   **material_misma_partida:** Un material no originario tiene la misma partida (4 dígitos) que el producto, por lo que no cambia de partida.\n*   **subdivision_distinta:** Un material no originario tiene la partida del producto pero otra subpartida: cambia de subpartida (CTSH) pero no de partida (CTH).\n*   **tolerancia_usada:** El veredicto se basa en la tolerancia general.\n\n**No verificado:**\n*   \"A change from within this heading, whether or not there is also a change from any other heading, provided that the value of non-originating materials of this heading does not exceed 50% of the transaction value or ex-works price of the product.\"\n\n---\n\n## Respuesta a la pregunta sobre conservación de documentos\n\nSegún el **Artículo 26 del Protocolo del CETA**, un exportador que haya completado una declaración de origen debe conservar una copia de dicha declaración y los documentos de soporte durante **tres años** después de la finalización de la declaración de origen, o por un período más largo de tiempo si la Parte de exportación lo especifica.\n\n*Fuente: ceta/protocol_rules_of_origin.md, SECTION C ORIGIN PROCEDURES › Article 26 Preservation of records.*",
+    "tools_worked": [
+     "evaluate_origin",
+     "get_origin_rule"
+    ],
+    "crash": null,
+    "seconds": 30.5,
+    "cost": {
+     "calls": 5.0,
+     "prompt_tokens": 8135.0,
+     "completion_tokens": 1231.0,
+     "reasoning_tokens": 0.0,
+     "seconds": 30.38046115200268
+    },
+    "cost_per_agent": {
+     "orchestrator": {
+      "calls": 1.0,
+      "prompt_tokens": 2022.0,
+      "completion_tokens": 136.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 3.1494984669989208
+     },
+     "extractor": {
+      "calls": 1.0,
+      "prompt_tokens": 1104.0,
+      "completion_tokens": 298.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 6.9037119730055565
+     },
+     "origin": {
+      "calls": 1.0,
+      "prompt_tokens": 805.0,
+      "completion_tokens": 45.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 1.1164414060040144
+     },
+     "knowledge": {
+      "calls": 1.0,
+      "prompt_tokens": 1911.0,
+      "completion_tokens": 83.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 3.1184991839982104
+     },
+     "writer": {
+      "calls": 1.0,
+      "prompt_tokens": 2293.0,
+      "completion_tokens": 669.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 16.09231012199598
+     }
+    },
+    "trace": {
+     "plan": {
+      "kind": "evaluate",
+      "product": "gas cookers",
+      "product_hs_code": "732111",
+      "exw_price_eur": 300.0,
+      "exw_price_currency": null,
+      "agreements": [
+       "CETA"
+      ],
+      "out_of_scope": [],
+      "statement": null,
+      "knowledge_questions": [
+       "How long do we have to keep the origin declaration and the supporting documents for exports to Canada under CETA?"
+      ],
+      "missing": []
+     },
+     "materials": [
+      {
+       "name": "burners and other cooker parts",
+       "hs_code": "732190",
+       "country_name": "China",
+       "country": "OTRO",
+       "value_eur": 25.0,
+       "supplier_declaration": false
+      },
+      {
+       "name": "gas valves",
+       "hs_code": "848180",
+       "country_name": "Italy",
+       "country": "UE",
+       "value_eur": 30.0,
+       "supplier_declaration": true
+      },
+      {
+       "name": "steel sheet",
+       "hs_code": "720917",
+       "country_name": "Turkey",
+       "country": "OTRO",
+       "value_eur": 60.0,
+       "supplier_declaration": false
+      },
+      {
+       "name": "thermostats",
+       "hs_code": "903210",
+       "country_name": "China",
+       "country": "OTRO",
+       "value_eur": 15.0,
+       "supplier_declaration": false
+      }
+     ],
+     "materials_missing": [],
+     "conversions": [],
+     "evaluations": {
+      "CETA": {
+       "evaluation_id": "EV-663CE1",
+       "originating": true,
+       "criterion": "CTH",
+       "criteria_met": [
+        "CTH"
+       ],
+       "non_originating_value_eur": 100.0,
+       "pct_non_originating": 33.33,
+       "tolerance_pct": 10,
+       "warnings": [
+        "material_misma_partida",
+        "subdivision_distinta",
+        "tolerancia_usada"
+       ],
+       "trace": [
+        "burners and other cooker parts [732190] 25.00: no originario (tercer país)",
+        "gas valves [848180] 30.00: originario",
+        "steel sheet [720917] 60.00: no originario (tercer país)",
+        "thermostats [903210] 15.00: no originario (tercer país)",
+        "CTH: cumple (con tolerancia)"
+       ],
+       "rule_applied": "CTH",
+       "not_checked": [
+        "A change from within this heading, whether or not there is also a change from any other heading, provided that the value of non-originating materials of this heading does not exceed 50% of the transaction value or ex-works price of the product."
+       ]
+      }
+     },
+     "issues": [],
+     "attempts": 1,
+     "knowledge": [
+      {
+       "question": "How long do we have to keep the origin declaration and the supporting documents for exports to Canada under CETA?",
+       "status": "answered",
+       "answer": "Under Article 26 of the CETA Protocol, an exporter that has completed an origin declaration shall keep a copy of the origin declaration and the supporting documents for three years after the completion of the origin declaration, or for a longer period of time as the Party of export may specify.",
+       "cited": [
+        1
+       ],
+       "passages": [
+        {
+         "source": "ceta/protocol_rules_of_origin.md",
+         "section": "SECTION C ORIGIN PROCEDURES › Article 26 Preservation of records",
+         "text": "[EU-Canada Comprehensive Economic and Trade Agreement (CETA): Protocol on rules of origin and origin procedures, Sections A to E and Annexes 1 to 4 › SECTION C ORIGIN PROCEDURES › Article 26 Preservation of records]\nArticle 26\n\nPreservation of records\n\n1. An exporter that has completed an origin declaration shall keep a copy of the origin declaration, as well as the supporting documents referred to in Article 25, for three years after the completion of the origin declaration or for a longer period of time as the Party of export may specify.\n\n2. If an exporter has based an origin declaration on a written statement from the producer, the producer shall be required to maintain records in accordance with paragraph 1.\n\n3. When provided for in laws of the Party of import, an importer that has been granted preferential tariff treatment shall keep documentation relating to the importation of the product, including a copy of the origin declaration, for three years after the date on which preferential treatment was granted, or for a longer period of time as that Party may specify.\n\n4. Each Party shall permit, in accordance with that Party's laws, importers, exporters, and producers in its territory to maintain documentation or records in any medium, provided that the documentation or records can be retrieved and printed.\n\n5. A Party may deny preferential tariff treatment to a product that is the subject of an origin verification when the importer, exporter, or producer of the product that is required to maintain records or documentation under this Article:"
+        },
+        {
+         "source": "ceta/protocol_rules_of_origin.md",
+         "section": "SECTION C ORIGIN PROCEDURES › Article 19 Obligations regarding exportations",
+         "text": "[EU-Canada Comprehensive Economic and Trade Agreement (CETA): Protocol on rules of origin and origin procedures, Sections A to E and Annexes 1 to 4 › SECTION C ORIGIN PROCEDURES › Article 19 Obligations regarding exportations]\nArticle 19\n\nObligations regarding exportations\n\n1. An origin declaration as referred to in Article 18.1 shall be completed:\n\n(a) in the European Union, by an exporter in accordance with the relevant European Union legislation; and\n\n(b) in Canada, by an exporter in accordance with Part V of the Customs Act, R.S.C., 1985, c. 1 (2nd Supp.).\n\n2. The exporter completing an origin declaration shall at the request of the customs authority of the Party of export submit a copy of the origin declaration and all appropriate documents proving the originating status of the products concerned, including supporting documents or written statements from the producers or suppliers, and fulfil the other requirements of this Protocol.\n\n3. An origin declaration shall be completed and signed by the exporter unless otherwise provided.\n\n4. A Party may allow an origin declaration to be completed by the exporter when the products to which it relates are exported, or after exportation if the origin declaration is presented in the importing Party within two years after the importation of the products to which it relates or within a longer period of time if specified in the laws of the importing Party.\n\n5. The customs authority of the Party of import may allow the application of an origin declaration to multiple shipments of identical originating products that take place within a period of time that does not exceed 12 months as set out by the exporter in that declaration."
+        },
+        {
+         "source": "ceta/protocol_rules_of_origin.md",
+         "section": "ANNEX 2 Text of image",
+         "text": "[EU-Canada Comprehensive Economic and Trade Agreement (CETA): Protocol on rules of origin and origin procedures, Sections A to E and Annexes 1 to 4 › ANNEX 2 Text of image]\nANNEX 2\n\nText of image\n\nTEXT OF THE ORIGIN DECLARATION\n\nThe origin declaration, the text of which is given below, must be completed in accordance with the footnotes. However, the footnotes do not have to be reproduced.\n\n(Period: from to (1))\n\nThe exporter of the products covered by this document (customs authorisation No … (2)) declares that, except where otherwise clearly indicated, these products are of … (3) preferential origin.\n\n(4) (Place and date)\n\n(5) (Signature and printed name of the exporter)\n\n(1) When the origin declaration is completed for multiple shipments of identical originating products within the meaning of Article 19.5, indicate the period of time for which the origin declaration will apply. The period of time must not exceed 12 months. All importations of the product must occur within the period indicated. Where a period of time is not applicable, the field can be left blank.\n\n(2) For EU exporters: When the origin declaration is completed by an approved or registered exporter the exporter's customs authorisation or registration number must be included. A customs authorisation number is required only if the exporter is an approved exporter. When the origin declaration is not completed by an approved or registered exporter, the words in brackets must be omitted or the space left blank."
+        },
+        {
+         "source": "ceta/protocol_rules_of_origin.md",
+         "section": "SECTION C ORIGIN PROCEDURES › Article 24 Exemptions from origin declarations",
+         "text": "[EU-Canada Comprehensive Economic and Trade Agreement (CETA): Protocol on rules of origin and origin procedures, Sections A to E and Annexes 1 to 4 › SECTION C ORIGIN PROCEDURES › Article 24 Exemptions from origin declarations]\nArticle 24\n\nExemptions from origin declarations\n\n1. A Party may, in conformity with its laws, waive the requirement to present an origin declaration as referred to in Article 21, for low value shipments of originating products from another Party and for originating products forming part of the personal luggage of a traveller coming from another Party.\n\n2. A Party may exclude any importation from the provisions of paragraph 1 when the importation is part of a series of importations that may reasonably be considered to have been undertaken or arranged for the purpose of avoiding the requirements of this Protocol related to origin declarations.\n\n3. The Parties may set value limits for products referred to in paragraph 1, and shall exchange information regarding those limits."
+        },
+        {
+         "source": "ceta/protocol_rules_of_origin.md",
+         "section": "SECTION C ORIGIN PROCEDURES › Article 26 Preservation of records",
+         "text": "[EU-Canada Comprehensive Economic and Trade Agreement (CETA): Protocol on rules of origin and origin procedures, Sections A to E and Annexes 1 to 4 › SECTION C ORIGIN PROCEDURES › Article 26 Preservation of records]\n(a) fails to maintain records or documentation relevant to determining the origin of the product in accordance with the requirements of this Protocol; or\n\n(b) denies access to those records or documentation."
+        }
+       ]
+      }
+     ],
+     "unsupported_numbers": [],
+     "statement": {}
+    },
+    "correct": true
+   },
+   {
+    "id": "conocimiento-01",
+    "category": "conocimiento",
+    "repeat": 2,
+    "final_answer": "## Resumen\n\n- **Límite para pequeños paquetes en Corea del Sur (sin prueba de origen):** **1.000 dólares de los EE. UU.**\n- **Equivalente en euros al tipo medio del BCE de octubre de 2026:** la base de conocimiento **no responde** a esta pregunta.\n\n## Detalle\n\n### 1. Valor máximo de los pequeños paquetes (acuerdo UE-Corea)\n\n- **Respuesta:** **1.000 US dollars**\n- **Fuente:** *korea/protocol_rules_of_origin.md*, sección *TITLE V Proof of origin › Article 21 Exemptions from proof of origin* (Artículo 21, párrafo 3(b)).\n\n### 2. Equivalente en euros al tipo medio del BCE de octubre de 2026\n\n- **Estado:** la base de conocimiento **no responde** a esta pregunta.\n- No se proporciona ninguna cifra en euros ni ningún tipo de cambio, ya que no existe información al respecto en la base de conocimiento.",
+    "tools_worked": [],
+    "crash": null,
+    "seconds": 14.7,
+    "cost": {
+     "calls": 4.0,
+     "prompt_tokens": 7432.0,
+     "completion_tokens": 455.0,
+     "reasoning_tokens": 0.0,
+     "seconds": 14.634536354991724
+    },
+    "cost_per_agent": {
+     "orchestrator": {
+      "calls": 1.0,
+      "prompt_tokens": 1917.0,
+      "completion_tokens": 164.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 3.887581100992975
+     },
+     "knowledge": {
+      "calls": 2.0,
+      "prompt_tokens": 3922.0,
+      "completion_tokens": 68.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 2.7614610599994194
+     },
+     "writer": {
+      "calls": 1.0,
+      "prompt_tokens": 1593.0,
+      "completion_tokens": 223.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 7.98549419399933
+     }
+    },
+    "trace": {
+     "plan": {
+      "kind": "knowledge",
+      "product": null,
+      "product_hs_code": null,
+      "exw_price_eur": null,
+      "exw_price_currency": null,
+      "agreements": [
+       "UE-KR"
+      ],
+      "out_of_scope": [],
+      "statement": null,
+      "knowledge_questions": [
+       "¿Cuál es el valor máximo de los pequeños paquetes que pueden entrar en Corea del Sur sin prueba de origen bajo el acuerdo UE-Corea?",
+       "¿Cuál es el equivalente en euros de ese límite de valor para pequeños paquetes, utilizando el tipo de cambio medio del BCE de octubre de 2026?"
+      ],
+      "missing": []
+     },
+     "materials": [],
+     "materials_missing": [],
+     "conversions": [],
+     "evaluations": {},
+     "issues": [],
+     "attempts": 1,
+     "knowledge": [
+      {
+       "question": "¿Cuál es el valor máximo de los pequeños paquetes que pueden entrar en Corea del Sur sin prueba de origen bajo el acuerdo UE-Corea?",
+       "status": "answered",
+       "answer": "1000 US dollars (Article 21, paragraph 3(b))",
+       "cited": [
+        1
+       ],
+       "passages": [
+        {
+         "source": "korea/protocol_rules_of_origin.md",
+         "section": "TITLE V Proof of origin › Article 21 Exemptions from proof of origin",
+         "text": "[EU-Korea Free Trade Agreement, Protocol concerning the definition of 'originating products' and methods of administrative cooperation: Protocol on origin, Titles I to VIII and Annex I (introductory notes) › TITLE V Proof of origin › Article 21 Exemptions from proof of origin]\nArticle 21\n\nExemptions from proof of origin\n\n1. Products sent as small packages from private persons to private persons or forming part of a traveller’s personal luggage shall be admitted as originating products without requiring the submission of a proof of origin, provided that such products are not imported by way of trade and have been declared as meeting the requirements of this Protocol and where there is no doubt as to the veracity of such a declaration. In the case of products sent by post, this declaration may be made on a postal customs declaration or on a sheet of paper annexed to that document.\n\n2. Imports which are occasional and consist solely of products for the personal use of the recipients or travellers or their families shall not be considered as imports by way of trade if it is evident from the nature and quantity of the products that no commercial purpose is intended.\n\n3. Furthermore, the total value of these products shall not exceed:\n\n(a) for importation into the EU Party, 500 euros in the case of small packages or 1200 euros in the case of products forming part of a traveller’s personal luggage;\n\n(b) for importation into Korea, 1000 US dollars both in the case of small packages and in the case of the products forming part of a traveller’s personal luggage."
+        },
+        {
+         "source": "korea/protocol_rules_of_origin.md",
+         "section": "TITLE V Proof of origin › Article 21 Exemptions from proof of origin",
+         "text": "[EU-Korea Free Trade Agreement, Protocol concerning the definition of 'originating products' and methods of administrative cooperation: Protocol on origin, Titles I to VIII and Annex I (introductory notes) › TITLE V Proof of origin › Article 21 Exemptions from proof of origin]\n4. For the purpose of paragraph 3, in cases where the products are invoiced in a currency other than euro or US dollars, amounts in the national currencies of the Parties equivalent to the amounts expressed in euro or US dollars shall be fixed in accordance with the current exchange rate applicable in the importing Party."
+        },
+        {
+         "source": "guides/aeat_authorised_exporter.pdf",
+         "section": "2. CONDICIONES PARA LA OBTENCIÓN DEL ESTATUTO DE EXPORTADOR AUTORIZADO",
+         "text": "[AEAT, Guía sobre el exportador autorizado › 2. CONDICIONES PARA LA OBTENCIÓN DEL ESTATUTO DE EXPORTADOR AUTORIZADO]\n2. CONDICIONES PARA LA OBTENCIÓN DEL ESTATUTO DE EXPORTADOR AUTORIZADO\n\n2.1. A todo exportador de mercancías originarias, fabricante o comerciante, establecido en el territorio de la Unión Europea, le asiste el derecho a solicitar una autorización de EA, siempre que aporte, en cualquier momento, datos apropiados acreditativos del origen de los productos que se propone exportar, a efectos de los controles que llevan a cabo las autoridades aduaneras.\n\n2.2. Para solicitar el estatuto de EA, el exportador no tiene que beneficiarse necesariamente de otros procedimientos simplificados aplicados sobre la base de la legislación aduanera de la UE.\n\n2.3. Aunque con arreglo a las disposiciones legales correspondientes, la frecuencia de los envíos es una condición para la expedición de la autorización, puede suponerse que todo solicitante que reúna todas las demás condiciones hará uso de la autorización regularmente. Entre los acuerdos de libre comercio (ALC) que se aplican actualmente, la condición de frecuencia no se incluye en el establecido entre la UE y Corea, en el que la declaración de origen constituye la única prueba posible del origen.\n\n2.4. Por otra parte, la fiabilidad del exportador ha de estar reconocida. Una condición puede consistir en que el interesado no se encuentre sujeto a procedimientos concursales, ni en situaciones de dem ora respecto al pago de derechos aduaneros o impuestos."
+        },
+        {
+         "source": "korea/protocol_rules_of_origin.md",
+         "section": "TITLE II Definition of \"originating products\" › Article 5 Sufficiently worked or processed products",
+         "text": "[EU-Korea Free Trade Agreement, Protocol concerning the definition of 'originating products' and methods of administrative cooperation: Protocol on origin, Titles I to VIII and Annex I (introductory notes) › TITLE II Definition of \"originating products\" › Article 5 Sufficiently worked or processed products]\n(a) their total value does not exceed 10 percent of the ex-works price of the product; and\n\n(b) any of the percentages given in the list in Annex II for the maximum value of non-originating materials are not exceeded through the application of this paragraph.\n\n3. Paragraph 2 shall not apply to products falling within Chapters 50 to 63 of the HS.\n\n4. Paragraphs 1 through 3 shall apply subject to the provisions of Article 6."
+        },
+        {
+         "source": "guides/aeat_rex.pdf",
+         "section": "2. REDACCIÓN DE LA DECLARACIÓN SOBRE EL ORIGEN",
+         "text": "[AEAT, Guía sobre el sistema de exportadores registrados (REX), mayo de 2022 › 2. REDACCIÓN DE LA DECLARACIÓN SOBRE EL ORIGEN]\n2. REDACCIÓN DE LA DECLARACIÓN SOBRE EL ORIGEN\n\n1. El texto de la declaración sobre el origen en el contexto del SPG figura en el anexo 22- 07 del Reglamento de Ejecución (UE) 2015/2447 de la Comisión (presentado en el anexo 1 del presente documento).\n\n2. Cuando el sistema REX se aplica en el contexto de un ALC, el texto del documento sobre el origen se define en el ALC y debe ser utiliza do por los exportadores y reexpedientes de la UE. Por ejemplo, para el AECG, el Acuerdo con Canadá, los exportadores registrados en la UE emiten declaraciones de origen con arreglo al texto del AECG.\n\n3. El número de registro deberá indicarse en la declaración de origen si el valor de los productos originarios de la partida supera un umbral de valor (6 000 EUR en el contexto del SPG y los ALC, 10 000 EUR en el contexto de los PTU). Si el valor de los productos originarios del envío es inferior al umbral de valor, cualquier exportador, registrado o no registrado, podrá hacer una declaración sobre el origen."
+        }
+       ]
+      },
+      {
+       "question": "¿Cuál es el equivalente en euros de ese límite de valor para pequeños paquetes, utilizando el tipo de cambio medio del BCE de octubre de 2026?",
+       "status": "not_found",
+       "answer": "",
+       "cited": [],
+       "passages": [
+        {
+         "source": "korea/protocol_rules_of_origin.md",
+         "section": "TITLE V Proof of origin › Article 25 Amounts expressed in euro",
+         "text": "[EU-Korea Free Trade Agreement, Protocol concerning the definition of 'originating products' and methods of administrative cooperation: Protocol on origin, Titles I to VIII and Annex I (introductory notes) › TITLE V Proof of origin › Article 25 Amounts expressed in euro]\nArticle 25\n\nAmounts expressed in euro\n\n1. For the application of the provisions of Article 16.1(b) in cases where products are invoiced in a currency other than euro, amounts in the national currencies of the Member States of the European Union equivalent to the amounts expressed in euro shall be fixed annually by the EU Party and submitted to Korea.\n\n2. A consignment shall benefit from the provisions of Article 16.1(b) by reference to the currency in which the invoice is drawn up, according to the amount fixed by the EU Party.\n\n3. The amounts to be used in any given national currency of the Member States of the European Union shall be the equivalent in that currency of the amounts expressed in euro as at the first working day of October. The European Commission shall notify Korea of these amounts by 15 October and these amounts shall apply from 1 January the following year."
+        },
+        {
+         "source": "korea/protocol_rules_of_origin.md",
+         "section": "TITLE V Proof of origin › Article 21 Exemptions from proof of origin",
+         "text": "[EU-Korea Free Trade Agreement, Protocol concerning the definition of 'originating products' and methods of administrative cooperation: Protocol on origin, Titles I to VIII and Annex I (introductory notes) › TITLE V Proof of origin › Article 21 Exemptions from proof of origin]\nArticle 21\n\nExemptions from proof of origin\n\n1. Products sent as small packages from private persons to private persons or forming part of a traveller’s personal luggage shall be admitted as originating products without requiring the submission of a proof of origin, provided that such products are not imported by way of trade and have been declared as meeting the requirements of this Protocol and where there is no doubt as to the veracity of such a declaration. In the case of products sent by post, this declaration may be made on a postal customs declaration or on a sheet of paper annexed to that document.\n\n2. Imports which are occasional and consist solely of products for the personal use of the recipients or travellers or their families shall not be considered as imports by way of trade if it is evident from the nature and quantity of the products that no commercial purpose is intended.\n\n3. Furthermore, the total value of these products shall not exceed:\n\n(a) for importation into the EU Party, 500 euros in the case of small packages or 1200 euros in the case of products forming part of a traveller’s personal luggage;\n\n(b) for importation into Korea, 1000 US dollars both in the case of small packages and in the case of the products forming part of a traveller’s personal luggage."
+        },
+        {
+         "source": "korea/protocol_rules_of_origin.md",
+         "section": "TITLE V Proof of origin › Article 25 Amounts expressed in euro",
+         "text": "[EU-Korea Free Trade Agreement, Protocol concerning the definition of 'originating products' and methods of administrative cooperation: Protocol on origin, Titles I to VIII and Annex I (introductory notes) › TITLE V Proof of origin › Article 25 Amounts expressed in euro]\n4. The Member States of the European Union may round up or down the amount resulting from the conversion into their national currency of an amount expressed in euro. The rounded-off amount may not differ from the amount resulting from the conversion by more than five percent. The Member States of the European Union may retain unchanged their national currency equivalent of an amount expressed in euro if, at the time of the annual adjustment provided for in paragraph 3, the conversion of that amount, prior to any rounding-off, results in an increase of less than 15 percent in the national currency equivalent. The national currency equivalent may be retained unchanged if the conversion would result in a decrease in that equivalent value.\n\n5. The amounts expressed in euro shall be reviewed by the Customs Committee at the request of a Party. When carrying out this review, the Customs Committee shall consider the desirability of preserving the effects of the limits concerned in real terms. For this purpose, it may decide to modify the amounts expressed in euro."
+        },
+        {
+         "source": "guides/guidance_preferential_origin_2025.pdf",
+         "section": "i. Government certificates",
+         "text": "[European Commission, Guidance on preferential rules of origin (March 2025) › i. Government certificates]\nGoods forming part of travellers' personal luggage\n\nIn passenger traffic, goods shall be admitted as originating products without requiring the submission of a document on origin, provided that:\n\n• the products are part of a traveller’s personal luggage and their total value (price paid) does not exceed the value limit of the concerned preferential arrangement, usually EUR 1 200.\n\n• the imports are occasional and consist solely of products for the personal use of the travellers, their families or are intended to be a present and it is evident from the nature and quantity of the products that they are not considered for commercial purposes.\n\n• the traveller declares orally that the products are eligible for preferential treatment and there is no doubt as to the veracity of such a declaration.\n\nAt the following link the value limits expressed in EURO and the corresponding amounts in national currencies are published:\n\nhttp://ec.europa.eu/taxation_customs/business/calculation-customs-duties/rulesorigin/general-aspects-preferential-origin/common-provisions_en\n\nf) Importation by instalments"
+        },
+        {
+         "source": "guides/guidance_preferential_origin_2025.pdf",
+         "section": "Annex 7 & Art. 68",
+         "text": "[European Commission, Guidance on preferential rules of origin (March 2025) › Annex 7 & Art. 68]\nAnnex 7\n\n& Art. 68\n\nUCC-IA\n\nImports into\n\nthe EU\n\nImports into\n\nthe UK\n\nArt. 56\n\nImports into\n\nthe EU:\n\nEUR 500\n\nImports into\n\nthe UK:\n\nGBP 1 000\n\n(limits set\n\nunder the UK\n\ndomestic law)\n\nArt 60 Imports into\n\nthe EU:\n\nEUR 1 200\n\nImports into\n\nthe UK::\n\nGBP 1 000(l\n\nimits set\n\nunder the\n\nUK\n\ndomestic\n\nlaw)\n\nArt 60\n\nUK: Additional exception from proof of origin :\n\nImports into the UK\n\nother low value consignments 1.000 GBP (Art. 60)\n\nVietnam Imports into the EU from\n\nVietnam\n\n•Certificate of origin EUR.1\n\n•Origin declaration\n\nImports into Vietnam from\n\nthe EU\n\nStatement of origin\n\nArt 15 In Vietnam :\n\nApproved\n\nExporter\n\n(over\n\nEUR 6 000)\n\nIn the EU :\n\nRegistered\n\nexporter\n\n(over 6.000\n\nEUR)\n\nArt 15 &\n\nArt 68\n\nUCC-DA"
+        }
+       ]
+      }
+     ],
+     "unsupported_numbers": [],
+     "statement": {}
+    },
+    "correct": false
+   },
+   {
+    "id": "conocimiento-02",
+    "category": "conocimiento",
+    "repeat": 2,
+    "final_answer": "## Resumen\n\n**Sí, el producto es originario** según el Acuerdo de Libre Comercio UE-Corea (UE-KR).\n\n**No, no podemos emitir la declaración de origen en la factura** para un envío de 8.500 € porque falta el número REX, que es obligatorio para importaciones superiores a 6.000 €.\n\n---\n\n## Detalle por acuerdo\n\n### Acuerdo de Libre Comercio UE-Corea (UE-KR)\n\n*   **Veredicto:** Originario.\n*   **Criterio cumplido:** CTH (cambio de partida).\n*   **Regla aplicada:** CTH o MAXNOM 45 % EXW.\n*   **Materiales no originarios:**\n    *   Placas base (8473.30) de China: 180,00 € (tercer país).\n    *   Pantallas (8524.11) de Taiwán: 120,00 € (tercer país).\n    *   Baterías (8507.60) de China: 40,00 € (tercer país).\n    *   *Total no originario:* 340,00 € (48,57 % del precio franco fábrica).\n*   **Materiales originarios:**\n    *   Carcasa de aluminio (7616.99) de la UE: 30,00 €.\n*   **Aviso:** El producto no cumple el umbral MAXNOM (48,57 % > 45 %). La tolerancia general (10 %) no amplía los umbrales de MAXNOM o RVC, por lo que este criterio no se cumple. Sin embargo, el producto sí es originario porque cumple el criterio CTH.\n\n---\n\n## Sobre la declaración de origen en la factura\n\nLa base de conocimientos no responde a la pregunta general sobre si un fabricante no autorizado puede extender la declaración.\n\nSin embargo, para este envío concreto de **8.500 €**, la declaración **no puede emitirse todavía** porque faltan los siguientes datos obligatorios:\n\n*   Número de factura (*invoice_number*)\n*   Nombre del exportador (*exporter_name*)\n*   Lugar (*place*)\n*   **Número REX** (*exporter_reference*): Es obligatorio para importaciones superiores a 6.000 €. Al no ser exportador autorizado, se requiere este número para poder extender la declaración.",
+    "tools_worked": [
+     "evaluate_origin",
+     "get_origin_rule"
+    ],
+    "crash": null,
+    "seconds": 27.5,
+    "cost": {
+     "calls": 5.0,
+     "prompt_tokens": 7805.0,
+     "completion_tokens": 1127.0,
+     "reasoning_tokens": 0.0,
+     "seconds": 27.49270285201783
+    },
+    "cost_per_agent": {
+     "orchestrator": {
+      "calls": 1.0,
+      "prompt_tokens": 2034.0,
+      "completion_tokens": 204.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 6.322650123009225
+     },
+     "extractor": {
+      "calls": 1.0,
+      "prompt_tokens": 1116.0,
+      "completion_tokens": 302.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 5.866613184000016
+     },
+     "origin": {
+      "calls": 1.0,
+      "prompt_tokens": 816.0,
+      "completion_tokens": 53.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 1.2375179950031452
+     },
+     "knowledge": {
+      "calls": 1.0,
+      "prompt_tokens": 2003.0,
+      "completion_tokens": 24.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 0.9324972280010115
+     },
+     "writer": {
+      "calls": 1.0,
+      "prompt_tokens": 1836.0,
+      "completion_tokens": 544.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 13.13342432200443
+     }
+    },
+    "trace": {
+     "plan": {
+      "kind": "evaluate",
+      "product": "portátiles",
+      "product_hs_code": "847130",
+      "exw_price_eur": 700.0,
+      "exw_price_currency": null,
+      "agreements": [
+       "UE-KR"
+      ],
+      "out_of_scope": [],
+      "statement": {
+       "invoice_number": null,
+       "exporter_name": null,
+       "place": null,
+       "consignment_value_eur": 8500.0,
+       "exporter_reference": null,
+       "agreement": "UE-KR"
+      },
+      "knowledge_questions": [
+       "Si un fabricante no es exportador autorizado, ¿puede extender él mismo la declaración de origen en la factura de un envío?"
+      ],
+      "missing": []
+     },
+     "materials": [
+      {
+       "name": "placas base",
+       "hs_code": "847330",
+       "country_name": "China",
+       "country": "OTRO",
+       "value_eur": 180.0,
+       "supplier_declaration": false
+      },
+      {
+       "name": "pantallas",
+       "hs_code": "852411",
+       "country_name": "Taiwán",
+       "country": "OTRO",
+       "value_eur": 120.0,
+       "supplier_declaration": false
+      },
+      {
+       "name": "baterías",
+       "hs_code": "850760",
+       "country_name": "China",
+       "country": "OTRO",
+       "value_eur": 40.0,
+       "supplier_declaration": false
+      },
+      {
+       "name": "carcasa de aluminio",
+       "hs_code": "761699",
+       "country_name": "UE",
+       "country": "UE",
+       "value_eur": 30.0,
+       "supplier_declaration": true
+      }
+     ],
+     "materials_missing": [],
+     "conversions": [],
+     "evaluations": {
+      "UE-KR": {
+       "evaluation_id": "EV-9E82A8",
+       "originating": true,
+       "criterion": "CTH",
+       "criteria_met": [
+        "CTH"
+       ],
+       "non_originating_value_eur": 340.0,
+       "pct_non_originating": 48.57,
+       "tolerance_pct": 10,
+       "warnings": [
+        "tolerancia_no_amplia_maxnom"
+       ],
+       "trace": [
+        "placas base [847330] 180.00: no originario (tercer país)",
+        "pantallas [852411] 120.00: no originario (tercer país)",
+        "baterías [850760] 40.00: no originario (tercer país)",
+        "carcasa de aluminio [761699] 30.00: originario",
+        "CTH: cumple",
+        "MAXNOM: no cumple"
+       ],
+       "rule_applied": "CTH or MAXNOM 45 % EXW",
+       "not_checked": []
+      }
+     },
+     "issues": [],
+     "attempts": 1,
+     "knowledge": [
+      {
+       "question": "Si un fabricante no es exportador autorizado, ¿puede extender él mismo la declaración de origen en la factura de un envío?",
+       "status": "not_found",
+       "answer": "",
+       "cited": [],
+       "passages": [
+        {
+         "source": "guides/aeat_rex.pdf",
+         "section": "1. QUIÉN PUEDE HACER DECLARACIONES SOBRE EL ORIGEN",
+         "text": "[AEAT, Guía sobre el sistema de exportadores registrados (REX), mayo de 2022 › 1. QUIÉN PUEDE HACER DECLARACIONES SOBRE EL ORIGEN]\n1. QUIÉN PUEDE HACER DECLARACIONES SOBRE EL ORIGEN\n\n1. Como principio general, el exportador registrado que extienda una declaración sobre el origen debe poder declarar y probar el origen de las mercancías y responder a las solicitudes de verificación.\n\nSi el exportador registrado que extienda la declaración de origen no es el productor (por ejemplo, un comerciante), deberá tener en su poder todos los documentos necesarios (declaraciones del proveedor...) que le permitan declarar y probar el origen de las mercancías, y responder a las solicitudes de verificación.\n\n2. En el SPG, un exportador registrado podrá extender declaraciones sobre el origen cuando esté registrado, es decir, después de que se le informe sobre su número REX y la fecha a partir de la cual el registro es válido de conformidad con el artículo 79, apar tado 3, del Reglamento de Ejecución (UE) 2015/2447 de la Comisión.Si se aplica la acumulación regional, el exportador (registrado) del país beneficiario de exportación a la Unión extenderá la declaración sobre el origen, de conformidad con el artículo 92, apartado 1, del Reglamento de Ejecución (UE) 2015/2447 de la Comisión.\n\n3. Si el valor de los productos originarios del envío es inferior al umbral de valor, cualquier exportador, registrado o no registrado, extenderá una declaración sobre el origen."
+        },
+        {
+         "source": "guides/aeat_authorised_exporter.pdf",
+         "section": "4.3. Extender una declaración de origen",
+         "text": "[AEAT, Guía sobre el exportador autorizado › 4.3. Extender una declaración de origen]\n4.3. Extender una declaración de origen\n\nUna buena práctica es adjuntar una instrucción de uso a la autorización de EA. Este anexo puede proporcionar la siguiente información útil para el exportador."
+        },
+        {
+         "source": "guides/aeat_authorised_exporter.pdf",
+         "section": "4.3.1. Texto de la declaración de origen",
+         "text": "[AEAT, Guía sobre el exportador autorizado › 4.3.1. Texto de la declaración de origen]\n4.3.1. Texto de la declaración de origen\n\nEl texto de la declaración de origen se menciona en cada acuerdo. Dependiendo del país de destino, el texto de la declaración de origen puede ser diferente; el EA debe asegurarse de utilizar la redacción correcta del régimen preferencial al que se refiere la declaración de origen, a modo de ejemplo, el texto de la declaración de origen se recoge en el anexo 3. El número de autorización deberá figurar en la declaración de origen. La declaración de origen llevará la firma manuscrita original del exportador, salvo que al titular se le haya concedido la dispensa de firma (véase el apartado 3.3.5). El nombre completo del firmante deberá figurar de manera legible bajo la firma.\n\nEn la declaración de origen deberá identificarse claramente al titular de la autorización, y tal identidad deberá resultar evidente asimismo para terceros.\n\nLa declaración de origen se expide mediante el mecanografiado, la impresión o la estampación del texto en la factura u otro documento comercial en el que se identifiquen claramente los productos originarios.\n\nLa declaración de origen en una etiqueta fijada de manera permanente a un documen to mercantil solo se permite si no cabe duda de que la etiqueta la ha adherido el EA (por ejemplo, colocando un sello o la firma tanto en la etiqueta como en el documento)."
+        },
+        {
+         "source": "guides/aeat_authorised_exporter.pdf",
+         "section": "4.2. El exportador se compromete a",
+         "text": "[AEAT, Guía sobre el exportador autorizado › 4.2. El exportador se compromete a]\n4.2. El exportador se compromete a\n\n extender las declaraciones de origen únicamente para los productos respecto a los que se dispone, en la fecha de expedición de la declaración de origen, los documentos justificativos y las cuentas pertinentes que demuestren que los productos son originarios;  presentar en cualquier momento, a petición de la autoridad aduanera competente del Estado miembro en el que se haya otorgado la autorización, todos los documentos justificativos pertinentes que demuestren la condición de originarios de los productos en cuestión, así como la observancia de los demás requisitos del Protocolo de origen de que se trate;  aceptar la verificación, por parte de las autoridades aduaneras referidas, de su contabilidad y del proceso de fabricación de los productos;\n\n conservar durante tres años (o más, dependiendo del período establecido en el acuerdo preferencial) copias de las declaraciones de origen y de los documentos justificativos relacionados con las declaraciones; dicho período comienza en la fecha de extensión de la declaración de origen. Cuando la normativa nacional prevea un período más largo, éste se aplicará independientemente de la duración del período para la solicitud de verificación de una prueba de origen.\n\n asumir plenamente las responsabilidades que se deriven del uso de la autorización;  informar a las autoridades aduaneras de las alteraciones que afecten a la autorización."
+        },
+        {
+         "source": "guides/aeat_authorised_exporter.pdf",
+         "section": "5.6. Resultados de las acciones de control",
+         "text": "[AEAT, Guía sobre el exportador autorizado › 5.6. Resultados de las acciones de control]\nde crédito)\n\nc) Cliente que rechaza la\n\ndeclaración de origen\n\nd) Otros\n\nAcción registrada en paralelo en la\n\nbase de datos del registro de\n\nquejas (Base de datos de acceso al\n\nmercado)\n\nSí □\n\nNo □\n\n(http://madb.europa.eu/madb/complaint_register_form.htm)\n\nDocumentos a adjuntar\n\nSe solicita al operador económico que envíe una copia de los siguientes documentos:\n\n- Documento comercial con la declaración original (después de ocultar las referencias apropiadas consideradas sensibles, como los precios de los productos básicos)\n\n- Documento proporcionado por las autoridades aduaneras que procedieron a la denegación\n\n- Documento proporcionado por terceros\n\n- Cualquier otro documento\n\nANEXO 2: MARCO JURÍDICO GENERAL\n\n Artículo 67 del AE-CAU\n\nAutorización de exportador autorizado\n\n(Artículo 64, apartado 1, del Código)\n\n1. Cuando la Unión mantenga un régimen preferencial con un tercer país que establezca que la prueba de origen tendrá la forma de una declaración en factura o una declaración de origen extendida por un exportador autorizado, los exportadores y re-expedidores establecidos en el territorio aduanero de la Unión podrán solicitar una autorización como exportador autorizado a efectos de extender y sustituir tales declaraciones."
+        }
+       ]
+      }
+     ],
+     "unsupported_numbers": [],
+     "statement": {}
+    },
+    "correct": true
+   },
+   {
+    "id": "conocimiento-03",
+    "category": "conocimiento",
+    "repeat": 2,
+    "final_answer": "## Resumen\n\n**Sí, los hornos de gas (HS 7321.11) son originarios bajo el CETA.** El criterio cumplido es **CTH** (cambio de partida), apoyado en la **tolerancia general** del 10 %.\n\n---\n\n## Detalle por acuerdo\n\n### CETA – Acuerdo Económico y Comercial Global UE-Canadá\n\n- **Veredicto:** Originario.\n- **Criterio cumplido:** CTH (cambio de partida).\n- **Regla aplicada:** CTH.\n- **Valor de materiales no originarios:** 100,00 EUR (33,33 % del precio ex-works de 300,00 EUR).\n\n**Materiales no originarios y motivo:**\n\n| Material | HS | País | Valor (EUR) | Motivo |\n|---|---|---|---|---|\n| Quemadores y otras partes de cocina | 7321.90 | China | 25,00 | Tercer país |\n| Chapa de acero | 7209.17 | Turquía | 60,00 | Tercer país |\n| Termostatos | 9032.10 | China | 15,00 | Tercer país |\n\n**Material originario:**\n- Válvulas de gas (HS 8481.80, Italia, 30,00 EUR): originario (declaración del proveedor).\n\n**Avisos:**\n- **material_misma_partida:** Un material no originario tiene la misma partida (4 dígitos) que el producto, por lo que no cambia de partida.\n- **subdivision_distinta:** Un material no originario tiene la partida del producto pero otra subpartida: cambia de subpartida (CTSH) pero no de partida (CTH).\n- **tolerancia_usada:** El veredicto se apoya en la tolerancia general.\n\n**No verificado:**\n- No se ha comprobado la alternativa: “un cambio desde dentro de esta partida, con o sin cambio desde otra partida, siempre que el valor de los materiales no originarios de esta partida no supere el 50 % del valor de transacción o del precio ex-works del producto.”\n\n---\n\n## Conservación de documentos bajo CETA\n\nSegún el **Artículo 26 del Protocolo de reglas de origen y procedimientos de origen del CETA**, el exportador debe conservar una copia de la declaración de origen y los documentos de soporte durante **tres años** desde la finalización de la declaración de origen, o durante un período más largo si la Parte de exportación lo especifica.\n\n*Fuente: ceta/protocol_rules_of_origin.md, SECTION C ORIGIN PROCEDURES › Article 26 Preservation of records.*",
+    "tools_worked": [
+     "evaluate_origin",
+     "get_origin_rule"
+    ],
+    "crash": null,
+    "seconds": 32.6,
+    "cost": {
+     "calls": 5.0,
+     "prompt_tokens": 7912.0,
+     "completion_tokens": 1175.0,
+     "reasoning_tokens": 0.0,
+     "seconds": 32.529960296014906
+    },
+    "cost_per_agent": {
+     "orchestrator": {
+      "calls": 1.0,
+      "prompt_tokens": 2022.0,
+      "completion_tokens": 132.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 3.3704838150006253
+     },
+     "extractor": {
+      "calls": 1.0,
+      "prompt_tokens": 1104.0,
+      "completion_tokens": 298.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 6.984396835003281
+     },
+     "origin": {
+      "calls": 1.0,
+      "prompt_tokens": 805.0,
+      "completion_tokens": 45.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 1.8516529230109882
+     },
+     "knowledge": {
+      "calls": 1.0,
+      "prompt_tokens": 1701.0,
+      "completion_tokens": 79.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 6.936894897997263
+     },
+     "writer": {
+      "calls": 1.0,
+      "prompt_tokens": 2280.0,
+      "completion_tokens": 621.0,
+      "reasoning_tokens": 0.0,
+      "seconds": 13.386531825002749
+     }
+    },
+    "trace": {
+     "plan": {
+      "kind": "evaluate",
+      "product": "gas cookers",
+      "product_hs_code": "732111",
+      "exw_price_eur": 300.0,
+      "exw_price_currency": null,
+      "agreements": [
+       "CETA"
+      ],
+      "out_of_scope": [],
+      "statement": null,
+      "knowledge_questions": [
+       "How long do we have to keep the origin declaration and the supporting documents under CETA?"
+      ],
+      "missing": []
+     },
+     "materials": [
+      {
+       "name": "burners and other cooker parts",
+       "hs_code": "732190",
+       "country_name": "China",
+       "country": "OTRO",
+       "value_eur": 25.0,
+       "supplier_declaration": false
+      },
+      {
+       "name": "gas valves",
+       "hs_code": "848180",
+       "country_name": "Italy",
+       "country": "UE",
+       "value_eur": 30.0,
+       "supplier_declaration": true
+      },
+      {
+       "name": "steel sheet",
+       "hs_code": "720917",
+       "country_name": "Turkey",
+       "country": "OTRO",
+       "value_eur": 60.0,
+       "supplier_declaration": false
+      },
+      {
+       "name": "thermostats",
+       "hs_code": "903210",
+       "country_name": "China",
+       "country": "OTRO",
+       "value_eur": 15.0,
+       "supplier_declaration": false
+      }
+     ],
+     "materials_missing": [],
+     "conversions": [],
+     "evaluations": {
+      "CETA": {
+       "evaluation_id": "EV-39FF38",
+       "originating": true,
+       "criterion": "CTH",
+       "criteria_met": [
+        "CTH"
+       ],
+       "non_originating_value_eur": 100.0,
+       "pct_non_originating": 33.33,
+       "tolerance_pct": 10,
+       "warnings": [
+        "material_misma_partida",
+        "subdivision_distinta",
+        "tolerancia_usada"
+       ],
+       "trace": [
+        "burners and other cooker parts [732190] 25.00: no originario (tercer país)",
+        "gas valves [848180] 30.00: originario",
+        "steel sheet [720917] 60.00: no originario (tercer país)",
+        "thermostats [903210] 15.00: no originario (tercer país)",
+        "CTH: cumple (con tolerancia)"
+       ],
+       "rule_applied": "CTH",
+       "not_checked": [
+        "A change from within this heading, whether or not there is also a change from any other heading, provided that the value of non-originating materials of this heading does not exceed 50% of the transaction value or ex-works price of the product."
+       ]
+      }
+     },
+     "issues": [],
+     "attempts": 1,
+     "knowledge": [
+      {
+       "question": "How long do we have to keep the origin declaration and the supporting documents under CETA?",
+       "status": "answered",
+       "answer": "Under CETA Article 26, an exporter must keep a copy of the origin declaration and the supporting documents for three years after the completion of the origin declaration, or for a longer period of time as the Party of export may specify.",
+       "cited": [
+        1
+       ],
+       "passages": [
+        {
+         "source": "ceta/protocol_rules_of_origin.md",
+         "section": "SECTION C ORIGIN PROCEDURES › Article 26 Preservation of records",
+         "text": "[EU-Canada Comprehensive Economic and Trade Agreement (CETA): Protocol on rules of origin and origin procedures, Sections A to E and Annexes 1 to 4 › SECTION C ORIGIN PROCEDURES › Article 26 Preservation of records]\nArticle 26\n\nPreservation of records\n\n1. An exporter that has completed an origin declaration shall keep a copy of the origin declaration, as well as the supporting documents referred to in Article 25, for three years after the completion of the origin declaration or for a longer period of time as the Party of export may specify.\n\n2. If an exporter has based an origin declaration on a written statement from the producer, the producer shall be required to maintain records in accordance with paragraph 1.\n\n3. When provided for in laws of the Party of import, an importer that has been granted preferential tariff treatment shall keep documentation relating to the importation of the product, including a copy of the origin declaration, for three years after the date on which preferential treatment was granted, or for a longer period of time as that Party may specify.\n\n4. Each Party shall permit, in accordance with that Party's laws, importers, exporters, and producers in its territory to maintain documentation or records in any medium, provided that the documentation or records can be retrieved and printed.\n\n5. A Party may deny preferential tariff treatment to a product that is the subject of an origin verification when the importer, exporter, or producer of the product that is required to maintain records or documentation under this Article:"
+        },
+        {
+         "source": "ceta/protocol_rules_of_origin.md",
+         "section": "SECTION C ORIGIN PROCEDURES › Article 26 Preservation of records",
+         "text": "[EU-Canada Comprehensive Economic and Trade Agreement (CETA): Protocol on rules of origin and origin procedures, Sections A to E and Annexes 1 to 4 › SECTION C ORIGIN PROCEDURES › Article 26 Preservation of records]\n(a) fails to maintain records or documentation relevant to determining the origin of the product in accordance with the requirements of this Protocol; or\n\n(b) denies access to those records or documentation."
+        },
+        {
+         "source": "ceta/protocol_rules_of_origin.md",
+         "section": "ANNEX 2 Text of image",
+         "text": "[EU-Canada Comprehensive Economic and Trade Agreement (CETA): Protocol on rules of origin and origin procedures, Sections A to E and Annexes 1 to 4 › ANNEX 2 Text of image]\nANNEX 2\n\nText of image\n\nTEXT OF THE ORIGIN DECLARATION\n\nThe origin declaration, the text of which is given below, must be completed in accordance with the footnotes. However, the footnotes do not have to be reproduced.\n\n(Period: from to (1))\n\nThe exporter of the products covered by this document (customs authorisation No … (2)) declares that, except where otherwise clearly indicated, these products are of … (3) preferential origin.\n\n(4) (Place and date)\n\n(5) (Signature and printed name of the exporter)\n\n(1) When the origin declaration is completed for multiple shipments of identical originating products within the meaning of Article 19.5, indicate the period of time for which the origin declaration will apply. The period of time must not exceed 12 months. All importations of the product must occur within the period indicated. Where a period of time is not applicable, the field can be left blank.\n\n(2) For EU exporters: When the origin declaration is completed by an approved or registered exporter the exporter's customs authorisation or registration number must be included. A customs authorisation number is required only if the exporter is an approved exporter. When the origin declaration is not completed by an approved or registered exporter, the words in brackets must be omitted or the space left blank."
+        },
+        {
+         "source": "ceta/protocol_rules_of_origin.md",
+         "section": "SECTION C ORIGIN PROCEDURES › Article 20 Validity of the origin declaration",
+         "text": "[EU-Canada Comprehensive Economic and Trade Agreement (CETA): Protocol on rules of origin and origin procedures, Sections A to E and Annexes 1 to 4 › SECTION C ORIGIN PROCEDURES › Article 20 Validity of the origin declaration]\nArticle 20\n\nValidity of the origin declaration\n\n1. An origin declaration shall be valid for 12 months from the date it was completed by the exporter, or for such longer period of time as provided by the Party of import. The preferential tariff treatment may be claimed, within this validity period, to the customs authority of the Party of import.\n\n2. The Party of import may accept an origin declaration submitted to its customs authority after the validity period referred to in paragraph 1 for the purpose of preferential tariff treatment in accordance with that Party's laws."
+        },
+        {
+         "source": "ceta/protocol_rules_of_origin.md",
+         "section": "SECTION C ORIGIN PROCEDURES › Article 27 Discrepancies and formal errors",
+         "text": "[EU-Canada Comprehensive Economic and Trade Agreement (CETA): Protocol on rules of origin and origin procedures, Sections A to E and Annexes 1 to 4 › SECTION C ORIGIN PROCEDURES › Article 27 Discrepancies and formal errors]\nArticle 27\n\nDiscrepancies and formal errors\n\n1. The discovery of slight discrepancies between the statements made in the origin declaration and those made in the documents submitted to the customs authorities for the purpose of carrying out the formalities for importing the products shall not, because of that fact, render the origin declaration null and void if it is established that this document corresponds to the products submitted.\n\n2. Obvious formal errors such as typing errors on an origin declaration shall not cause this document to be rejected if these errors do not create doubts concerning the correctness of the statements made in the document."
+        }
+       ]
+      }
+     ],
+     "unsupported_numbers": [],
+     "statement": {}
+    },
+    "correct": true
+   }
+  ]
+ }
+}
