@@ -611,19 +611,57 @@ Hacerlo funcionar pedía cambiar también el prompt del orquestador y el reconoc
 monedas, para una sola tarea del banco. Se deja como **límite conocido**: Origo no encadena una
 respuesta de normativa con un cálculo.
 
+## 2026-11-28 · Banco completo con y sin verificador
+
+**Resultado** (20 tareas de `data/bench/tasks.jsonl`, 3 repeticiones; `reports/bench_origo.json`):
+
+| Configuración | Aciertos por repetición | Media | Excepciones | Llamadas | Tokens | s por tarea |
+|---|---|---|---|---|---|---|
+| Con verificador | 17, 17, 16 | **0,83** | 3 | 4,9 | 8.117 | 31 |
+| Sin verificador | 15, 15, 15 | **0,75** | 6 | 4,5 | 7.501 | 16 |
+
+Fallan siempre en las dos configuraciones: `conocimiento-01` (límite conocido),
+`faltan-datos-02` (moneda fuera del BCE y lista incompleta) y `larga-01`. `conocimiento-03`
+falla una vez con verificador. Sin verificador fallan además `cambio-03` y `veredicto-04`.
+
+**Los +8 puntos no son todos del verificador.** Mirando tarea a tarea:
+- **`veredicto-04` sí es un rescate**, en las 3 repeticiones. Sin verificador, el modelo tomó
+  como precio franco fábrica los 31 € de compra (son 38 €) y metió las propias lámparas como
+  material: los materiales sumaban más que el precio y el motor no dio veredicto. Con
+  verificador hubo un segundo intento, que dejó solo las cajas como material, y el veredicto es
+  el bueno: no son originarias, porque reembalar no da origen.
+- **`cambio-03` no**: sin verificador falló por una excepción del extractor (abajo), y el
+  extractor va antes del verificador. Es azar, no efecto del verificador.
+- **[informe]** Lo atribuible al verificador es una tarea, unos 5 puntos. La diferencia de
+  tiempo tampoco es limpia: las ejecuciones que rompen terminan antes y bajan la media.
+
+**Las 9 excepciones son el mismo fallo:** "extractor: still calling tools after 5 rounds". El
+extractor convierte con un bucle de herramientas, y con importes en otra moneda sigue llamando a
+`get_exchange_rate` sin terminar: `larga-01` (USD y GBP) en las 6 ejecuciones y `cambio-03` (KRW)
+en 3. Es el mismo problema que ya se vio con las sillas (4 llamadas para 6 USD), pero con dos
+monedas el bucle no termina.
+
+**Nota sobre el banco:** `vies-01` cuenta como acierto, pero es un falso positivo de la
+comprobación del banco. Origo no consulta VIES, y la comprobación acepta cualquier informe que
+contenga "válid" (por ejemplo, "no puedo comprobar si el NIF es válido").
+
 ## Pendiente
 
-1. **Evaluación y comparaciones:** un agente frente a multi-agente; con y sin verificador;
-   27B frente al 1,7B de ARCA; razonamiento por agente; fidelidad y variación del redactor
-   (varias ejecuciones por pregunta). El script del banco está hecho; falta lanzarlo y el
-   baseline de ARCA con el 27B.
-2. **Ruta de conocimiento:** medida (18 de 18 y 6 de 9). Límite conocido: no encadena una
-   respuesta del corpus con una conversión (`conocimiento-01`).
-3. **Monedas fuera del BCE y lista de materiales incompleta** (`faltan-datos-02`), y decidir si
-   VIES entra en el alcance.
-4. **Extractor:** que el modelo solo lea importe, moneda y mes, y que convierta el código
-   (de 4 llamadas a 1), medido con el `METER`.
-5. **Para pulir:**
+1. **Extractor (prioridad alta):** su bucle de herramientas no termina con importes en otra
+   moneda (9 excepciones en el banco). Propuesta: que el modelo solo lea importe, moneda y mes,
+   y que convierta el código (una sola llamada).
+2. **Repetir el banco con y sin verificador** después del punto 1, para que la comparación no
+   dependa de las excepciones del extractor.
+3. **Lista de materiales incompleta** (`faltan-datos-02`): decidir si se evalúa sin el material
+   que falta (hoy sí, y la tarea lo prohíbe). Además, el dong vietnamita no se reconoce como
+   moneda.
+4. **VIES:** decidir si entra en el alcance. `vies-01` es hoy un falso positivo del banco.
+5. **Ruta de conocimiento:** medida (18 de 18 y 6 de 9). Límite conocido: no encadena una
+   respuesta del corpus con una conversión (`conocimiento-01`); contarlo en el informe.
+6. **Ablaciones, si da tiempo:** razonamiento por agente; fidelidad y variación del redactor
+   (varias ejecuciones por pregunta).
+7. **Para pulir:**
    - el aviso `proveedor_sin_declaracion` debería decir qué materiales lo provocan;
    - el hueco vacío "(Exporter Reference No )" en las declaraciones sin REX;
    - varias declaraciones en una pregunta.
+8. **Cierre:** informe, README y, si la entrega lo pide, API o demo.
